@@ -29,4 +29,4 @@ jobs:
         with:
           publish-dir: ./build # Set the output folder for your build (e.g., Next.js might use `.next` or `out`)
           production-branch: main # Specify your production branch
-          deploy-token: nfp_QmKGovR6HZ9E8wQRT1uB2PnwaXNYpCiU4e6b # Netlify deployment token (we'll set this up in the next step)
+          deploy-token: ${{ secrets.NETLIFY_TOKEN }} # Netlify deployment token (we'll set this up in the next step)
