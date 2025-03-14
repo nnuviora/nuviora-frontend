@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@lib/utils/cn";
+
 
 const buttonVariants = cva(
   "cursor-pointer rounded-lg border-none px-9.5 py-3.5 text-base font-semibold tracking-wide leading-[1.25] " +

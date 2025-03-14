@@ -1,6 +1,9 @@
-import Button from "@/components/ui/Button";
+
 import { CiSettings } from "react-icons/ci";
-import { Input } from "@/components/ui/Input";
+import Button from "@ui/Button";
+import { Input } from "@ui/Input";
+
+
 
 export default function Home() {
   const errors = "Error";
