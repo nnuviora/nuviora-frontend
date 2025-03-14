@@ -1,7 +1,6 @@
-
+import {Button, Input} from '@components/ui'
 import { CiSettings } from "react-icons/ci";
-import Button from "@ui/Button";
-import { Input } from "@ui/Input";
+
 
 
 

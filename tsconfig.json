@@ -27,11 +27,11 @@
       "@lib/*": [
         "src/lib/*"
       ],
-      "@ui/": [
-        "src/components/ui"
+      "@components/": [
+        "src/components"
       ],
-      "@ui/*": [
-        "src/components/ui/*"
+      "@components/*": [
+        "src/components/*"
       ]
 
     }
