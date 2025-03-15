@@ -1,5 +1,5 @@
-import {Button, Input} from '@components/ui'
-import { CiSettings } from "react-icons/ci";
+import {Button} from '@components/ui'
+
 
 
 
@@ -12,34 +12,26 @@ export default function Home() {
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
         Welcome Page  DEVELOPMENT
         <div className="mb-4 flex items-center gap-16">
-          <Button>Для переменных</Button>
-          <Button variant="white">Белая по умолчанию</Button>
-          <Button variant="iconAndText">
-            <CiSettings
-              className="fill-[var(--primary)] group-hover:fill-[var(--secondary)]"
-              size="20"
-            />
-            <span className="text-[var(--primary)] group-hover:text-[var(--secondary)]">
-              Иконка и текст
-            </span>
-          </Button>
+          <Button>Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="secondary" disabled>Disabled</Button>
         </div>
-        <div className="mb-4 flex items-center gap-16">
-          <Input
-            type={"password"}
-            placeholder={"Enter Password"}
-            showToggle={true}
-            className={errors && "border border-red-500/80"}
-            name={"password"}
-          />
-          <Input
-            type={"text"}
-            placeholder={"Enter text"}
-            showToggle={false}
-            className={error && "border border-red-500/80"}
-            name={"text"}
-          />
-        </div>
+        {/*<div className="mb-4 flex items-center gap-16">*/}
+        {/*  <Input*/}
+        {/*    type={"password"}*/}
+        {/*    placeholder={"Enter Password"}*/}
+        {/*    showToggle={true}*/}
+        {/*    className={errors && "border border-red-500/80"}*/}
+        {/*    name={"password"}*/}
+        {/*  />*/}
+        {/*  <Input*/}
+        {/*    type={"text"}*/}
+        {/*    placeholder={"Enter text"}*/}
+        {/*    showToggle={false}*/}
+        {/*    className={error && "border border-red-500/80"}*/}
+        {/*    name={"text"}*/}
+        {/*  />*/}
+        {/*</div>*/}
       </main>
     </div>
   );
