@@ -5,6 +5,8 @@ import { Poppins, Roboto } from "next/font/google";
 import type { Metadata } from "next";
 import Providers from "@/lib/providers";
 import { ReactNode } from "react";
+import Header from "@components/layouts/Header";
+import { cn } from "@lib/utils/cn";
 
 const poppinsFont = Poppins({
   variable: "--font-poppins",
@@ -35,9 +37,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppinsFont.variable} ${robotoFont.variable} antialiased`}
+        className={cn(
+          "flex h-screen flex-col items-center",
+          `${poppinsFont.variable} ${robotoFont.variable} antialiased`,
+        )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          <div className="flex flex-1 overflow-hidden">
+            <main className="flex-1 overflow-y-auto">{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   );
