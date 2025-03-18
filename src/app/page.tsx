@@ -1,6 +1,4 @@
 import { Button } from "@components/ui";
-import { DualRangeSlider } from "@components/ui/DualRange";
-
 
 export default function Home() {
   return (
