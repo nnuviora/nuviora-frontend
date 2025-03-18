@@ -1,0 +1,20 @@
+name: Restrict merging to main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  restrict:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check source branch
+        run: |
+          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+          HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
+
+          if [[ "$BASE_BRANCH" == "main" && "$HEAD_BRANCH" != "dev" && ! "$HEAD_BRANCH" =~ ^main- ]]; then
+            echo "Merging to main is only allowed from dev or main-* branches!"
+            exit 1
+          fi
