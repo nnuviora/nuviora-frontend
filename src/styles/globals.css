@@ -1,28 +1,40 @@
 @import "tailwindcss";
+@import "./typography.css";
+
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #f4c550;
-  --secondary: #fbe9ba;
+  --main: #D0F0D0;
+  --white: #FFFFFF;
+  --bg-disabled: #F4F3FE;
+  --bg-hover-active: #F6F5FF;
+  --bg-brand-default:#3E3E3E;
+  --bg-brand-hover:#1E1E1E;
+
+  --stroke-normal:#A9AEB7;
+  --stroke-error:#E98888;
+  --stroke-default:#BDBCDB;
+  --stroke-hover:#0B0B0B;
+  --stroke-field:#0B0B0B;
+
+  --text-black:#212121;
+  --text-grey:#818181;
+  --text-lightgrey:#C9C8D3;
+  --text-disabled:#C5C0DB;
+  --text-validation:#FFB82E;
+  --text-error:#F93232;
+  --text-success:#439F6E;
+  --text-link:#0F62FE;
+
+  --button-default:#00B000;
+  --button-hover:#018901;
+  --button-activ:#027702;
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--main);
+  color: var(--text-black);
+  font-family: var(--font-poppins), sans-serif;
 }

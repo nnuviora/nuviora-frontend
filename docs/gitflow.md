@@ -1,2 +1,0 @@
-main -  production
-dev - development
