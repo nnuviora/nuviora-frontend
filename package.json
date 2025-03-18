@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slider": "^1.2.3",
     "axios": "^1.8.1",
     "next": "^15.2.1",
     "react": "^19.0.0",
