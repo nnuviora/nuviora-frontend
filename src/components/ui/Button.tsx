@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "border-none  bg-[var(--button-default)] text-[var(--white)] hover:bg-[var(--button-hover)] ",
+          "border-none  bg-[var(--button-primary-default)] text-[var(--white)] hover:bg-[var(--button-secondary-hover)] ",
         secondary:
-          "bg-transparent text-[var(--button-default)] border border-[var(--button-default)] " +
-          "hover:bg-[var(--bg-hover-active)] hover:border-[var(--button-hover)] hover:text-[var(--button-hover)] " +
-          "active:bg-[var(--bg-hover-active)] active:border-[var(--button-activ)] active:text-[var(--button-activ)]",
+          "bg-transparent text-[var(--button-primary-default)] border border-[var(--button-primary-default)] " +
+          "hover:bg-[var(--bg-hover-active)] hover:border-[var(--button-secondary-hover)] hover:text-[var(--button-secondary-hover)] " +
+          "active:bg-[var(--bg-hover-active)] active:border-[var(--button-tertiary-active)] active:text-[var(--button-tertiary-active)]",
         iconAndText:
           "px-1 py-3 flex items-center justify-center gap-2 bg-transparent group",
       },
