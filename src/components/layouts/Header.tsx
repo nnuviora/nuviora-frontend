@@ -8,9 +8,11 @@ import {
   selectIsUserProfile,
 } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
-import DualRangeSliderLabel from "@components/ui_old/DualRangeSliderLabel";
+// import DualRangeSliderLabel from "@components/ui_old/DualRangeSliderLabel";
 import { Modal } from "@components/ui_old";
 import { Button } from "@components/ui";
+import { LogIn } from "@components/LogIn";
+
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 export function Header() {
@@ -31,15 +33,17 @@ export function Header() {
           User Profile
         </Button>
       </div>
-      {isLogIn && (
-        <Modal isOpen={isLogIn} onClose={() => dispatch(closeModal("isLogIn"))}>
-          <p>Log In</p>
-          <DualRangeSliderLabel />
-          <Button onClick={() => dispatch(closeModal("isLogIn"))}>
-            Закрыть
-          </Button>
-        </Modal>
-      )}
+      {isLogIn && <LogIn/>
+      //   (
+      //   <Modal isOpen={isLogIn} onClose={() => dispatch(closeModal("isLogIn"))}>
+      //     <p>Log In</p>
+      //     <DualRangeSliderLabel />
+      //     <Button onClick={() => dispatch(closeModal("isLogIn"))}>
+      //       Закрыть
+      //     </Button>
+      //   </Modal>
+      // )
+      }
       {isLogOut && (
         <Modal
           isOpen={isLogOut}
