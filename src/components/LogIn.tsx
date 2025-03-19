@@ -8,13 +8,11 @@ import {
   DialogHeader,
   DialogTitle,
   Input,
-  Label,
 } from "@components/ui";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogIn } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
 import { closeModal } from "@lib/redux/toggleModal/slice";
-import { cn } from "@lib/utils/cn";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -32,24 +30,29 @@ export function LogIn() {
             Ласкаво просимо!
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+        <div className="flex flex-col gap-6">
+          <div>
             <Input
-              id="name"
-              defaultValue="Pedro Duarte"
               className="col-span-3"
+              type="email"
+              name="email"
+              placeholder="Адреса ектронної пошти"
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div>
             <Input
-              id="username"
-              defaultValue="@peduarte"
               className="col-span-3"
+              type="password"
+              showToggle={true}
+              name="password"
+              placeholder="Створити пароль"
             />
           </div>
+          <Button type="submit">Login</Button>
         </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
+        <DialogFooter className="items-center">
+          <p>або</p>
+          <Button variant="outline" className="w-full">Увійти за допомогою Google</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

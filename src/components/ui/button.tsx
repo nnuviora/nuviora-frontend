@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
 
 const buttonVariants = cva(
-  "cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-button" +
-  "transition-all duration-[250ms] ease-in-out",
+  "cursor-pointer rounded-lg px-6 py-3 text-base font-semibold tracking-wide leading-[1.25] " +
+  "transition-colors duration-[250ms] ease-in-out",
 
   {
     variants: {
