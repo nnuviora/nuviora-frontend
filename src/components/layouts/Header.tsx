@@ -1,5 +1,5 @@
 "use client";
-import { Button, Modal } from "@components/ui";
+import { Button, Checkbox, Modal, RadioButton } from "@components/ui";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,6 +10,7 @@ import {
 } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
 import DualRangeSliderLabel from "@components/ui/DualRangeSliderLabel";
+import { useState } from "react";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 export function Header() {
@@ -18,6 +19,18 @@ export function Header() {
   const isSignUp = useSelector(selectIsSignUp);
   const isUserProfile = useSelector(selectIsUserProfile);
   const isLogOut = useSelector(selectIsLogOut);
+  const [checkedValue, setCheckedValue] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleChange = (checked: boolean) => {
+    setCheckedValue(checked);
+    console.log("checkedValue :>> ", checkedValue);
+  };
+
+  const handleRadioChange = (value: string) => {
+    setSelectedOption(value);
+  };
+
   return (
     <header>
       <div className="mb-6 flex items-center gap-16 py-6">
@@ -33,7 +46,7 @@ export function Header() {
       {isLogIn && (
         <Modal isOpen={isLogIn} onClose={() => dispatch(closeModal("isLogIn"))}>
           <p>Log In</p>
-          <DualRangeSliderLabel/>
+          <DualRangeSliderLabel />
           <Button onClick={() => dispatch(closeModal("isLogIn"))}>
             Закрыть
           </Button>
@@ -45,6 +58,54 @@ export function Header() {
           onClose={() => dispatch(closeModal("isLogOut"))}
         >
           <p>Log Out</p>
+          <div className="mb-2 flex items-center gap-2">
+            <Checkbox name="option" onChange={handleChange}>
+              Option1
+            </Checkbox>
+            <Checkbox name="option" onChange={handleChange}>
+              Option2
+            </Checkbox>
+            <Checkbox name="option" onChange={handleChange}>
+              Option3
+            </Checkbox>
+            <Checkbox name="option" onChange={handleChange} disabled>
+              Option4
+            </Checkbox>
+          </div>
+          <div className="mb-2 flex items-center gap-2">
+            <RadioButton
+              name="options"
+              value="option1"
+              checked={selectedOption === "option1"}
+              onChange={handleRadioChange}
+            >
+              Option1
+            </RadioButton>
+            <RadioButton
+              name="options"
+              value="option2"
+              checked={selectedOption === "option2"}
+              onChange={handleRadioChange}
+            >
+              Option2
+            </RadioButton>
+            <RadioButton
+              name="options"
+              value="option3"
+              checked={selectedOption === "option3"}
+              onChange={handleRadioChange}
+            >
+              Option3
+            </RadioButton>
+            <RadioButton
+              name="options"
+              value="option4"
+              checked={selectedOption === "option4"}
+              onChange={handleRadioChange}
+            >
+              Option4
+            </RadioButton>
+          </div>
           <Button onClick={() => dispatch(closeModal("isLogOut"))}>
             Закрыть
           </Button>
