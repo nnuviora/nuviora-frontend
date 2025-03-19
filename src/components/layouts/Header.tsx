@@ -1,5 +1,5 @@
 "use client";
-import { Button, Modal } from "@components/ui";
+import { Button, Checkbox, Modal, RadioButton } from "@components/ui";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,9 +10,7 @@ import {
 } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
 import DualRangeSliderLabel from "@components/ui/DualRangeSliderLabel";
-import { Checkbox } from "../ui/checkbox";
 import { useState } from "react";
-import { RadioButton } from "../ui/radiobutton";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 export function Header() {
