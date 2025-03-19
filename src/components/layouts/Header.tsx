@@ -24,6 +24,7 @@ export function Header() {
 
   const handleChange = (checked: boolean) => {
     setCheckedValue(checked);
+    console.log("checkedValue :>> ", checkedValue);
   };
 
   const handleRadioChange = (value: string) => {
