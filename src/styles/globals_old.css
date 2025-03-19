@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "./typography.css";
+
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --inputs-dropdown-presset: #f1f1f1;
+  --inputs-dropdown-hover: #e4e4e4;
+  --main-green: #d0f0d0;
+  --bg-white: #fff;
+  --bg-disabled: #f4f3fe;
+  --bg-hover-active: #f6f5ff;
+  --bg-brand-default: #3e3e3e;
+  --bg-brand-hover: #1e1e1e;
+  --bg-error: #fef3f2;
+  --bg-success: #effff8;
+  --bg-info: #f1f7fd;
+  --bg-warning: #fff9f4;
+  --stroke-normal: #a9aeb7;
+  --stroke-error: #e98888;
+  --stroke-default: #bdbcdb;
+  --stroke-hover: #0b0b0b;
+  --stroke-field: #e1e6ef;
+  --text-black: #212121;
+  --text-white: #fff;
+  --text-grey: #818181;
+  --text-light-grey: #c9c8d3;
+  --text-disabled: #c5c0d8;
+  --text-validation: #ffb82e;
+  --text-error: #f93232;
+  --text-success: #439f6e;
+  --text-link: #0f62fe;
+  --button-primary-default: #00b000;
+  --button-secondary-hover: #018901;
+  --button-tertiary-active: #027702;
+
+}
+
+body {
+  background: var(--main-green);
+  color: var(--text-black);
+  font-family: var(--font-poppins), sans-serif;
+}

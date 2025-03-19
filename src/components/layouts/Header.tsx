@@ -1,5 +1,4 @@
 "use client";
-import { Button, Modal } from "@components/ui";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,7 +8,9 @@ import {
   selectIsUserProfile,
 } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
-import DualRangeSliderLabel from "@components/ui/DualRangeSliderLabel";
+import DualRangeSliderLabel from "@components/ui_old/DualRangeSliderLabel";
+import { Modal } from "@components/ui_old";
+import { Button } from "@components/ui";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 export function Header() {
@@ -33,7 +34,7 @@ export function Header() {
       {isLogIn && (
         <Modal isOpen={isLogIn} onClose={() => dispatch(closeModal("isLogIn"))}>
           <p>Log In</p>
-          <DualRangeSliderLabel/>
+          <DualRangeSliderLabel />
           <Button onClick={() => dispatch(closeModal("isLogIn"))}>
             Закрыть
           </Button>
