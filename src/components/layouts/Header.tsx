@@ -11,6 +11,7 @@ import { AppDispatch } from "@lib/redux/store";
 import DualRangeSliderLabel from "@components/ui_old/DualRangeSliderLabel";
 import { Modal } from "@components/ui_old";
 import { Button } from "@components/ui";
+import { Checkbox } from "../ui/checkbox";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 export function Header() {
@@ -46,6 +47,48 @@ export function Header() {
           onClose={() => dispatch(closeModal("isLogOut"))}
         >
           <p>Log Out</p>
+
+          <div className="mb-2 flex gap-1">
+            <div className="inline-flex cursor-pointer items-center gap-2 transition-colors duration-300 hover:text-[var(--button-secondary-hover)] focus-visible:text-[var(--button-secondary-hover)]">
+              <Checkbox id="terms1" disabled />
+              <label
+                htmlFor="terms1"
+                className="cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-data-[state=checked]:text-[var(--button-tertiary-active)]"
+              >
+                Option1
+              </label>
+            </div>
+
+            <div className="inline-flex cursor-pointer items-center gap-2 transition-colors duration-300 peer-data-[state=checked]:text-[var(--button-tertiary-active)] hover:text-[var(--button-secondary-hover)] focus-visible:text-[var(--button-secondary-hover)]">
+              <Checkbox id="terms2" />
+              <label
+                htmlFor="terms2"
+                className="cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Option2
+              </label>
+            </div>
+
+            <div className="inline-flex cursor-pointer items-center gap-2 transition-colors duration-300 peer-data-[state=checked]:text-[var(--button-tertiary-active)] hover:text-[var(--button-secondary-hover)] focus-visible:text-[var(--button-secondary-hover)]">
+              <Checkbox id="terms3" />
+              <label
+                htmlFor="terms3"
+                className="cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Option3
+              </label>
+            </div>
+
+            <div className="inline-flex cursor-pointer items-center gap-2 transition-colors duration-300 peer-data-[state=checked]:text-[var(--button-tertiary-active)] hover:text-[var(--button-secondary-hover)] focus-visible:text-[var(--button-secondary-hover)]">
+              <Checkbox id="terms4" />
+              <label
+                htmlFor="terms4"
+                className="cursor-pointercursor-pointer cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Option4
+              </label>
+            </div>
+          </div>
           <Button onClick={() => dispatch(closeModal("isLogOut"))}>
             Закрыть
           </Button>
