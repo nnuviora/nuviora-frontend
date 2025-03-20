@@ -4,167 +4,169 @@
 }
 
 /* ========== Titles ========== */
-.text-h1 {
+.h1-text {
     font-family: var(--font-poppins);
     font-weight: bold;
     font-size: 32px;
 }
-@media (min-width: 640px) {
-    .text-h1 {
+@media (min-width: 768px) {
+    .h1-text {
         font-size: 40px;
     }
 }
-@media (min-width: 1024px) {
-    .text-h1 {
+@media (min-width: 1280px) {
+    .h1-text {
         font-size: 48px;
     }
 }
 
-.text-h2 {
+.h2-text {
     font-family: var(--font-poppins);
     font-weight: bold;
     font-size: 28px;
 }
-@media (min-width: 640px) {
-    .text-h2 {
+@media (min-width: 768px) {
+    .h2-text {
         font-size: 36px;
     }
 }
-@media (min-width: 1024px) {
-    .text-h2 {
+@media (min-width: 1280px) {
+    .h2-text {
         font-size: 28px;
     }
 }
 
-.text-h3 {
+.h3-text {
     font-family: var(--font-poppins);
     font-weight: 600;
     font-size: 24px;
 }
-@media (min-width: 640px) {
-    .text-h3 {
+@media (min-width: 768px) {
+    .h3-text {
         font-size: 30px;
     }
 }
-@media (min-width: 1024px) {
-    .text-h3 {
+@media (min-width: 1280px) {
+    .h3-text {
         font-size: 28px;
     }
 }
 
 /* ========== Subtitles ========== */
-.text-subtitle1 {
+.subtitle1-text {
     font-family: var(--font-poppins);
     font-weight: bold;
     font-size: 20px;
 }
-@media (min-width: 640px) {
-    .text-subtitle1 {
+@media (min-width: 768px) {
+    .subtitle1-text {
         font-size: 24px;
     }
 }
-@media (min-width: 1024px) {
-    .text-subtitle1 {
+@media (min-width: 1280px) {
+    .subtitle1-text {
         font-size: 30px;
     }
 }
 
-.text-subtitle2 {
+.subtitle2-text {
     font-family: var(--font-poppins);
     font-weight: bold;
     font-size: 18px;
 }
-@media (min-width: 640px) {
-    .text-subtitle2 {
+@media (min-width: 768px) {
+    .subtitle2-text {
         font-size: 22px;
     }
 }
-@media (min-width: 1024px) {
-    .text-subtitle2 {
+@media (min-width: 1280px) {
+    .subtitle2-text {
         font-size: 26px;
     }
 }
 
-.text-subtitle3 {
+.subtitle3-text {
     font-family: var(--font-poppins);
     font-weight: 600;
     font-size: 16px;
 }
-@media (min-width: 640px) {
-    .text-subtitle3 {
+@media (min-width: 768px) {
+    .subtitle3-text {
         font-size: 20px;
     }
 }
-@media (min-width: 1024px) {
-    .text-subtitle3 {
+@media (min-width: 1280px) {
+    .subtitle3-text {
         font-size: 24px;
     }
 }
 
 /* ========== Body text ========== */
-.text-body {
+.body-text {
     font-family: var(--font-roboto);
     font-weight: 400;
     font-size: 14px;
+    line-height: 1.4;
 }
-@media (min-width: 640px) {
-    .text-body {
+@media (min-width: 768px) {
+    .body-text {
         font-size: 16px;
     }
 }
-@media (min-width: 1024px) {
-    .text-body {
+@media (min-width: 1280px) {
+    .body-text {
         font-size: 18px;
     }
 }
 
 /* ========== Buttons ========== */
-.text-button {
+.button-text {
     font-family: var(--font-poppins);
-    font-weight: bold;
+    font-weight: 500;
     font-size: 14px;
+    line-height: 1.4;
 }
-@media (min-width: 640px) {
-    .text-button {
+@media (min-width: 768px) {
+    .button-text {
         font-size: 16px;
     }
 }
-@media (min-width: 1024px) {
-    .text-button {
+@media (min-width: 1280px) {
+    .button-text {
         font-size: 18px;
     }
 }
 
 /* ========== Labels ========== */
-.text-label {
+.label-text {
     font-family: var(--font-roboto);
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
 }
-@media (min-width: 640px) {
-    .text-label {
+@media (min-width: 768px) {
+    .label-text {
         font-size: 16px;
     }
 }
-@media (min-width: 1024px) {
-    .text-label {
+@media (min-width: 1280px) {
+    .label-text {
         font-size: 18px;
     }
 }
 
 /* ========== Categories ========== */
-.text-category {
+.category-text {
     font-family: var(--font-roboto);
     font-weight: 400;
     font-size: 16px;
 }
-@media (min-width: 640px) {
-    .text-category {
+@media (min-width: 768px) {
+    .category-text {
         font-size: 18px;
     }
 }
-@media (min-width: 1024px) {
-    .text-category {
+@media (min-width: 1280px) {
+    .category-text {
         font-size: 20px;
     }
 }
