@@ -8,10 +8,9 @@ import {
   selectIsUserProfile,
 } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
-// import DualRangeSliderLabel from "@components/ui_old/DualRangeSliderLabel";
 import { Modal } from "@components/ui_old";
 import { Button } from "@components/ui";
-import { LogIn } from "@components/LogIn";
+import { SingUp } from "@components/singUp/SingUp";
 
 
 const useAppDispatch: () => AppDispatch = useDispatch;
@@ -23,7 +22,7 @@ export function Header() {
   const isLogOut = useSelector(selectIsLogOut);
   return (
     <header>
-      <div className="mb-6 flex items-center gap-16 py-6">
+      <div className="mb-6 flex items-center gap-16 py-6 flex-wrap">
         <Button onClick={() => dispatch(openModal("isLogIn"))}>Log In</Button>
         <Button onClick={() => dispatch(openModal("isLogOut"))}>Log Out</Button>
         <Button onClick={() => dispatch(openModal("isSignUp"))}>
@@ -33,16 +32,16 @@ export function Header() {
           User Profile
         </Button>
       </div>
-      {isLogIn && <LogIn/>
-      //   (
-      //   <Modal isOpen={isLogIn} onClose={() => dispatch(closeModal("isLogIn"))}>
-      //     <p>Log In</p>
-      //     <DualRangeSliderLabel />
-      //     <Button onClick={() => dispatch(closeModal("isLogIn"))}>
-      //       Закрыть
-      //     </Button>
-      //   </Modal>
-      // )
+      {isLogIn &&
+        (
+        <Modal isOpen={isLogIn} onClose={() => dispatch(closeModal("isLogIn"))}>
+          <p>Log In</p>
+          {/*<DualRangeSliderLabel />*/}
+          <Button onClick={() => dispatch(closeModal("isLogIn"))}>
+            Закрыть
+          </Button>
+        </Modal>
+      )
       }
       {isLogOut && (
         <Modal
@@ -55,17 +54,7 @@ export function Header() {
           </Button>
         </Modal>
       )}
-      {isSignUp && (
-        <Modal
-          isOpen={isSignUp}
-          onClose={() => dispatch(closeModal("isSignUp"))}
-        >
-          <p>Register</p>
-          <Button onClick={() => dispatch(closeModal("isSignUp"))}>
-            Закрыть
-          </Button>
-        </Modal>
-      )}
+      {isSignUp && <SingUp/>}
       {isUserProfile && (
         <Modal
           isOpen={isUserProfile}

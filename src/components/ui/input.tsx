@@ -6,8 +6,8 @@ import {
   ReactElement,
   useState,
 } from "react";
-import { AiOutlineEyeInvisible, AiTwotoneEye } from "react-icons/ai";
 import { cn } from "@/lib/utils/cn";
+import { Eye, EyeOff } from "lucide-react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: string;
@@ -37,7 +37,7 @@ const Input = forwardRef(function Input(
         name={name}
         placeholder={placeholder}
         className={cn(
-          "w-full rounded-lg border border-[var(--foreground)]/10 bg-transparent px-4.5 py-4 text-base outline-none ",
+          "w-full rounded-lg border border-[var(-text-grey)] bg-transparent px-4.5 py-4 body-text outline-none ",
           className,
         )}
         {...props}
@@ -47,12 +47,12 @@ const Input = forwardRef(function Input(
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute inset-y-0 right-2 flex items-center"
+          className="cursor-pointer absolute inset-y-0 right-2 flex items-center"
         >
           {showPassword ? (
-            <AiTwotoneEye size={20} />
+            <Eye size={16} className="stroke-[var(--text-grey)]"/>
           ) : (
-            <AiOutlineEyeInvisible size={20} />
+            <EyeOff size={16} className="stroke-[var(--text-grey)]"/>
           )}
         </button>
       )}

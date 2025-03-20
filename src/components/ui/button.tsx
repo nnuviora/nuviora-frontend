@@ -4,20 +4,21 @@ import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
 
 const buttonVariants = cva(
-  "cursor-pointer rounded-lg px-6 py-3 text-base font-semibold tracking-wide leading-[1.25] " +
-  "transition-colors duration-[250ms] ease-in-out",
+  "cursor-pointer rounded-lg button-text leading-[1.4] " +
+    "transition-colors duration-[250ms] ease-in-out",
 
   {
     variants: {
       variant: {
         default:
-          "bg-[var(--button-primary-default)] text-[var(--white)] shadow-xs " +
+          "px-6 py-3 bg-[var(--button-primary-default)] text-[var(--white)] shadow-xs " +
           "hover:bg-[var(--button-secondary-hover)]",
         outline:
-          "border bg-transparent text-[var(--button-primary-default)] border-[var(--button-primary-default)] shadow-xs " +
+          "px-6 py-3 border bg-transparent text-[var(--button-primary-default)] border-[var(--button-primary-default)] shadow-xs " +
           "hover:bg-[var(--bg-hover-active)] hover:border-[var(--button-secondary-hover)] hover:text-[var(--button-secondary-hover)] " +
           "active:bg-[var(--bg-hover-active)] active:border-[var(--button-tertiary-active)] active:text-[var(--button-tertiary-active)]",
 
+        link: "text-[var(--button-primary-default)] underline-offset-4 hover:underline",
         // !Пока не использовать
         // destructive:
         //   "bg-destructive text-white shadow-xs hover:bg-destructive/90 " +
@@ -27,8 +28,7 @@ const buttonVariants = cva(
         //   "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         // ghost:
         //   "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 ",
-        // link: "text-primary underline-offset-4 hover:underline",
-
+        //
       },
       disabled: {
         true: "border-none bg-[var(--bg-disabled)] text-[var(--text-disabled)] cursor-not-allowed pointer-events-none",
@@ -43,7 +43,6 @@ const buttonVariants = cva(
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
     },
   },
 );
