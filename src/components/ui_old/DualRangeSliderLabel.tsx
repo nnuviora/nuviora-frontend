@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import { useState } from 'react';
-import { DualRangeSlider } from "@components/ui/DualRange";
+import { DualRangeSlider } from "@components/ui_old/DualRange";
 
 
 export default function DualRangeSliderLabel  ()  {
