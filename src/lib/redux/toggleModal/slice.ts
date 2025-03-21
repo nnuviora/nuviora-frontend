@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IModalState {
-  isLogIn: boolean;
+  isSignIn: boolean;
   isLogOut: boolean;
   isSignUp: boolean;
   isUserProfile: boolean;
 }
 
 const initialState: IModalState = {
-  isLogIn: false,
+  isSignIn: false,
   isLogOut: false,
   isSignUp: false,
   isUserProfile: false,

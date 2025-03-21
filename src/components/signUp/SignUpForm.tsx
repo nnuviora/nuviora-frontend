@@ -4,10 +4,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { boolean, object, ObjectSchema, ref, string } from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ISingUpForm } from "@/types";
+import { entryForm } from "@/types";
 import { cn } from "@lib/utils/cn";
 
-const SignUpSchema: ObjectSchema<ISingUpForm> = object().shape({
+const SignUpSchema: ObjectSchema<entryForm> = object().shape({
   email: string().email("Invalid email").required("Email is required"),
   password: string()
     .min(6, "Minimum 6 character")
@@ -26,7 +26,7 @@ export function SingUpForm() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ISingUpForm>({
+  } = useForm<entryForm>({
     defaultValues: {
       email: "",
       password: "",
@@ -37,7 +37,7 @@ export function SingUpForm() {
     mode: "onSubmit",
   });
 
-  const onSubmit: SubmitHandler<ISingUpForm> = (data) => {
+  const onSubmit: SubmitHandler<entryForm> = (data) => {
     alert(`Email: ${data.email}
     Password: ${data.password}
     PasswordConfirm: ${data.passwordConfirm}
