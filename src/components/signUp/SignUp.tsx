@@ -26,12 +26,10 @@ export function SignUp() {
     >
       <DialogContent className="gap-4 px-8 py-27" aria-describedby={undefined}>
         <DialogHeader>
-          <DialogTitle className="h2-text text-[var(--text-black)]">
-            Реєстрація
-          </DialogTitle>
+          <DialogTitle>Реєстрація</DialogTitle>
         </DialogHeader>
         <SingUpForm />
-        <DialogFooter className="items-center">
+        <DialogFooter>
           <Button
             variant="link"
             onClick={() => {

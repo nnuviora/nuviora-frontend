@@ -6,7 +6,8 @@ import type { Metadata } from "next";
 import Providers from "@/lib/providers";
 import { ReactNode } from "react";
 import Header from "@components/layouts/Header";
-import { cn } from "@lib/utils/cn";
+import { cn } from "@lib/utils";
+
 
 const poppinsFont = Poppins({
   variable: "--font-poppins",

@@ -1,13 +1,13 @@
 import { Lock, Mail } from "lucide-react";
-import { Button, Input } from "@components/ui";
+import { Button, Input, InputErrorMassage } from "@components/ui";
 import { Checkbox } from "@/components/ui/checkbox";
 import { boolean, object, ObjectSchema, ref, string } from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { entryForm } from "@/types";
-import { cn } from "@lib/utils/cn";
+import { ISingUpForm } from "@/types";
+import { cn } from "@lib/utils";
 
-const SignUpSchema: ObjectSchema<entryForm> = object().shape({
+const SignUpSchema: ObjectSchema<ISingUpForm> = object().shape({
   email: string().email("Invalid email").required("Email is required"),
   password: string()
     .min(6, "Minimum 6 character")
@@ -26,7 +26,7 @@ export function SingUpForm() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<entryForm>({
+  } = useForm<ISingUpForm>({
     defaultValues: {
       email: "",
       password: "",
@@ -37,7 +37,7 @@ export function SingUpForm() {
     mode: "onSubmit",
   });
 
-  const onSubmit: SubmitHandler<entryForm> = (data) => {
+  const onSubmit: SubmitHandler<ISingUpForm> = (data) => {
     alert(`Email: ${data.email}
     Password: ${data.password}
     PasswordConfirm: ${data.passwordConfirm}
@@ -73,9 +73,7 @@ export function SingUpForm() {
           )}
         />
         {errors.email && (
-          <p className="py-0.2 label-text absolute bottom-[-9px] left-2 rounded border border-[var(--text-error)] bg-[var(--bg-white)] px-2 text-xs text-[var(--text-error)] shadow-lg">
-            {errors.email.message}
-          </p>
+          <InputErrorMassage message={errors.email.message || ""} />
         )}
       </div>
 
@@ -102,9 +100,7 @@ export function SingUpForm() {
           )}
         />
         {errors.password && (
-          <p className="py-0.2 label-text absolute bottom-[-9px] left-2 rounded border border-[var(--text-error)] bg-[var(--bg-white)] px-2 text-xs text-[var(--text-error)] shadow-lg">
-            {errors.password.message}
-          </p>
+          <InputErrorMassage message={errors.password.message || ""} />
         )}
       </div>
 
@@ -131,9 +127,7 @@ export function SingUpForm() {
           )}
         />
         {errors.passwordConfirm && (
-          <p className="py-0.2 label-text absolute bottom-[-9px] left-2 rounded border border-[var(--text-error)] bg-[var(--bg-white)] px-2 text-xs text-[var(--text-error)] shadow-lg">
-            {errors.passwordConfirm.message}
-          </p>
+          <InputErrorMassage message={errors.passwordConfirm.message || ""} />
         )}
       </div>
 
@@ -159,9 +153,10 @@ export function SingUpForm() {
           )}
         />
         {errors.isTermsAccepted && (
-          <p className="py-0.2 label-text absolute bottom-[-15px] left-4.5 rounded border border-[var(--text-error)] bg-[var(--bg-white)] px-2 text-xs text-[var(--text-error)] shadow-lg">
-            {errors.isTermsAccepted.message}
-          </p>
+          <InputErrorMassage
+            message={errors.isTermsAccepted.message || ""}
+            className="bottom-[-15px] left-4.5"
+          />
         )}
       </div>
 

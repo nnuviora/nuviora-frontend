@@ -1,6 +1,5 @@
 "use client";
 import * as SliderPrimitive from "@radix-ui/react-slider";
-import { cn } from "@lib/utils/cn";
 import {
   ComponentProps,
   ForwardedRef,
@@ -8,6 +7,7 @@ import {
   Fragment,
   ReactNode,
 } from "react";
+import { cn } from "@lib/utils";
 
 interface DualRangeSliderProps
   extends ComponentProps<typeof SliderPrimitive.Root> {
@@ -32,12 +32,12 @@ const DualRangeSlider = forwardRef(function DualRangeSlider(
       )}
       {...props}
     >
-      <SliderPrimitive.Track className="bg-[var(--bg-success)] relative h-2 w-full grow overflow-hidden rounded-full">
-        <SliderPrimitive.Range className="bg-[var(--button-primary-default)] absolute h-full" />
+      <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-[var(--bg-success)]">
+        <SliderPrimitive.Range className="absolute h-full bg-[var(--button-primary-default)]" />
       </SliderPrimitive.Track>
       {initialValue.map((value, index) => (
         <Fragment key={index}>
-          <SliderPrimitive.Thumb className="border-[var(--stroke-normal)] bg-[var(--bg-white)] ring-offset-background focus-visible:ring-ring relative block h-6 w-6 rounded-full border-2 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
+          <SliderPrimitive.Thumb className="ring-offset-background focus-visible:ring-ring relative block h-6 w-6 rounded-full border-2 border-[var(--stroke-normal)] bg-[var(--bg-white)] transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
             {label && (
               <span
                 className={cn(
