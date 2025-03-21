@@ -1,4 +1,4 @@
-export interface ISingUpForm {
+export interface entryForm {
   email: string;
   password: string;
   passwordConfirm: string;

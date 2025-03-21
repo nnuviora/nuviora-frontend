@@ -1,1 +1,1 @@
-export * from "./singUpFormType"
+export * from "./entryFormType";
