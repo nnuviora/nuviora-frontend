@@ -8,7 +8,7 @@ import {
   ReactNode,
   ChangeEvent,
 } from "react";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@lib/utils";
 
 interface RadioButtonProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {

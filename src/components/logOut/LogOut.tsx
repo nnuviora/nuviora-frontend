@@ -10,7 +10,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "@components/ui";
+
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogOut } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
@@ -31,7 +32,13 @@ export const LogOut = () => {
           <AlertDialogDescription></AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel
+            onClick={() => {
+              dispatch(closeModal("isLogOut"));
+            }}
+          >
+            Cancel
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
               dispatch(closeModal("isLogOut"));
