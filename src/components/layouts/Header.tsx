@@ -1,40 +1,30 @@
 "use client";
-import { openModal } from "@lib/redux/toggleModal/slice";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectIsSignIn,
-  selectIsLogOut,
-  selectIsSignUp,
-} from "@lib/redux/toggleModal/selectors";
-import { AppDispatch } from "@lib/redux/store";
-import { Button } from "@components/ui";
-import { SignUp } from "@/components/signUp/SignUp";
-import { SignIn } from "../signIn/SignIn";
-import { LogOut } from "../logOut/LogOut";
+import { Button, SearchInput } from "@components/ui";
 
-const useAppDispatch: () => AppDispatch = useDispatch;
+import { ShoppingCart, User } from "lucide-react";
+
 export function Header() {
-  const dispatch = useAppDispatch();
-  const isSignIn = useSelector(selectIsSignIn);
-  const isSignUp = useSelector(selectIsSignUp);
-
-  const isLogOut = useSelector(selectIsLogOut);
   return (
-    <header>
-      <div className="mb-6 flex flex-wrap items-center gap-16 py-6">
-        <Button onClick={() => dispatch(openModal("isSignIn"))}>Log In</Button>
-        <Button onClick={() => dispatch(openModal("isLogOut"))}>Log Out</Button>
-        <Button onClick={() => dispatch(openModal("isSignUp"))}>
-          Register
+    <header className="w-full bg-[var(--button-primary-default)]">
+      <div className="xl2:max-w-[90rem] xl2:px-18 xl2:py-3.5 mx-auto flex w-full items-center justify-between gap-6 px-4 py-2">
+        <h2 className="h2-text leading-[1.2] text-[var(--text-white)]">
+          Nuviora
+        </h2>
+        <SearchInput
+          name="headerSearch"
+          placeholder="Search..."
+          className="leading-[1.2]"
+        />
+        <Button className="p-3 leading-[1.2]">
+          <div className="flex items-center justify-between gap-3">
+            <User size={24} />
+            <p className="body-text">Account</p>
+          </div>
         </Button>
-        <Button onClick={() => dispatch(openModal("isUserProfile"))}>
-          User Profile
+        <Button className="p-1">
+          <ShoppingCart size={36} />
         </Button>
       </div>
-
-      {isSignIn && <SignIn />}
-      {isLogOut && <LogOut />}
-      {isSignUp && <SignUp />}
     </header>
   );
 }

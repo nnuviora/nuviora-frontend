@@ -9,7 +9,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@components/ui";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +24,6 @@ export const LogOut = () => {
 
   return (
     <AlertDialog open={logOut}>
-      <AlertDialogTrigger></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

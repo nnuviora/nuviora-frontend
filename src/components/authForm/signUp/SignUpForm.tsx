@@ -1,6 +1,6 @@
 import { Lock, Mail } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@components/ui/checkbox";
 import { boolean, object, ObjectSchema, ref, string } from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
