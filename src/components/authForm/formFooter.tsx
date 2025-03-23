@@ -1,0 +1,36 @@
+import { Button } from "@components/ui";
+import { FcGoogle } from "react-icons/fc";
+import { Heart } from "lucide-react";
+
+export default function FormFooter() {
+  return (
+    <>
+      <div className="flex w-full flex-col items-center justify-center gap-2">
+        <p className="body-text text-[var(--text-grey)]">Aбо</p>
+        <Button
+          variant="outline"
+          className="w-full border-[var(--stroke-normal)]"
+        >
+          <div className="flex w-full items-center justify-center gap-4">
+            <FcGoogle size={18} />
+            <p className="text-[var(--text-grey)]">Продовжити з Google</p>
+          </div>
+        </Button>
+      </div>
+      <div className="flex w-full flex-col items-center justify-center gap-2">
+        <p className="body-text text-[var(--text-grey)]">
+          Подобається наш проект?
+        </p>
+        <Button
+          variant="outline"
+          className="w-full border-[var(--stroke-normal)]"
+        >
+          <div className="flex w-full items-center justify-center gap-4">
+            <Heart size={18} className="stroke-[var(--text-grey)]" />
+            <p className="text-[var(--text-grey)]">Підтримати нас</p>
+          </div>
+        </Button>
+      </div>
+    </>
+  );
+}

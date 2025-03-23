@@ -11,8 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsSignUp } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
-import { SingUpForm } from "@/components/signUp/SignUpForm";
-import { FcGoogle } from "react-icons/fc";
+import { SingUpForm } from "@components/authForm/signUp/SignUpForm";
+import FormFooter from "@components/authForm/formFooter";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -29,7 +29,7 @@ export function SignUp() {
           <DialogTitle>Реєстрація</DialogTitle>
         </DialogHeader>
         <SingUpForm />
-        <DialogFooter>
+        <DialogFooter className="gap-4">
           <Button
             variant="link"
             onClick={() => {
@@ -42,13 +42,7 @@ export function SignUp() {
             </span>
             Увійти
           </Button>
-          <p className="body-text text-[var(--text-grey)]">Aбо</p>
-          <Button variant="outline" className="w-full">
-            <div className="flex w-full items-center justify-center gap-4">
-              <FcGoogle size={18} />
-              <p>Продовжити з Google</p>
-            </div>
-          </Button>
+          <FormFooter />
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -11,8 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsSignIn } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
-import { SignInForm } from "@components/signIn/SignInForm";
-import { FcGoogle } from "react-icons/fc";
+import { SignInForm } from "@components/authForm/signIn/SignInForm";
+import FormFooter from "@components/authForm/formFooter";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -44,13 +44,7 @@ export const SignIn = () => {
             </span>
             Створити
           </Button>
-          <p className="body-text text-[var(--text-grey)]">Aбо</p>
-          <Button variant="outline" className="w-full">
-            <div className="flex w-full items-center justify-center gap-4">
-              <FcGoogle size={18} />
-              <p>Продовжити з Google</p>
-            </div>
-          </Button>
+          <FormFooter />
         </DialogFooter>
       </DialogContent>
     </Dialog>
