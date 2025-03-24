@@ -1,45 +1,41 @@
-"use client";
-import { Lock, Mail } from "lucide-react";
+import { Lock } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-import { object, ObjectSchema, string } from "yup";
+import { object, ObjectSchema, ref, string } from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { cn } from "@lib/utils";
-import { ISingInForm } from "@/types";
-import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
-import { AppDispatch } from "@lib/redux/store";
-import { useDispatch } from "react-redux";
+import { IPasswordRecoveryPassword } from "@/types";
 
-const useAppDispatch: () => AppDispatch = useDispatch;
+const passwordRecoverySchema: ObjectSchema<IPasswordRecoveryPassword> =
+  object().shape({
+    password: string()
+      .min(6, "Minimum 6 character")
+      .required("Password is required"),
+    passwordConfirm: string()
+      .oneOf([ref("password")], "Passwords must match")
+      .required("Password confirmation is required"),
+  });
 
-const SignInSchema: ObjectSchema<ISingInForm> = object().shape({
-  email: string().email("Invalid email").required("Email is required"),
-  password: string()
-    .min(6, "Minimum 6 character")
-    .required("Password is required"),
-});
-
-export function SignInForm() {
-  const dispatch = useAppDispatch();
-
+export const PasswordRecoveryFormPassword = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ISingInForm>({
+  } = useForm<IPasswordRecoveryPassword>({
     defaultValues: {
-      email: "",
       password: "",
+      passwordConfirm: "",
     },
-    resolver: yupResolver(SignInSchema),
+    resolver: yupResolver(passwordRecoverySchema),
     mode: "onSubmit",
   });
 
-  const onSubmit: SubmitHandler<ISingInForm> = (data) => {
-    alert(`Email: ${data.email}
-    Password: ${data.password}
-`);
+  const onSubmit: SubmitHandler<IPasswordRecoveryPassword> = (data) => {
+    alert(
+      `Password: ${data.password.trim()}, 
+       Passwords confirmed: ${data.passwordConfirm.trim()}`,
+    );
     reset();
   };
 
@@ -49,32 +45,6 @@ export function SignInForm() {
       className="flex flex-col gap-4"
       noValidate
     >
-      <div className="relative w-full">
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <div
-              className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-blue-500",
-                errors.email && "border-[var(--text-error)]",
-              )}
-            >
-              <Mail className="stroke-[var(--text-grey)]" size="16" />
-              <Input
-                {...field}
-                className="border-none p-0 placeholder-[var(--text-grey)] focus:ring-0"
-                type="email"
-                placeholder="Email"
-              />
-            </div>
-          )}
-        />
-        {errors.email && (
-          <InputErrorMassage message={errors.email.message || ""} />
-        )}
-      </div>
-
       <div className="relative w-full">
         <Controller
           name="password"
@@ -101,17 +71,35 @@ export function SignInForm() {
           <InputErrorMassage message={errors.password.message || ""} />
         )}
       </div>
-      <Button
-        variant="link"
-        className="text-[var(--text-link)]"
-        onClick={() => {
-          dispatch(closeModal("isSignIn"));
-          dispatch(openModal("isPasswordRecoveryEmail"));
-        }}
-      >
-        Забули пароль?
-      </Button>
-      <Button type="submit">Увійти</Button>
+
+      <div className="relative w-full">
+        <Controller
+          name="passwordConfirm"
+          control={control}
+          render={({ field }) => (
+            <div
+              className={cn(
+                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-blue-500",
+                errors.passwordConfirm && "border-[var(--text-error)]",
+              )}
+            >
+              <Lock className="stroke-[var(--text-grey)]" size="16" />
+              <Input
+                {...field}
+                className="border-none p-0 placeholder-[var(--text-grey)] focus:ring-0"
+                type="password"
+                showToggle={true}
+                placeholder="Підвердіть пароль"
+              />
+            </div>
+          )}
+        />
+        {errors.passwordConfirm && (
+          <InputErrorMassage message={errors.passwordConfirm.message || ""} />
+        )}
+      </div>
+
+      <Button type="submit">Відновити пароль</Button>
     </form>
   );
-}
+};
