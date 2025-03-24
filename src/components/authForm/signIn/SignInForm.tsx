@@ -101,9 +101,11 @@ export function SignInForm() {
           <InputErrorMassage message={errors.password.message || ""} />
         )}
       </div>
+
+      {/* не можу перебити font-weight на 400 */}
       <Button
         variant="link"
-        className="text-[var(--text-link)]"
+        className="text-start font-normal text-[var(--text-link)]"
         onClick={() => {
           dispatch(closeModal("isSignIn"));
           dispatch(openModal("isPasswordRecoveryEmail"));
@@ -111,7 +113,11 @@ export function SignInForm() {
       >
         Забули пароль?
       </Button>
-      <Button type="submit">Увійти</Button>
+
+      {/* не можу перебити font-weight на 600 */}
+      <Button type="submit" className="mt-4 font-semibold">
+        Увійти
+      </Button>
     </form>
   );
 }
