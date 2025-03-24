@@ -12,10 +12,8 @@ export function InputErrorMassage({
   return (
     <p
       className={cn(
-        "py-0.2 label-text absolute bottom-[-9px] left-2 rounded border text-[var(--text-error)] " +
-          "border-[var(--text-error)] bg-[var(--bg-white)] px-2 " +
-          "shadow-lg",
-        className,
+        "py-0.2 label-text absolute bottom-[-20px] left-0 rounded border-none text-[var(--text-error)] " +
+          className,
       )}
     >
       {message}
