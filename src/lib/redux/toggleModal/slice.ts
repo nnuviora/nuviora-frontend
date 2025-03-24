@@ -5,6 +5,8 @@ export interface IModalState {
   isLogOut: boolean;
   isSignUp: boolean;
   isUserProfile: boolean;
+  isPasswordRecoveryEmail: boolean;
+  isPasswordRecoveryPassword: boolean;
 }
 
 const initialState: IModalState = {
@@ -12,6 +14,8 @@ const initialState: IModalState = {
   isLogOut: false,
   isSignUp: false,
   isUserProfile: false,
+  isPasswordRecoveryEmail: false,
+  isPasswordRecoveryPassword: false,
 };
 
 const modalSlice = createSlice({

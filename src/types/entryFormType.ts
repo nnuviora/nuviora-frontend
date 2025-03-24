@@ -9,3 +9,12 @@ export interface ISingInForm {
   email: string;
   password: string;
 }
+
+export interface IPasswordRecoveryEmail {
+  email: string;
+}
+
+export interface IPasswordRecoveryPassword {
+  password: string;
+  passwordConfirm: string;
+}

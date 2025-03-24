@@ -7,18 +7,25 @@ import { SignIn } from "@components/authForm/signIn/SignIn";
 import { SignUp } from "@components/authForm/signUp/SignUp";
 import {
   selectIsLogOut,
+  selectIsPasswordRecoveryEmail,
+  selectIsPasswordRecoveryPassword,
   selectIsSignIn,
   selectIsSignUp,
 } from "@lib/redux/toggleModal/selectors";
 import { LogOut } from "@components/authForm/logOut/LogOut";
+import { PasswordRecoveryEmail } from "@components/authForm/passwordRecovery/PasswordRecoveryEmail";
+import { PasswordRecoveryPassword } from "@components/authForm/passwordRecovery/PasswordRecoveryPassword";
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 const Footer = () => {
   const dispatch = useAppDispatch();
   const isSignIn = useSelector(selectIsSignIn);
   const isSignUp = useSelector(selectIsSignUp);
-
   const isLogOut = useSelector(selectIsLogOut);
+  const isPasswordRecoveryEmail = useSelector(selectIsPasswordRecoveryEmail);
+  const isPasswordRecoveryPassword = useSelector(
+    selectIsPasswordRecoveryPassword,
+  );
   return (
     <footer>
       <div className="xl2:max-w-[90rem] xl2:px-18 xl2:py-3.5 mx-auto flex w-full flex-wrap items-center justify-between gap-16 py-6">
@@ -34,6 +41,8 @@ const Footer = () => {
       {isSignIn && <SignIn />}
       {isLogOut && <LogOut />}
       {isSignUp && <SignUp />}
+      {isPasswordRecoveryEmail && <PasswordRecoveryEmail />}
+      {isPasswordRecoveryPassword && <PasswordRecoveryPassword />}
     </footer>
   );
 };
