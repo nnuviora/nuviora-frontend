@@ -48,7 +48,7 @@ export function SingUpForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-6"
       noValidate
     >
       <div className="relative w-full">
@@ -153,10 +153,7 @@ export function SingUpForm() {
           )}
         />
         {errors.isTermsAccepted && (
-          <InputErrorMassage
-            message={errors.isTermsAccepted.message || ""}
-            className="bottom-[-15px] left-4.5"
-          />
+          <InputErrorMassage message={errors.isTermsAccepted.message || ""} />
         )}
       </div>
 
