@@ -48,7 +48,7 @@ export function SingUpForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6"
+      className="xl2:gap-8 flex flex-col gap-6"
       noValidate
     >
       <div className="relative w-full">
@@ -58,7 +58,7 @@ export function SingUpForm() {
           render={({ field }) => (
             <div
               className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-blue-500",
+                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
                 errors.email && "border-[var(--text-error)]",
               )}
             >
@@ -84,7 +84,7 @@ export function SingUpForm() {
           render={({ field }) => (
             <div
               className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-blue-500",
+                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
                 errors.password && "border-[var(--text-error)]",
               )}
             >
@@ -111,7 +111,7 @@ export function SingUpForm() {
           render={({ field }) => (
             <div
               className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-blue-500",
+                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
                 errors.passwordConfirm && "border-[var(--text-error)]",
               )}
             >

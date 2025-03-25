@@ -1,6 +1,5 @@
 "use client";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogFooter,
@@ -12,8 +11,9 @@ import { selectIsPasswordRecoveryPassword } from "@lib/redux/toggleModal/selecto
 import { AppDispatch } from "@lib/redux/store";
 import { closeModal } from "@lib/redux/toggleModal/slice";
 import { DialogDescription } from "@radix-ui/react-dialog";
-import { ArrowLeft } from "lucide-react";
 import { PasswordRecoveryFormPassword } from "@components/authForm/passwordRecovery/PasswordRecoveryFormPassword";
+import { GoBack } from "@components/authForm/passwordRecovery/goBack";
+import Link from "next/link";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -27,22 +27,22 @@ export const PasswordRecoveryPassword = () => {
       open={isPasswordRecoveryPassword}
       onOpenChange={() => dispatch(closeModal("isPasswordRecoveryPassword"))}
     >
-      <DialogContent className="gap-4 px-8 py-27" aria-describedby={undefined}>
-        <Button variant="link" className="text-[var(--text-black)]">
-          <div className="flex items-center gap-4">
-            <ArrowLeft size={16} />
-            <p>Повернутися до входу</p>
-          </div>
-        </Button>
+      <DialogContent className="gap-4 px-8 py-8" aria-describedby={undefined}>
+        <GoBack />
         <DialogHeader>
-          <DialogTitle className="h2-text text-[var(--text-black)]">
+          <DialogTitle className="mb-2 text-[24px] font-semibold text-[var(--text-black)]">
             Відновлення паролю
           </DialogTitle>
           <DialogDescription>Введіть новий пароль</DialogDescription>
         </DialogHeader>
         <PasswordRecoveryFormPassword />
         <DialogFooter className="items-center">
-          <Button variant="link">Служба підтримки</Button>
+          <Link
+            className="font-[family-name:var(--font-roboto)] text-[20px] font-semibold text-[var(--text-black)]"
+            href="#"
+          >
+            Служба підтримки
+          </Link>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -13,6 +13,7 @@ import { AppDispatch } from "@lib/redux/store";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { SignInForm } from "@components/authForm/signIn/SignInForm";
 import FormFooter from "@components/authForm/formFooter";
+import Image from "next/image";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -24,28 +25,42 @@ export const SignIn = () => {
       open={isSignIn}
       onOpenChange={() => dispatch(closeModal("isSignIn"))}
     >
-      <DialogContent aria-describedby={undefined}>
-        <DialogHeader>
-          <DialogTitle className="h2-text text-[var(--text-black)]">
-            Вхід
-          </DialogTitle>
-        </DialogHeader>
-        <SignInForm />
-        <DialogFooter className="items-center">
-          <Button
-            variant="link"
-            onClick={() => {
-              dispatch(closeModal("isSignIn"));
-              dispatch(openModal("isSignUp"));
-            }}
-          >
-            <span className="body-text mr-1 text-[var(--text-grey)]">
-              У вас ще немає аккаунту?
-            </span>
-            Створити
-          </Button>
-          <FormFooter />
-        </DialogFooter>
+      <DialogContent
+        aria-describedby={undefined}
+        className="flex w-[90%] max-w-[1280px] flex-col gap-0 p-0 md:flex-row"
+      >
+        <div className="flex w-full flex-col justify-center gap-4 px-5 py-15 md:w-1/2">
+          <DialogHeader>
+            <DialogTitle className="h2-text text-[var(--text-black)]">
+              Вхід
+            </DialogTitle>
+          </DialogHeader>
+          <SignInForm />
+          <DialogFooter className="items-center">
+            <Button
+              variant="link"
+              onClick={() => {
+                dispatch(closeModal("isSignIn"));
+                dispatch(openModal("isSignUp"));
+              }}
+            >
+              <span className="body-text mr-1 text-[var(--text-grey)]">
+                У вас ще немає аккаунту?
+              </span>
+              Створити
+            </Button>
+            <FormFooter />
+          </DialogFooter>
+        </div>
+        <div className="relative hidden w-1/2 md:block">
+          <Image
+            src="/image24.jpg"
+            alt="Регистрация"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-r-lg"
+          />
+        </div>
       </DialogContent>
     </Dialog>
   );
