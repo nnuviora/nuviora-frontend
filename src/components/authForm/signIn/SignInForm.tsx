@@ -46,7 +46,7 @@ export function SignInForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6"
+      className="xl2:gap-8 flex flex-col gap-6"
       noValidate
     >
       <div className="relative w-full">
@@ -56,7 +56,7 @@ export function SignInForm() {
           render={({ field }) => (
             <div
               className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-blue-500",
+                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
                 errors.email && "border-[var(--text-error)]",
               )}
             >
@@ -82,7 +82,7 @@ export function SignInForm() {
           render={({ field }) => (
             <div
               className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-blue-500",
+                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
                 errors.password && "border-[var(--text-error)]",
               )}
             >
@@ -105,7 +105,7 @@ export function SignInForm() {
       {/* не можу перебити font-weight на 400 */}
       <Button
         variant="link"
-        className="text-start font-normal text-[var(--text-link)]"
+        className="text-center font-normal text-[var(--text-link)]"
         onClick={() => {
           dispatch(closeModal("isSignIn"));
           dispatch(openModal("isPasswordRecoveryEmail"));

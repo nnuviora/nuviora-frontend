@@ -1,6 +1,5 @@
 "use client";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogFooter,
@@ -13,8 +12,9 @@ import { AppDispatch } from "@lib/redux/store";
 import { closeModal } from "@lib/redux/toggleModal/slice";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { PasswordRecoveryFormEmail } from "@components/authForm/passwordRecovery/PasswordRecoveryFormEmail";
-import { ArrowLeft } from "lucide-react";
 import { selectIsPasswordRecoveryEmail } from "@lib/redux/toggleModal/selectors";
+import { GoBack } from "@components/authForm/passwordRecovery/goBack";
+import Link from "next/link";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -27,14 +27,9 @@ export const PasswordRecoveryEmail = () => {
       onOpenChange={() => dispatch(closeModal("isPasswordRecoveryEmail"))}
     >
       <DialogContent className="gap-4 px-8 py-8" aria-describedby={undefined}>
-        <Button variant="link" className="text-[var(--text-black)]">
-          <div className="flex items-center gap-4">
-            <ArrowLeft size={16} />
-            <p>Повернутися до входу</p>
-          </div>
-        </Button>
+        <GoBack />
         <DialogHeader>
-          <DialogTitle className="h2-text text-[var(--text-black)]">
+          <DialogTitle className="mb-2 text-[24px] font-semibold text-[var(--text-black)]">
             Відновлення паролю
           </DialogTitle>
           <DialogDescription>
@@ -43,7 +38,12 @@ export const PasswordRecoveryEmail = () => {
         </DialogHeader>
         <PasswordRecoveryFormEmail />
         <DialogFooter className="items-center">
-          <Button variant="link">Служба підтримки</Button>
+          <Link
+            className="font-[family-name:var(--font-roboto)] text-[20px] font-semibold text-[var(--text-black)]"
+            href="#"
+          >
+            Служба підтримки
+          </Link>
         </DialogFooter>
       </DialogContent>
     </Dialog>
