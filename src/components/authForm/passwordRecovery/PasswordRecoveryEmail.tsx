@@ -33,7 +33,7 @@ export const PasswordRecoveryEmail = () => {
             Відновлення паролю
           </DialogTitle>
           <DialogDescription>
-            Введіть Ваш email, після чого ми відправимо на нього новий пароль
+            Введіть Ваш E-mail, після чого ми відправимо на нього новий пароль
           </DialogDescription>
         </DialogHeader>
         <PasswordRecoveryFormEmail />
