@@ -22,7 +22,7 @@ export default function FormFooter() {
 
       <div className="flex w-full flex-col items-center justify-center gap-2">
         <p className="body-text text-[16px] text-[var(--text-grey)]">
-          Подобається наш проект?
+          Подобається наш проєкт?
         </p>
         <Button
           variant="outline"
