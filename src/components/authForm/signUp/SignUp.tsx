@@ -24,9 +24,11 @@ export function SignUp() {
       open={isSignUp}
       onOpenChange={() => dispatch(closeModal("isSignUp"))}
     >
-      <DialogContent className="gap-4 px-8 py-27" aria-describedby={undefined}>
+      <DialogContent aria-describedby={undefined}>
         <DialogHeader>
-          <DialogTitle>Реєстрація</DialogTitle>
+          <DialogTitle className="h2-text text-[var(--text-black)]">
+            Реєстрація
+          </DialogTitle>
         </DialogHeader>
         <SingUpForm />
         <DialogFooter className="gap-4">

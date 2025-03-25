@@ -24,7 +24,7 @@ export const SignIn = () => {
       open={isSignIn}
       onOpenChange={() => dispatch(closeModal("isSignIn"))}
     >
-      <DialogContent className="gap-4 px-8 py-27" aria-describedby={undefined}>
+      <DialogContent aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle className="h2-text text-[var(--text-black)]">
             Вхід

@@ -145,7 +145,7 @@ export function SingUpForm() {
               />
               <label
                 htmlFor="isTermsAccepted"
-                className="label-text leading-[1.4] text-[var(--text-black)]"
+                className="captions-text text-[var(--text-black)]"
               >
                 Я погоджуюся з умовами використання особистих даних на сервісі
               </label>
@@ -157,7 +157,9 @@ export function SingUpForm() {
         )}
       </div>
 
-      <Button type="submit">Зареєструватися</Button>
+      <Button type="submit" className="mt-4 font-semibold">
+        Зареєструватися
+      </Button>
     </form>
   );
 }
