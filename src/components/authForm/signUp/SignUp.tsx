@@ -14,7 +14,6 @@ import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { SingUpForm } from "@components/authForm/signUp/SignUpForm";
 import FormFooter from "@components/authForm/formFooter";
 import Image from "next/image";
-import Link from "next/link";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
