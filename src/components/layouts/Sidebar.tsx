@@ -59,7 +59,7 @@ const AppSidebar = () => {
           <AvatarFallback>ПІ</AvatarFallback>
         </Avatar>
         <p className="category-text text-[var(--black)] transition-opacity duration-500 ease-linear group-data-[collapsible=icon]:opacity-0 group-data-[collapsible=icon]:duration-200">
-          Прізвище Імʼя
+          Імʼя Прізвище
         </p>
       </SidebarHeader>
       <SidebarContent>
