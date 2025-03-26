@@ -5,9 +5,10 @@ import { Poppins, Roboto } from "next/font/google";
 import type { Metadata } from "next";
 import Providers from "@/lib/providers";
 import { ReactNode } from "react";
+
 import Header from "@components/layouts/Header";
-import { cn } from "@lib/utils";
 import Footer from "@components/layouts/Footer";
+import { cn } from "@lib/utils";
 
 const poppinsFont = Poppins({
   variable: "--font-poppins",
@@ -45,9 +46,13 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
+
           <div className="flex flex-1 overflow-hidden">
-            <main className="flex-1 overflow-y-auto">{children}</main>
+            <main className="xl2:max-w-[1440px] xl2:px-18 xl2:py-10 flex-1 overflow-y-auto px-5 py-5">
+              {children}
+            </main>
           </div>
+
           <Footer />
         </Providers>
       </body>
