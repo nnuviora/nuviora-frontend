@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarHeader,
+  SidebarProvider,
+  SidebarSeparator,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 
 import AppSidebar from "@/components/layouts/Sidebar";
 
@@ -12,9 +17,15 @@ export default function AccountLayout({
     <section className="relative flex h-full">
       <SidebarProvider>
         <AppSidebar />
-        <SidebarTrigger />
+
         <div className="flex h-screen flex-1 flex-col">
-          <div className="flex-1">{children}</div>
+          <div className="ml-6 flex-1">
+            <SidebarHeader className="flex flex-col items-start">
+              <SidebarTrigger />
+              <SidebarSeparator />
+            </SidebarHeader>
+            {children}
+          </div>
         </div>
       </SidebarProvider>
     </section>

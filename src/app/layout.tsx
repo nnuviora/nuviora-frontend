@@ -47,8 +47,10 @@ export default function RootLayout({
         <Providers>
           <Header />
 
-          <div className="xl2:max-w-[1440px] flex flex-1 overflow-hidden">
-            <main className="flex-1 overflow-y-auto p-5">{children}</main>
+          <div className="flex flex-1 overflow-hidden">
+            <main className="xl2:max-w-[1440px] xl2:px-18 xl2:py-10 flex-1 overflow-y-auto px-5 py-5">
+              {children}
+            </main>
           </div>
 
           <Footer />

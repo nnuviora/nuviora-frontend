@@ -5,11 +5,10 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -20,9 +19,12 @@ import {
   PiggyBank,
   Mail,
   Heart,
+  LifeBuoy,
+  LogOut,
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import items from "../../../data/sidebar-items.json";
+import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
 
 const iconMap: { [key: string]: React.ComponentType } = {
@@ -33,27 +35,35 @@ const iconMap: { [key: string]: React.ComponentType } = {
   Mail,
   Heart,
 };
+const iconMapFooter: { [key: string]: React.ComponentType } = {
+  LifeBuoy,
+  LogOut,
+};
 
 const AppSidebar = () => {
   const isMobile = useIsMobile();
-  const { state } = useSidebar();
   return (
-    <Sidebar variant="floating" collapsible={isMobile ? "offcanvas" : "icon"}>
-      <SidebarContent>
+    <Sidebar
+      variant="floating"
+      collapsible={isMobile ? "offcanvas" : "icon"}
+      className="h-[calc(100vh-116px-40px)]"
+    >
+      <SidebarHeader className="mb-6">
         <Avatar
           className={cn(
-            "transition-all duration-200",
-            state === "collapsed" ? "h-4 w-4" : "h-32 w-32",
+            "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-4",
           )}
         >
           <AvatarImage src="https://github.com/shadcn.png" />
 
           <AvatarFallback>ПІ</AvatarFallback>
         </Avatar>
+        <p className="category-text text-[var(--black)] transition-opacity duration-500 ease-linear group-data-[collapsible=icon]:opacity-0 group-data-[collapsible=icon]:duration-200">
+          Прізвище Імʼя
+        </p>
+      </SidebarHeader>
+      <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="justify-center">
-            <p className="category-text text-[var(--black)]">Прізвище Імʼя</p>
-          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
@@ -63,6 +73,23 @@ const AppSidebar = () => {
                     <SidebarMenuButton asChild>
                       <a href={item.url}>
                         <IconComponent />
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {itemsFooter.map((item) => {
+                const IconComponentFooter = iconMapFooter[item.icon];
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <a href={item.url}>
+                        <IconComponentFooter />
                         <span>{item.title}</span>
                       </a>
                     </SidebarMenuButton>
