@@ -9,6 +9,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -26,9 +28,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import items from "../../../data/sidebar-items.json";
 import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
-import { openModal } from "@lib/redux/toggleModal/slice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@lib/redux/store";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { openModal } from "@/lib/redux/toggleModal/slice";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,
@@ -42,17 +43,25 @@ const iconMapFooter: { [key: string]: React.ComponentType } = {
   LifeBuoy,
   LogOut,
 };
-const useAppDispatch: () => AppDispatch = useDispatch;
+
 const AppSidebar = () => {
-  const dispatch = useAppDispatch();
   const isMobile = useIsMobile();
+  const dispatch = useAppDispatch();
+  const { state } = useSidebar();
+  const handleClick = () => {
+    dispatch(openModal("isLogOut"));
+  };
   return (
     <Sidebar
       variant="floating"
       collapsible={isMobile ? "offcanvas" : "icon"}
-      className="h-[calc(100vh-116px-40px)]"
+      className={cn(
+        "xl2:h-[calc(100vh-104px-40px)] isMobile:w-full h-[calc(100vh-84px-20px)] group-data-[variant=floating]:rounded-2xl md:w-[280px]",
+      )}
     >
       <SidebarHeader className="mb-6">
+        <SidebarTrigger className="mb-5 ml-auto" />
+
         <Avatar
           className={cn(
             "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-4",
@@ -62,14 +71,16 @@ const AppSidebar = () => {
 
           <AvatarFallback>ПІ</AvatarFallback>
         </Avatar>
-        <p className="category-text text-[var(--black)] transition-opacity duration-500 ease-linear group-data-[collapsible=icon]:opacity-0 group-data-[collapsible=icon]:duration-200">
-          Імʼя Прізвище
-        </p>
+        {state === "expanded" && (
+          <p className="category-text text-[var(--black)] transition-all duration-200 ease-linear">
+            Імʼя Прізвище
+          </p>
+        )}
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-0">
               {items.map((item) => {
                 const IconComponent = iconMap[item.icon];
                 return (
@@ -86,19 +97,23 @@ const AppSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-0">
               {itemsFooter.map((item) => {
                 const IconComponentFooter = iconMapFooter[item.icon];
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a
-                        href={item.url}
-                        onClick={() => dispatch(openModal("isLogOut"))}
-                      >
-                        <IconComponentFooter />
-                        <span>{item.title}</span>
-                      </a>
+                      {item.url ? (
+                        <a href={item.url}>
+                          <IconComponentFooter />
+                          <span>{item.title}</span>
+                        </a>
+                      ) : (
+                        <button onClick={handleClick}>
+                          <IconComponentFooter />
+                          <span>{item.title}</span>
+                        </button>
+                      )}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
