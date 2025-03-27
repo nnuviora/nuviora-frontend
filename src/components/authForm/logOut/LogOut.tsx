@@ -15,15 +15,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogOut } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
 import { closeModal } from "@lib/redux/toggleModal/slice";
+import { logOut } from "@lib/redux/logIn/slice";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export const LogOut = () => {
-  const logOut = useSelector(selectIsLogOut);
+  const logOutState = useSelector(selectIsLogOut);
   const dispatch = useAppDispatch();
 
   return (
-    <AlertDialog open={logOut}>
+    <AlertDialog open={logOutState}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -39,6 +40,7 @@ export const LogOut = () => {
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
+              dispatch(logOut());
               dispatch(closeModal("isLogOut"));
             }}
           >

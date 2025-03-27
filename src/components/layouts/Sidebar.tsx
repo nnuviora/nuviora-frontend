@@ -26,6 +26,9 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import items from "../../../data/sidebar-items.json";
 import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
+import { openModal } from "@lib/redux/toggleModal/slice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@lib/redux/store";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,
@@ -39,8 +42,9 @@ const iconMapFooter: { [key: string]: React.ComponentType } = {
   LifeBuoy,
   LogOut,
 };
-
+const useAppDispatch: () => AppDispatch = useDispatch;
 const AppSidebar = () => {
+  const dispatch = useAppDispatch();
   const isMobile = useIsMobile();
   return (
     <Sidebar
@@ -88,7 +92,10 @@ const AppSidebar = () => {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a href={item.url}>
+                      <a
+                        href={item.url}
+                        onClick={() => dispatch(openModal("isLogOut"))}
+                      >
                         <IconComponentFooter />
                         <span>{item.title}</span>
                       </a>
