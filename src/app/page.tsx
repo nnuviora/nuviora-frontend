@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@components/ui";
+import Footer from "@components/layouts/Footer";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
         <Button variant="outline">Outline</Button>
         <Button disabled>Disabled</Button>
       </div>
+      <Footer />
     </section>
   );
 }

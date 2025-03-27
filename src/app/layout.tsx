@@ -7,7 +7,6 @@ import Providers from "@/lib/providers";
 import { ReactNode } from "react";
 
 import Header from "@components/layouts/Header";
-import Footer from "@components/layouts/Footer";
 import { cn } from "@lib/utils";
 
 const poppinsFont = Poppins({
@@ -52,8 +51,6 @@ export default function RootLayout({
               {children}
             </main>
           </div>
-
-          <Footer />
         </Providers>
       </body>
     </html>

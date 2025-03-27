@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import {
   SidebarHeader,
@@ -7,8 +9,9 @@ import {
 } from "@/components/ui/sidebar";
 
 import AppSidebar from "@/components/layouts/Sidebar";
+import withAuth from "@/hoc/withAuth";
 
-export default function AccountLayout({
+function AccountLayout({
   children,
 }: Readonly<{
   children: ReactNode;
@@ -31,3 +34,5 @@ export default function AccountLayout({
     </section>
   );
 }
+
+export default withAuth(AccountLayout);
