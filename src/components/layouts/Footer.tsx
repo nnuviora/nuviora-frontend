@@ -35,7 +35,6 @@ const Footer = () => {
         <Button onClick={() => dispatch(openModal("isSignUp"))}>
           Register
         </Button>
-        <Link href="/account">User Profile</Link>
       </div>
       {isSignIn && <SignIn />}
       {isLogOut && <LogOut />}

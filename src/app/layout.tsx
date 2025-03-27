@@ -52,8 +52,6 @@ export default function RootLayout({
               {children}
             </main>
           </div>
-
-          <Footer />
         </Providers>
       </body>
     </html>

@@ -9,6 +9,7 @@ import { ISingInForm } from "@/types";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { AppDispatch } from "@lib/redux/store";
 import { useDispatch } from "react-redux";
+import { logIn } from "@lib/redux/logIn/slice";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -41,6 +42,8 @@ export function SignInForm() {
     Password: ${data.password}
 `);
     reset();
+    dispatch(closeModal("isSignIn"));
+    dispatch(logIn());
   };
 
   return (
