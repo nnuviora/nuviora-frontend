@@ -15,7 +15,6 @@ import {
 import { LogOut } from "@components/authForm/logOut/LogOut";
 import { PasswordRecoveryEmail } from "@components/authForm/passwordRecovery/PasswordRecoveryEmail";
 import { PasswordRecoveryPassword } from "@components/authForm/passwordRecovery/PasswordRecoveryPassword";
-import Link from "next/link";
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 const Footer = () => {
