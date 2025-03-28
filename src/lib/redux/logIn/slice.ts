@@ -5,7 +5,7 @@ export interface ILogInState {
 }
 
 const initialState: ILogInState = {
-  isLogIn: false,
+  isLogIn: true,
 };
 
 const loginSlice = createSlice({
