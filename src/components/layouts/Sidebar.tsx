@@ -56,7 +56,7 @@ const AppSidebar = () => {
       variant="floating"
       collapsible={isMobile ? "offcanvas" : "icon"}
       className={cn(
-        "xl2:h-[calc(100vh-104px-40px)] isMobile:w-full h-[calc(100vh-84px-20px)] group-data-[variant=floating]:rounded-2xl md:w-[280px]",
+        "xl2:w-(--sidebar-width) xl2:h-[calc(100vh-104px-40px)] h-[calc(100vh-84px-20px)] w-full group-data-[collapsible=icon]:items-center group-data-[variant=floating]:rounded-2xl md:w-[280px]",
       )}
     >
       <SidebarHeader className="mb-6">
@@ -64,7 +64,7 @@ const AppSidebar = () => {
 
         <Avatar
           className={cn(
-            "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-4",
+            "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-6",
           )}
         >
           <AvatarImage src="https://github.com/shadcn.png" />

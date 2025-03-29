@@ -35,7 +35,8 @@ export function Header() {
 
   function handleUser() {
     if (isLogIn) {
-      router.push("/account");
+      router.push("/profile");
+      // router.push("/account");
     } else {
       dispatch(openModal("isSignIn"));
     }

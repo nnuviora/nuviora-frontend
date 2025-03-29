@@ -106,6 +106,12 @@ export function SignInForm() {
       </div>
 
       {/* не можу перебити font-weight на 400 */}
+
+      {/* не можу перебити font-weight на 600 */}
+      <Button type="submit" className="mt-4 font-semibold">
+        Увійти
+      </Button>
+
       <Button
         variant="link"
         className="text-center font-normal text-[var(--text-link)]"
@@ -115,11 +121,6 @@ export function SignInForm() {
         }}
       >
         Забули пароль?
-      </Button>
-
-      {/* не можу перебити font-weight на 600 */}
-      <Button type="submit" className="mt-4 font-semibold">
-        Увійти
       </Button>
     </form>
   );
