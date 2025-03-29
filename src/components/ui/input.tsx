@@ -12,7 +12,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@lib/utils";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  type: string;
+  type?: string;
   name: string;
   placeholder?: string;
   showToggle?: boolean;
@@ -21,7 +21,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = forwardRef(function Input(
   {
-    type,
+    type = "text",
     name,
     placeholder,
     className,
@@ -33,7 +33,7 @@ const Input = forwardRef(function Input(
   const [showPassword, setShowPassword] = useState<boolean>(!showToggle);
 
   return (
-    <div className="relative w-full">
+    <div className="relative">
       <input
         type={showToggle ? (showPassword ? "text" : "password") : type}
         name={name}
