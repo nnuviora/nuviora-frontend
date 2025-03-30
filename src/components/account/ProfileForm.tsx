@@ -1,8 +1,9 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Label, Input, Button } from "@/components/ui";
+import { Label, Input, Button, useSidebar } from "@/components/ui";
 import { Textarea } from "../ui/textarea";
+import { cn } from "@/lib/utils";
 
 interface ProfileFormData {
   fullname: string;
@@ -11,6 +12,7 @@ interface ProfileFormData {
 }
 
 export default function ProfileForm() {
+  const { state } = useSidebar();
   const {
     register,
     handleSubmit,
@@ -24,16 +26,33 @@ export default function ProfileForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-[597px] flex-col gap-10"
+      className="flex w-full max-w-[597px] flex-col items-center justify-center gap-10"
     >
-      <div className="flex items-center justify-between">
+      <div
+        className={cn(
+          "flex w-full flex-col items-center gap-2",
+          state === "expanded"
+            ? "xl2:flex-row xl2:justify-between md:flex-col"
+            : "md:flex-row md:justify-between",
+        )}
+      >
         <Label htmlFor="fullname" className="category-text !font-semibold">
           П.І.П.
         </Label>
-        <div className="relative">
+        <div
+          className={cn(
+            "relative w-full",
+            state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+          )}
+        >
           <Input
             id="fullname"
-            className="h-10 w-[325px] border border-solid border-[var(--stroke-field)] px-3 py-2.5"
+            className={cn(
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+              state === "expanded"
+                ? "xl2:w-[325px] md:w-full"
+                : "md:ml-auto md:w-[325px]",
+            )}
             placeholder="П.І.П."
             {...register("fullname", { required: "Це поле обов'язкове" })}
           />
@@ -45,14 +64,31 @@ export default function ProfileForm() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div
+        className={cn(
+          "flex w-full flex-col items-center gap-2",
+          state === "expanded"
+            ? "xl2:flex-row xl2:justify-between md:flex-col"
+            : "md:flex-row md:justify-between",
+        )}
+      >
         <Label htmlFor="email" className="category-text !font-semibold">
           Email
         </Label>
-        <div className="relative">
+        <div
+          className={cn(
+            "relative w-full",
+            state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+          )}
+        >
           <Input
             id="email"
-            className="h-10 w-[325px] border border-solid border-[var(--stroke-field)] px-3 py-2.5"
+            className={cn(
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+              state === "expanded"
+                ? "xl2:w-[325px] md:w-full"
+                : "md:ml-auto md:w-[325px]",
+            )}
             type="email"
             placeholder="pedro.pascal@example.com"
             {...register("email", {
@@ -71,21 +107,40 @@ export default function ProfileForm() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div
+        className={cn(
+          "flex w-full flex-col items-center gap-2",
+          state === "expanded"
+            ? "xl2:flex-row xl2:justify-between md:flex-col"
+            : "md:flex-row md:justify-between",
+        )}
+      >
         <Label
           htmlFor="about"
-          className="category-text self-start !font-semibold"
+          className="category-text !font-semibold md:self-start"
         >
           Про себе
         </Label>
         <Textarea
           id="about"
-          className="w-[325px] border border-solid border-[var(--stroke-field)] px-3 py-2.5"
+          className={cn(
+            "border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+            state === "expanded" ? "xl2:w-[325px] md:w-full" : "md:w-[325px]",
+          )}
           placeholder="Enter a description..."
           {...register("about")}
         />
       </div>
-      <Button type="submit" className="w-[325px] self-end">
+
+      <Button
+        type="submit"
+        className={cn(
+          "w-full",
+          state === "expanded"
+            ? "xl2:w-[325px] xl2:self-end md:w-full"
+            : "md:w-[325px] md:self-end",
+        )}
+      >
         Зберегти зміни
       </Button>
     </form>

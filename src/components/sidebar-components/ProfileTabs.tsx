@@ -5,15 +5,15 @@ import PasswordChangeForm from "../account/PasswordChangeForm";
 
 export function ProfileTabs() {
   return (
-    <Tabs defaultValue="account" className="w-[597px]">
-      <TabsList className="mb-6 grid w-full grid-cols-2">
+    <Tabs defaultValue="account" className="w-full">
+      <TabsList className="mb-6 flex h-10 w-full flex-nowrap overflow-x-scroll">
         <TabsTrigger value="account" className="button-text h-10 px-3 py-2">
           <User size={18} />
-          <span className="self-baseline">Профіль</span>
+          <span>Профіль</span>
         </TabsTrigger>
         <TabsTrigger value="password" className="button-text h-10 px-3 py-2">
           <Lock size={18} />
-          <span className="self-baseline">Зміна паролю</span>
+          <span>Зміна паролю</span>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="account">

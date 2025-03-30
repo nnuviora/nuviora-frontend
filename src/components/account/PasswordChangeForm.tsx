@@ -1,7 +1,8 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Label, Input, Button } from "@/components/ui";
+import { Label, Input, Button, useSidebar } from "@/components/ui";
+import { cn } from "@/lib/utils";
 
 interface PasswordFormData {
   oldPassword: string;
@@ -10,6 +11,7 @@ interface PasswordFormData {
 }
 
 export default function PasswordChangeForm() {
+  const { state } = useSidebar();
   const {
     register,
     handleSubmit,
@@ -28,19 +30,36 @@ export default function PasswordChangeForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-[597px] flex-col gap-10"
+      className="flex max-w-[597px] flex-col items-center justify-center gap-10"
     >
-      <div className="flex items-center justify-between">
+      <div
+        className={cn(
+          "flex w-full flex-col items-center gap-2",
+          state === "expanded"
+            ? "xl2:flex-row xl2:justify-between md:flex-col"
+            : "md:flex-row md:justify-between",
+        )}
+      >
         <Label htmlFor="current" className="category-text !font-semibold">
           Старий пароль
         </Label>
-        <div className="relative">
+        <div
+          className={cn(
+            "relative w-full",
+            state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+          )}
+        >
           <Input
             id="current"
             type="password"
             showToggle={true}
             placeholder="Старий пароль"
-            className="h-10 w-[325px] border border-solid border-[var(--stroke-field)] px-3 py-2.5"
+            className={cn(
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+              state === "expanded"
+                ? "xl2:w-[325px] md:w-full"
+                : "md:ml-auto md:w-[325px]",
+            )}
             {...register("oldPassword", { required: "Введіть старий пароль" })}
           />
           {errors.oldPassword && (
@@ -51,17 +70,34 @@ export default function PasswordChangeForm() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div
+        className={cn(
+          "flex w-full flex-col items-center gap-2",
+          state === "expanded"
+            ? "xl2:flex-row xl2:justify-between md:flex-col"
+            : "md:flex-row md:justify-between",
+        )}
+      >
         <Label htmlFor="new" className="category-text !font-semibold">
           Новий пароль
         </Label>
-        <div className="relative">
+        <div
+          className={cn(
+            "relative w-full",
+            state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+          )}
+        >
           <Input
             id="new"
             type="password"
             showToggle={true}
             placeholder="Новий пароль"
-            className="h-10 w-[325px] border border-solid border-[var(--stroke-field)] px-3 py-2.5"
+            className={cn(
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+              state === "expanded"
+                ? "xl2:w-[325px] md:w-full"
+                : "md:ml-auto md:w-[325px]",
+            )}
             {...register("newPassword", { required: "Введіть новий пароль" })}
           />
           {errors.newPassword && (
@@ -72,17 +108,34 @@ export default function PasswordChangeForm() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div
+        className={cn(
+          "flex w-full flex-col items-center gap-2",
+          state === "expanded"
+            ? "xl2:flex-row xl2:justify-between md:flex-col"
+            : "md:flex-row md:justify-between",
+        )}
+      >
         <Label htmlFor="new-repeat" className="category-text !font-semibold">
           Повторіть новий пароль
         </Label>
-        <div className="relative">
+        <div
+          className={cn(
+            "relative w-full",
+            state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+          )}
+        >
           <Input
             id="new-repeat"
             type="password"
             showToggle={true}
             placeholder="Повторіть новий пароль"
-            className="h-10 w-[325px] border border-solid border-[var(--stroke-field)] px-3 py-2.5"
+            className={cn(
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+              state === "expanded"
+                ? "xl2:w-[325px] md:w-full"
+                : "md:ml-auto md:w-[325px]",
+            )}
             {...register("newPasswordRepeat", {
               required: "Повторіть новий пароль",
               validate: validatePasswordMatch,
@@ -96,7 +149,15 @@ export default function PasswordChangeForm() {
         </div>
       </div>
 
-      <Button type="submit" className="w-[325px] self-end">
+      <Button
+        type="submit"
+        className={cn(
+          "w-full",
+          state === "expanded"
+            ? "xl2:w-[325px] xl2:self-end md:w-full"
+            : "md:w-[325px] md:self-end",
+        )}
+      >
         Зберегти пароль
       </Button>
     </form>
