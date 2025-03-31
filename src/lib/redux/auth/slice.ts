@@ -11,12 +11,10 @@ const handlePending = (state: AuthState) => {
   state.error = null;
 };
 
-const handleRejected = (
-  state: AuthState,
-  action: PayloadAction<{ message?: string }>,
-) => {
+const handleRejected = (state: AuthState, action: PayloadAction<unknown>) => {
   state.isLoading = false;
-  state.error = action.payload.message ?? "Unknown error";
+  state.error =
+    typeof action.payload === "string" ? action.payload : "Unknown error";
 };
 
 const initialState = {
