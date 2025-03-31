@@ -2,15 +2,14 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@components/ui";
 import { useDispatch, useSelector } from "react-redux";
-
 import { AppDispatch } from "@lib/redux/store";
 import { closeModal } from "@lib/redux/toggleModal/slice";
-import { DialogDescription } from "@radix-ui/react-dialog";
 import { PasswordRecoveryFormEmail } from "@components/authForm/passwordRecovery/PasswordRecoveryFormEmail";
 import { selectIsPasswordRecoveryEmail } from "@lib/redux/toggleModal/selectors";
 import { GoBack } from "@components/authForm/passwordRecovery/goBack";
@@ -40,7 +39,7 @@ export const PasswordRecoveryEmail = () => {
         <DialogFooter className="items-center">
           <Link
             className="font-[family-name:var(--font-roboto)] text-[20px] font-semibold text-[var(--text-black)]"
-            href="#"
+            href="/"
           >
             Служба підтримки
           </Link>

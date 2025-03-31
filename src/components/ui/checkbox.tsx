@@ -1,39 +1,54 @@
 "use client";
 
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "lucide-react";
-
 import { cn } from "@lib/utils";
-import { ComponentProps, forwardRef } from "react";
+import { ComponentPropsWithoutRef, forwardRef, useState } from "react";
 
-const Checkbox = forwardRef<
-  HTMLButtonElement,
-  ComponentProps<typeof CheckboxPrimitive.Root>
->(function Checkbox({ className, ...props }, ref) {
-  return (
-    <CheckboxPrimitive.Root
-      ref={ref}
-      data-slot="checkbox"
-      className={cn(
-        "peer cursor-pointer border-[var(--stroke-normal)] data-[state=checked]:bg-[var(--button-tertiary-active)] " +
-          "data-[state=checked]:border-none data-[state=checked]:text-[var(--text-white)]" +
-          "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20" +
-          "aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border outline-none" +
-          "hover:border-[var(--button-secondary-hover)] focus-visible:ring-[3px]",
-        className,
-      )}
-      {...props}
-    >
-      <CheckboxPrimitive.Indicator
-        data-slot="checkbox-indicator"
-        className="flex items-center justify-center text-[var(--text-white)] transition-none"
+type CheckboxProps = {
+  className?: string;
+  checked?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
+} & ComponentPropsWithoutRef<"button">;
+
+const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
+  (
+    { className, checked: controlledChecked, onCheckedChange, ...props },
+    ref,
+  ) => {
+    const [unchecked, setUnchecked] = useState(!controlledChecked);
+
+    const isChecked = controlledChecked ?? !unchecked;
+
+    const toggleChecked = () => {
+      const newChecked = !isChecked;
+      setUnchecked(!newChecked);
+      onCheckedChange?.(newChecked);
+    };
+
+    return (
+      <button
+        ref={ref}
+        type="button"
+        role="checkbox"
+        aria-checked={isChecked}
+        onClick={toggleChecked}
+        className={cn(
+          "peer flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-[4px] border border-[var(--stroke-normal)] outline-none",
+          "focus-visible:ring-ring/50 hover:border-[var(--button-secondary-hover)] focus-visible:ring-[3px]",
+          isChecked &&
+            "border-none bg-[var(--button-tertiary-active)] text-[var(--text-white)]",
+          className,
+        )}
+        {...props}
       >
-        <CheckIcon className="size-3.5" />
-      </CheckboxPrimitive.Indicator>
-    </CheckboxPrimitive.Root>
-  );
-});
+        {isChecked && (
+          <CheckIcon className="size-3.5 text-[var(--text-white)]" />
+        )}
+      </button>
+    );
+  },
+);
 
-Checkbox.displayName = "Checkbox";
+Checkbox.displayName = "Checkbox22";
 
 export { Checkbox };
