@@ -7,7 +7,6 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 export function EmailOTPForm() {
   const { control, handleSubmit } = useForm({
