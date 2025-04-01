@@ -33,13 +33,13 @@ const Input = forwardRef(function Input(
   const [showPassword, setShowPassword] = useState<boolean>(!showToggle);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <input
         type={showToggle ? (showPassword ? "text" : "password") : type}
         name={name}
         placeholder={placeholder}
         className={cn(
-          "body-text w-full rounded-lg border border-[var(-text-grey)] bg-transparent px-4.5 py-4 outline-none",
+          "body-text w-full border border-[var(-text-grey)] bg-transparent px-4.5 py-4 outline-none",
           className,
         )}
         {...props}

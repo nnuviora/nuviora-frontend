@@ -9,3 +9,5 @@ export const selectIsPasswordRecoveryEmail = (state: RootState) =>
   state.modal.isPasswordRecoveryEmail;
 export const selectIsPasswordRecoveryPassword = (state: RootState) =>
   state.modal.isPasswordRecoveryPassword;
+export const selectIsValidateOTP = (state: RootState) =>
+  state.modal.isValidateOTP;

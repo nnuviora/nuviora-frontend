@@ -7,18 +7,13 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 export function EmailOTPForm() {
   const { control, handleSubmit } = useForm({
     defaultValues: { otp: "" },
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const onSubmit = (data: { otp: string }) => {
-    setIsSubmitting(true);
-
     alert(`OTP Code:", ${data.otp}`);
   };
 
@@ -30,16 +25,16 @@ export function EmailOTPForm() {
       <Controller
         name="otp"
         control={control}
-        rules={{ required: true, pattern: /^\d{6}$/ }}
+        rules={{ required: true, pattern: /^\d+$/ }}
         render={({ field }) => (
           <InputOTP
-            maxLength={6}
+            maxLength={4}
             value={field.value}
             onChange={field.onChange}
             className="gap-2"
           >
-            <InputOTPGroup>
-              {Array.from({ length: 6 }).map((_, index) => (
+            <InputOTPGroup className="gap-6">
+              {Array.from({ length: 4 }).map((_, index) => (
                 <InputOTPSlot key={index} index={index} />
               ))}
             </InputOTPGroup>
@@ -49,10 +44,9 @@ export function EmailOTPForm() {
 
       <Button
         type="submit"
-        className="w-full bg-green-500 text-white"
-        disabled={isSubmitting}
+        className="w-full bg-green-500 text-white md:max-w-104"
       >
-        {isSubmitting ? "Проверка..." : "Подтвердить"}
+        Підтвердити
       </Button>
     </form>
   );
