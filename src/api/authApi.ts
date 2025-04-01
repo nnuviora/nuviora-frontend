@@ -49,6 +49,10 @@ export interface Iregister {
 
 export const registerUserApi = (userData: Iregister) =>
   api.post("/auth/register", userData);
+
+export const validateRegistrationEmailApi = (otp: string) =>
+  api.get(`/auth/register/${otp}`);
+
 export const loginUserApi = (credentials: Record<string, string>) =>
   api.post("/login", credentials);
 export const logoutUserApi = () => api.post("/logout");

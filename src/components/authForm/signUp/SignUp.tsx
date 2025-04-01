@@ -14,12 +14,24 @@ import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { SingUpForm } from "@components/authForm/signUp/SignUpForm";
 import FormFooter from "@components/authForm/formFooter";
 import Image from "next/image";
+import { useEffect } from "react";
+import { selectPendingUserId } from "@lib/redux/auth/selectors";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function SignUp() {
   const isSignUp = useSelector(selectIsSignUp);
+  const pendingUserId = useSelector(selectPendingUserId);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (pendingUserId !== "") {
+      console.log("user pending", pendingUserId);
+      dispatch(closeModal("isSignUp"));
+      dispatch(openModal("isValidateOTP"));
+    }
+  }, [pendingUserId]);
+
   return (
     <Dialog
       open={isSignUp}

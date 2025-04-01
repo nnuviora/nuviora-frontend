@@ -2,7 +2,7 @@ import { useState, useEffect, JSX } from "react";
 import { Button } from "@/components/ui/button";
 
 export default function ResendTimer(): JSX.Element {
-  const [timeLeft, setTimeLeft] = useState<number>(180); // 3 минуты
+  const [timeLeft, setTimeLeft] = useState<number>(5);
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -25,7 +25,7 @@ export default function ResendTimer(): JSX.Element {
       ) : (
         <Button
           variant="link"
-          onClick={() => setTimeLeft(180)}
+          onClick={() => setTimeLeft(5)}
           className="captions-text text-[var(--text-link)]"
         >
           Натисніть для повторної відправки

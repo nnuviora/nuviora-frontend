@@ -14,10 +14,7 @@ export function EmailOTPForm() {
     defaultValues: { otp: "" },
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const onSubmit = (data: { otp: string }) => {
-    setIsSubmitting(true);
     alert(`OTP Code:", ${data.otp}`);
   };
 
@@ -49,9 +46,8 @@ export function EmailOTPForm() {
       <Button
         type="submit"
         className="w-full bg-green-500 text-white md:max-w-104"
-        disabled={isSubmitting}
       >
-        {isSubmitting ? "Перевірка..." : "Підтвердити"}
+        Підтвердити
       </Button>
     </form>
   );

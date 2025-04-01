@@ -15,6 +15,7 @@ import { selectIsValidateOTP } from "@lib/redux/toggleModal/selectors";
 
 import { Key } from "lucide-react";
 import ResendTimer from "@components/authForm/validateForm/timer";
+import { resetPendingUserId } from "@lib/redux/auth/slice";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
@@ -24,7 +25,10 @@ export const ValidateOTP = () => {
   return (
     <Dialog
       open={isValidateOTP}
-      onOpenChange={() => dispatch(closeModal("isValidateOTP"))}
+      onOpenChange={() => {
+        dispatch(resetPendingUserId());
+        dispatch(closeModal("isValidateOTP"));
+      }}
     >
       <DialogContent
         className="xl2:max-w-142 xl2:px-15 xl2:py-30 flex w-full max-w-74 flex-col gap-4 px-5 py-20 md:max-w-4/5 md:px-30 md:py-30"

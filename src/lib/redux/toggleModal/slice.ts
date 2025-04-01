@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { resetPendingUserId } from "@lib/redux/auth/slice";
 
 export interface IModalState {
   isSignIn: boolean;
