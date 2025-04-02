@@ -1,26 +1,21 @@
+"use client";
 import { Lock, Mail } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-import { Checkbox } from "@components/ui/checkbox";
-import { boolean, object, ObjectSchema, ref, string } from "yup";
+
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISingUpForm } from "@/types";
 import { cn } from "@lib/utils";
+import { AppDispatch } from "@lib/redux/store";
+import { useDispatch } from "react-redux";
+import { SignUpSchema } from "@components/authForm/signUp/validationSchema";
+import { registerUser } from "@lib/redux/auth/operations";
+import { Checkbox } from "@components/ui/checkbox";
 
-const SignUpSchema: ObjectSchema<ISingUpForm> = object().shape({
-  email: string().email("Invalid email").required("Email is required"),
-  password: string()
-    .min(6, "Minimum 6 character")
-    .required("Password is required"),
-  passwordConfirm: string()
-    .oneOf([ref("password")], "Passwords must match")
-    .required("Password confirmation is required"),
-  isTermsAccepted: boolean()
-    .oneOf([true], "You must accept the terms")
-    .required(),
-});
+const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function SingUpForm() {
+  const dispatch = useAppDispatch();
   const {
     control,
     handleSubmit,
@@ -34,7 +29,6 @@ export function SingUpForm() {
       isTermsAccepted: false,
     },
     resolver: yupResolver(SignUpSchema),
-    mode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<ISingUpForm> = (data) => {
@@ -42,6 +36,13 @@ export function SingUpForm() {
     Password: ${data.password}
     PasswordConfirm: ${data.passwordConfirm}
     TermsAccepted: ${data.isTermsAccepted}`);
+    dispatch(
+      registerUser({
+        email: data.email,
+        hash_password: data.password,
+        repeat_password: data.passwordConfirm,
+      }),
+    );
     reset();
   };
 
@@ -135,12 +136,11 @@ export function SingUpForm() {
         <Controller
           control={control}
           name="isTermsAccepted"
-          render={({ field: { onChange } }) => (
+          render={({ field }) => (
             <div className="flex items-center space-x-2">
               <Checkbox
-                onCheckedChange={(value) => {
-                  onChange(value);
-                }}
+                checked={field.value}
+                onCheckedChange={field.onChange}
                 id="isTermsAccepted"
               />
               <label
@@ -157,9 +157,7 @@ export function SingUpForm() {
         )}
       </div>
 
-      <Button type="submit" className="mt-4 font-semibold">
-        Зареєструватися
-      </Button>
+      <Button className="mt-4 font-semibold">Зареєструватися</Button>
     </form>
   );
 }

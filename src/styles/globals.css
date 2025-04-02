@@ -131,7 +131,7 @@ body {
 }
 
 .h2-text {
-  @apply xl2:text-[40px] font-[family-name:var(--font-poppins)] text-[28px] font-bold md:text-[36px] leading-[1.2];
+  @apply xl2:text-[38px] font-[family-name:var(--font-poppins)] text-[28px] font-bold md:text-[32px] leading-[1.2];
 }
 
 .h3-text {

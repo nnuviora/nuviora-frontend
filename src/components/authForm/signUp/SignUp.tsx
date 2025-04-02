@@ -14,12 +14,24 @@ import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { SingUpForm } from "@components/authForm/signUp/SignUpForm";
 import FormFooter from "@components/authForm/formFooter";
 import Image from "next/image";
+import { useEffect } from "react";
+import { selectPendingUserId } from "@lib/redux/auth/selectors";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function SignUp() {
   const isSignUp = useSelector(selectIsSignUp);
+  const pendingUserId = useSelector(selectPendingUserId);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (pendingUserId !== "") {
+      console.log("user pending", pendingUserId);
+      dispatch(closeModal("isSignUp"));
+      dispatch(openModal("isValidateOTP"));
+    }
+  }, [pendingUserId]);
+
   return (
     <Dialog
       open={isSignUp}
@@ -29,7 +41,7 @@ export function SignUp() {
         aria-describedby={undefined}
         className="flex w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:flex-row"
       >
-        <div className="xl2:px-25 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-1/2 lg:px-20">
+        <div className="xl2:px-25 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-2/3 lg:px-20 xl:w-1/2 xl:px-20">
           <DialogHeader>
             <DialogTitle className="h2-text text-[var(--text-black)]">
               Реєстрація
@@ -53,10 +65,10 @@ export function SignUp() {
           </DialogFooter>
         </div>
 
-        <div className="relative hidden w-1/2 lg:block">
+        <div className="relative hidden lg:block lg:w-1/3 xl:w-1/2">
           <Image
             src="/image24.jpg"
-            alt="Регистрация"
+            alt="Реєстрація"
             layout="fill"
             objectFit="cover"
             className="rounded-r-lg"

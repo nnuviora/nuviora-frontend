@@ -39,7 +39,7 @@ const Input = forwardRef(function Input(
         name={name}
         placeholder={placeholder}
         className={cn(
-          "body-text w-full rounded-lg border border-[var(-text-grey)] bg-transparent px-4.5 py-4 outline-none",
+          "body-text w-full border border-[var(-text-grey)] bg-transparent px-4.5 py-4 outline-none",
           className,
         )}
         {...props}
