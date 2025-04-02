@@ -1,25 +1,25 @@
 "use client";
 import { Lock, Mail } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISingUpForm } from "@/types";
 import { cn } from "@lib/utils";
 import { AppDispatch } from "@lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { SignUpSchema } from "@components/authForm/signUp/validationSchema";
+import { SignUpSchema } from "@components/authForm/validationSchema";
 import { registerUser } from "@lib/redux/auth/operations";
 import { Checkbox } from "@components/ui/checkbox";
 import { selectIsLoading } from "@lib/redux/auth/selectors";
 import { BarLoader } from "react-spinners";
+import { useId } from "react";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function SingUpForm() {
   const dispatch = useAppDispatch();
   const isLoading = useSelector(selectIsLoading);
-  console.log(`Ghbdtn ${isLoading}`);
+  const uniqueId = useId();
 
   const {
     control,
@@ -142,10 +142,10 @@ export function SingUpForm() {
               <Checkbox
                 checked={field.value}
                 onCheckedChange={field.onChange}
-                id="isTermsAccepted"
+                id={uniqueId}
               />
               <label
-                htmlFor="isTermsAccepted"
+                htmlFor={uniqueId}
                 className="captions-text text-[var(--text-black)]"
               >
                 Я погоджуюся з умовами використання особистих даних на сервісі
@@ -158,7 +158,7 @@ export function SingUpForm() {
         )}
       </div>
 
-      <Button className="mt-4 font-semibold" disabled={isLoading}>
+      <Button className="font-semibold" disabled={isLoading}>
         {!isLoading ? (
           "Зареєструватися"
         ) : (
