@@ -1,21 +1,26 @@
 "use client";
 import { Lock, Mail } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISingUpForm } from "@/types";
 import { cn } from "@lib/utils";
 import { AppDispatch } from "@lib/redux/store";
-import { useDispatch } from "react-redux";
-import { SignUpSchema } from "@components/authForm/signUp/validationSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { SignUpSchema } from "@components/authForm/validationSchema";
 import { registerUser } from "@lib/redux/auth/operations";
 import { Checkbox } from "@components/ui/checkbox";
+import { selectIsLoading } from "@lib/redux/auth/selectors";
+import { BarLoader } from "react-spinners";
+import { useId } from "react";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function SingUpForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const uniqueId = useId();
+
   const {
     control,
     handleSubmit,
@@ -32,10 +37,6 @@ export function SingUpForm() {
   });
 
   const onSubmit: SubmitHandler<ISingUpForm> = (data) => {
-    alert(`Email: ${data.email}
-    Password: ${data.password}
-    PasswordConfirm: ${data.passwordConfirm}
-    TermsAccepted: ${data.isTermsAccepted}`);
     dispatch(
       registerUser({
         email: data.email,
@@ -141,10 +142,10 @@ export function SingUpForm() {
               <Checkbox
                 checked={field.value}
                 onCheckedChange={field.onChange}
-                id="isTermsAccepted"
+                id={uniqueId}
               />
               <label
-                htmlFor="isTermsAccepted"
+                htmlFor={uniqueId}
                 className="captions-text text-[var(--text-black)]"
               >
                 Я погоджуюся з умовами використання особистих даних на сервісі
@@ -157,7 +158,23 @@ export function SingUpForm() {
         )}
       </div>
 
-      <Button className="mt-4 font-semibold">Зареєструватися</Button>
+      <Button className="font-semibold" disabled={isLoading}>
+        {!isLoading ? (
+          "Зареєструватися"
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="xl2:text-[16px] text-[12px] leading-[1] md:text-[14px]">
+              Відправка...
+            </p>
+            <BarLoader
+              color="#04b22b"
+              height={5}
+              speedMultiplier={1}
+              width={150}
+            />
+          </div>
+        )}
+      </Button>
     </form>
   );
 }

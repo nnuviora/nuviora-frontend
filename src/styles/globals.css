@@ -127,53 +127,53 @@ body {
 
 /* ========== Titles ========== */
 .h1-text {
-  @apply xl2:text-[48px] font-[family-name:var(--font-poppins)] text-[32px] font-bold md:text-[40px] leading-[1.2];
+  @apply xl2:text-[48px] font-[family-name:var(--font-poppins)] text-[32px] leading-[1.2] font-bold md:text-[40px];
 }
 
 .h2-text {
-  @apply xl2:text-[38px] font-[family-name:var(--font-poppins)] text-[28px] font-bold md:text-[32px] leading-[1.2];
+  @apply xl2:text-[38px] font-[family-name:var(--font-poppins)] text-[28px] leading-[1.2] font-bold md:text-[32px];
 }
 
 .h3-text {
-  @apply xl2:text-[40px] font-[family-name:var(--font-poppins)] text-[24px] font-semibold md:text-[32px] leading-[1.2];
+  @apply xl2:text-[40px] font-[family-name:var(--font-poppins)] text-[24px] leading-[1.2] font-semibold md:text-[32px];
 }
 
 /* ========== Subtitles ========== */
 .subtitle1-text {
-  @apply font-[family-name:var(--font-poppins)] text-[20px] font-bold md:text-[24px] xl2:text-[30px] leading-[1.2];
+  @apply xl2:text-[30px] font-[family-name:var(--font-poppins)] text-[20px] leading-[1.2] font-bold md:text-[24px];
 }
 
 .subtitle2-text {
-  @apply font-[family-name:var(--font-poppins)] text-[18px] font-bold md:text-[22px] xl2:text-[26px] leading-[1.4] md:leading-[1.2];
+  @apply xl2:text-[26px] font-[family-name:var(--font-poppins)] text-[18px] leading-[1.4] font-bold md:text-[22px] md:leading-[1.2];
 }
 
 .subtitle3-text {
-  @apply font-[family-name:var(--font-poppins)] text-[16px] font-semibold md:text-[20px] xl2:text-[24px] leading-[1.4] md:leading-[1.2];
+  @apply xl2:text-[24px] font-[family-name:var(--font-poppins)] text-[16px] leading-[1.4] font-semibold md:text-[20px] md:leading-[1.2];
 }
 
 /* ========== Body text ========== */
 .body-text {
-  @apply font-[family-name:var(--font-roboto)] text-[14px] font-normal md:text-[16px] xl2:text-[18px] leading-[1.4] xl2:leading-[1.2];
+  @apply xl2:text-[18px] xl2:leading-[1.2] font-[family-name:var(--font-roboto)] text-[14px] leading-[1.4] font-normal md:text-[16px];
 }
 
 /* ========== Buttons ========== */
 .button-text {
-  @apply font-[family-name:var(--font-poppins)] text-[16px] leading-[1.4] font-medium xl2:text-[18px];
+  @apply xl2:text-[18px] font-[family-name:var(--font-poppins)] text-[14px] leading-[1.4] font-medium md:text-[16px];
 }
 
 /* ========== Labels ========== */
 .label-text {
-  @apply font-[family-name:var(--font-roboto)] text-[14px] font-normal md:text-[16px] xl2:text-[18px] leading-[1.4];
+  @apply xl2:text-[18px] font-[family-name:var(--font-roboto)] text-[14px] leading-[1.4] font-normal md:text-[16px];
 }
 
 /* ========== Categories ========== */
 .category-text {
-  @apply font-[family-name:var(--font-roboto)] text-[16px] font-normal md:text-[18px] xl2:text-[20px] leading-[1.4];
+  @apply xl2:text-[20px] font-[family-name:var(--font-roboto)] text-[16px] leading-[1.4] font-normal md:text-[18px];
 }
 
 /* ========== Captions ========== */
 .captions-text {
-  @apply font-[family-name:var(--font-roboto)] text-[12px] font-normal leading-[1.4];
+  @apply font-[family-name:var(--font-roboto)] text-[12px] leading-[1.4] font-normal;
 }
 
 .dark {

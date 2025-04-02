@@ -11,6 +11,7 @@ export interface Iregister {
   hash_password: string;
   repeat_password: string;
 }
+
 // api.interceptors.request.use(
 //   (config: AxiosRequestConfig) => {
 //     const token = localStorage.getItem("accessToken");
@@ -39,7 +40,7 @@ export interface Iregister {
 //         return api(originalRequest);
 //       } catch (refreshError) {
 //         store.dispatch(logoutUser());
-//         Router.push("/login"); // Редирект на страницу логина
+//         Router.push("/login");
 //         return Promise.reject(refreshError);
 //       }
 //     }
@@ -51,8 +52,9 @@ export const registerUserApi = (userData: Iregister) =>
   api.post("/auth/register", userData);
 
 export const validateRegistrationEmailApi = (otp: string) =>
-  api.get(`/auth/register/${otp}`);
+  api.get(`/auth/verify_email/${otp}`);
 
 export const loginUserApi = (credentials: Record<string, string>) =>
-  api.post("/login", credentials);
-export const logoutUserApi = () => api.post("/logout");
+  api.post("/auth/login", credentials);
+
+export const logoutUserApi = () => api.post("/auth/logout");

@@ -29,7 +29,7 @@ export const SignIn = () => {
         aria-describedby={undefined}
         className="flex w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:flex-row"
       >
-        <div className="xl2:px-25 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-1/2 lg:px-20">
+        <div className="xl2:px-25 xl2:w-1/2 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-2/3 lg:px-20">
           <DialogHeader>
             <DialogTitle className="h2-text text-[var(--text-black)]">
               Вхід
@@ -52,12 +52,13 @@ export const SignIn = () => {
             <FormFooter />
           </DialogFooter>
         </div>
-        <div className="relative hidden w-1/2 lg:block">
+        <div className="relative hidden lg:block lg:w-1/3 xl:w-1/2">
           <Image
             src="/image24.jpg"
             alt="Регистрация"
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="700px"
+            style={{ objectFit: "cover" }}
             className="rounded-r-lg"
           />
         </div>

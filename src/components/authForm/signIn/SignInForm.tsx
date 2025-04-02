@@ -1,27 +1,23 @@
 "use client";
 import { Lock, Mail } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-import { object, ObjectSchema, string } from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { cn } from "@lib/utils";
 import { ISingInForm } from "@/types";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { AppDispatch } from "@lib/redux/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "@lib/redux/logIn/slice";
+import { SignInSchema } from "@components/authForm/validationSchema";
+import { BarLoader } from "react-spinners";
+import { selectIsLoading } from "@lib/redux/auth/selectors";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
-const SignInSchema: ObjectSchema<ISingInForm> = object().shape({
-  email: string().email("Invalid email").required("Email is required"),
-  password: string()
-    .min(6, "Minimum 6 character")
-    .required("Password is required"),
-});
-
 export function SignInForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   const {
     control,
@@ -41,9 +37,9 @@ export function SignInForm() {
     alert(`Email: ${data.email}
     Password: ${data.password}
 `);
-    reset();
     dispatch(closeModal("isSignIn"));
     dispatch(logIn());
+    reset();
   };
 
   return (
@@ -105,11 +101,22 @@ export function SignInForm() {
         )}
       </div>
 
-      {/* не можу перебити font-weight на 400 */}
-
-      {/* не можу перебити font-weight на 600 */}
-      <Button type="submit" className="mt-4 font-semibold">
-        Увійти
+      <Button className="font-semibold" disabled={isLoading}>
+        {!isLoading ? (
+          "Увійти"
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="xl2:text-[16px] text-[12px] leading-[1] md:text-[14px]">
+              Відправка...
+            </p>
+            <BarLoader
+              color="#04b22b"
+              height={5}
+              speedMultiplier={1}
+              width={150}
+            />
+          </div>
+        )}
       </Button>
 
       <Button
