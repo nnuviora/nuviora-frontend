@@ -173,7 +173,7 @@ body {
 
 /* ========== Captions ========== */
 .captions-text {
-  @apply font-[family-name:var(--font-roboto)] text-[12px] font-normal leading-[1.4];
+  @apply font-[family-name:var(--font-roboto)] text-[12px] font-normal leading-[1.4] 2xl:p-4;
 }
 
 .dark {
