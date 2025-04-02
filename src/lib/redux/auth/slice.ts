@@ -8,6 +8,7 @@ export interface IAuthState {
   isLoading: boolean;
   error: string | null;
   pendingUserId: string;
+  accessToken: string;
   user: object | null;
 }
 
@@ -27,6 +28,7 @@ const initialState = {
   error: null,
   pendingUserId: "",
   user: null,
+  accessToken: "",
 };
 
 const authSlice = createSlice({
@@ -49,7 +51,9 @@ const authSlice = createSlice({
     builder
       .addCase(validateRegistrationEmail.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+        console.log(action.payload);
+        state.accessToken = action.payload.access_token;
+        state.user = action.payload.user;
       })
 
       .addMatcher(

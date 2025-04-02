@@ -26,7 +26,6 @@ export function SignUp() {
 
   useEffect(() => {
     if (pendingUserId !== "") {
-      console.log("user pending", pendingUserId);
       dispatch(closeModal("isSignUp"));
       dispatch(openModal("isValidateOTP"));
     }
