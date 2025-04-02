@@ -26,7 +26,6 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
 import items from "../../../data/sidebar-items.json";
 import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
@@ -47,9 +46,8 @@ const iconMapFooter: { [key: string]: React.ComponentType } = {
 };
 
 const AppSidebar = () => {
-  // const isMobile = useIsMobile();
   const dispatch = useAppDispatch();
-  const { state, isMobile, openMobile } = useSidebar();
+  const { state, isMobile } = useSidebar();
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
   };
