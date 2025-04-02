@@ -45,8 +45,9 @@ export function Header() {
   }
 
   return (
+    // <header className="max-h-[60px] w-full bg-[var(--button-primary-default)] md:max-h-[64px]">
     <header className="w-full bg-[var(--button-primary-default)]">
-      <div className="xl2:max-w-[90rem] xl2:px-18 xl2:py-2 mx-auto flex w-full items-center justify-between gap-6 px-4 py-2">
+      <div className="xl2:max-w-[90rem] xl2:min-h-[76px] xl2:px-18 mx-auto flex h-full min-h-[60px] w-full items-center justify-between gap-6 px-4 md:min-h-[64px]">
         <Link
           className="h2-text leading-[1.2] text-[var(--text-white)]"
           href={"/"}

@@ -49,7 +49,7 @@ export default function RootLayout({
           <Header />
 
           <div className="flex w-full flex-1 overflow-hidden">
-            <main className="xl2:max-w-[1440px] xl2:px-18 xl2:py-10 mr-auto ml-auto flex-1 overflow-y-auto px-5 py-5">
+            <main className="xl2:max-w-[1440px] xl2:px-18 xl2:py-10 mr-auto ml-auto flex-1 overflow-y-auto px-5 py-5 md:px-8 md:py-6">
               <Suspense fallback={<Loader />}>{children}</Suspense>
             </main>
           </div>

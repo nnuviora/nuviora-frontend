@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 export default function Bar() {
   const router = useRouter();
   return (
-    <div className="flex w-full items-center justify-around px-1 py-2 sm:justify-center sm:gap-4">
+    <div className="flex h-[75px] w-full items-center justify-around px-1 sm:justify-center sm:gap-10">
       <Button
         className="h-15 w-15 bg-transparent p-3"
         onClick={() => router.push("/")}

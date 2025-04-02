@@ -17,7 +17,7 @@ function AccountLayout({
       <SidebarProvider>
         <AppSidebar />
 
-        <div className="w-full flex-1 overflow-hidden overflow-y-auto md:ml-5 md:rounded-2xl">
+        <div className="xl2:ml-6 w-full flex-1 overflow-hidden overflow-y-auto outline-none md:ml-5 md:rounded-2xl">
           <Suspense fallback={<Loader />}>{children}</Suspense>
         </div>
       </SidebarProvider>

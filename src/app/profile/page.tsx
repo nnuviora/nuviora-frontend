@@ -33,7 +33,7 @@ const ProfilePage = ({}) => {
           <AvatarFallback>ІП</AvatarFallback>
         </Avatar>
 
-        <p className="body-text text-[var(--text-black)]">Імʼя Прізвище</p>
+        <p className="body-text text-[var(--text-black)]">Тарас Шевченко</p>
       </div>
       <ProfileTabs />
     </section>
