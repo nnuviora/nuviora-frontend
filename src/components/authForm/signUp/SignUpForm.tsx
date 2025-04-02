@@ -7,15 +7,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ISingUpForm } from "@/types";
 import { cn } from "@lib/utils";
 import { AppDispatch } from "@lib/redux/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SignUpSchema } from "@components/authForm/signUp/validationSchema";
 import { registerUser } from "@lib/redux/auth/operations";
 import { Checkbox } from "@components/ui/checkbox";
+import { selectIsLoading } from "@lib/redux/auth/selectors";
+import { BarLoader } from "react-spinners";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function SingUpForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  console.log(`Ghbdtn ${isLoading}`);
+
   const {
     control,
     handleSubmit,
@@ -153,7 +158,23 @@ export function SingUpForm() {
         )}
       </div>
 
-      <Button className="mt-4 font-semibold">Зареєструватися</Button>
+      <Button className="mt-4 font-semibold" disabled={isLoading}>
+        {!isLoading ? (
+          "Зареєструватися"
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="xl2:text-[16px] text-[12px] leading-[1] md:text-[14px]">
+              Відправка...
+            </p>
+            <BarLoader
+              color="#04b22b"
+              height={5}
+              speedMultiplier={1}
+              width={150}
+            />
+          </div>
+        )}
+      </Button>
     </form>
   );
 }
