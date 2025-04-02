@@ -131,7 +131,7 @@ body {
 }
 
 .h2-text {
-  @apply xl2:text-[40px] font-[family-namh-e:var(--font-poppins)] text-[28px] font-bold md:text-[36px] leading-[1.2];
+  @apply xl2:text-[40px] font-[family-name:var(--font-poppins)] text-[28px] font-bold md:text-[36px] leading-[1.2];
 }
 
 .h3-text {
@@ -173,7 +173,7 @@ body {
 
 /* ========== Captions ========== */
 .captions-text {
-  @apply font-[family-name:var(--font-roboto)] text-[12px] font-normal leading-[1.4];
+  @apply font-[family-name:var(--font-roboto)] text-[12px] font-normal leading-[1.4] 2xl:p-4;
 }
 
 .dark {

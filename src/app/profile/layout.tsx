@@ -12,15 +12,15 @@ function AccountLayout({
   children: ReactNode;
 }>) {
   return (
-    <section className="xl2:h-[calc(100vh-104px-40px)] relative flex h-[calc(100vh-84px-20px)] w-full">
+    <div className="relative flex h-full w-full">
       <SidebarProvider>
         <AppSidebar />
 
-        <div className="ml-6 flex w-full flex-1 flex-col items-center justify-center overflow-y-auto">
-          <div className="w-full flex-1">{children}</div>
+        <div className="w-full flex-1 overflow-hidden overflow-y-auto md:ml-5 md:rounded-2xl">
+          {children}
         </div>
       </SidebarProvider>
-    </section>
+    </div>
   );
 }
 

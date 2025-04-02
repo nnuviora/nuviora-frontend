@@ -33,7 +33,7 @@ const Input = forwardRef(function Input(
   const [showPassword, setShowPassword] = useState<boolean>(!showToggle);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <input
         type={showToggle ? (showPassword ? "text" : "password") : type}
         name={name}

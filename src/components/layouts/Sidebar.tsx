@@ -23,6 +23,8 @@ import {
   Heart,
   LifeBuoy,
   LogOut,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import items from "../../../data/sidebar-items.json";
@@ -45,9 +47,9 @@ const iconMapFooter: { [key: string]: React.ComponentType } = {
 };
 
 const AppSidebar = () => {
-  const isMobile = useIsMobile();
+  // const isMobile = useIsMobile();
   const dispatch = useAppDispatch();
-  const { state } = useSidebar();
+  const { state, isMobile, openMobile } = useSidebar();
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
   };
@@ -60,7 +62,19 @@ const AppSidebar = () => {
       )}
     >
       <SidebarHeader className="mb-6">
-        <SidebarTrigger className="mb-5 ml-auto" />
+        {isMobile ? (
+          <SidebarTrigger className="mb-5 ml-auto">
+            <PanelLeftClose className="size-6 self-end" color="#BDBCDB" />
+          </SidebarTrigger>
+        ) : state === "collapsed" ? (
+          <SidebarTrigger className="mb-5 ml-auto">
+            <PanelLeftOpen className="size-6" color="#BDBCDB" />
+          </SidebarTrigger>
+        ) : (
+          <SidebarTrigger className="mb-5 ml-auto">
+            <PanelLeftClose className="size-6 self-end" color="#BDBCDB" />
+          </SidebarTrigger>
+        )}
 
         <Avatar
           className={cn(

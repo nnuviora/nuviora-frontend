@@ -6,13 +6,13 @@ import PasswordChangeForm from "../account/PasswordChangeForm";
 export function ProfileTabs() {
   return (
     <Tabs defaultValue="account" className="w-full">
-      <TabsList className="mb-6 flex h-10 w-full flex-nowrap overflow-x-scroll">
+      <TabsList className="mb-5 min-h-10 w-full flex-nowrap overflow-x-auto overflow-y-hidden">
         <TabsTrigger value="account" className="button-text h-10 px-3 py-2">
-          <User size={18} />
+          <User size={18} color="#BDBCDB" />
           <span>Профіль</span>
         </TabsTrigger>
         <TabsTrigger value="password" className="button-text h-10 px-3 py-2">
-          <Lock size={18} />
+          <Lock size={18} color="#BDBCDB" />
           <span>Зміна паролю</span>
         </TabsTrigger>
       </TabsList>
