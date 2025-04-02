@@ -4,7 +4,7 @@ import { cn } from "@lib/utils";
 import { ComponentProps } from "react";
 
 const buttonVariants = cva(
-  "cursor-pointer rounded-lg button-text leading-[1.4] " +
+  "cursor-pointer rounded-lg button-text leading-[1.4] rounded-[8px] " +
     "transition-colors duration-[250ms] ease-in-out",
 
   {

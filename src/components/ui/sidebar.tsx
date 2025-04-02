@@ -199,7 +199,7 @@ function Sidebar({
             <SheetTitle>Sidebar</SheetTitle>
             <SheetDescription>Displays the mobile sidebar.</SheetDescription>
           </SheetHeader>
-          <div className="flex h-full w-full flex-col p-5">{children}</div>
+          <div className="flex h-full w-full flex-col p-4">{children}</div>
         </SheetContent>
       </Sheet>
     );
@@ -244,7 +244,7 @@ function Sidebar({
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col justify-center p-6 group-data-[collapsible=icon]:gap-10 group-data-[collapsible=icon]:p-3 group-data-[variant=floating]:rounded-2xl group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+          className="bg-sidebar flex h-full w-full flex-col justify-center p-4 group-data-[collapsible=icon]:gap-10 group-data-[collapsible=icon]:p-3 group-data-[variant=floating]:rounded-2xl"
         >
           {children}
         </div>

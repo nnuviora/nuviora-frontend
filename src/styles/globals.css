@@ -158,7 +158,7 @@ body {
 
 /* ========== Buttons ========== */
 .button-text {
-  @apply font-[family-name:var(--font-poppins)] text-[16px] leading-[1.4] font-medium md:text-[16px] xl2:text-[18px];
+  @apply font-[family-name:var(--font-poppins)] text-[16px] leading-[1.4] font-medium xl2:text-[18px];
 }
 
 /* ========== Labels ========== */
@@ -173,7 +173,7 @@ body {
 
 /* ========== Captions ========== */
 .captions-text {
-  @apply font-[family-name:var(--font-roboto)] text-[12px] font-normal leading-[1.4] 2xl:p-4;
+  @apply font-[family-name:var(--font-roboto)] text-[12px] font-normal leading-[1.4];
 }
 
 .dark {
