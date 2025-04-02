@@ -6,7 +6,8 @@ import { Textarea } from "../ui/textarea";
 import { cn } from "@/lib/utils";
 
 interface ProfileFormData {
-  fullname: string;
+  firstname: string;
+  lastname: string;
   email: string;
   about: string;
 }
@@ -30,14 +31,14 @@ export default function ProfileForm() {
     >
       <div
         className={cn(
-          "flex w-full flex-col items-center gap-2",
+          "flex w-full flex-col items-start gap-2",
           state === "expanded"
             ? "xl2:flex-row xl2:justify-between md:flex-col"
             : "md:flex-row md:justify-between",
         )}
       >
-        <Label htmlFor="fullname" className="category-text !font-semibold">
-          П.І.П.
+        <Label htmlFor="firstname" className="category-text">
+          Ім&apos;я
         </Label>
         <div
           className={cn(
@@ -46,19 +47,19 @@ export default function ProfileForm() {
           )}
         >
           <Input
-            id="fullname"
+            id="firstname"
             className={cn(
-              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
               state === "expanded"
                 ? "xl2:w-[325px] md:w-full"
                 : "md:ml-auto md:w-[325px]",
             )}
-            placeholder="П.І.П."
-            {...register("fullname", { required: "Це поле обов'язкове" })}
+            placeholder="Тарас"
+            {...register("firstname", { required: "Це поле обов'язкове" })}
           />
-          {errors.fullname && (
+          {errors.firstname && (
             <p className="absolute text-sm text-red-500">
-              {errors.fullname.message}
+              {errors.firstname.message}
             </p>
           )}
         </div>
@@ -66,13 +67,49 @@ export default function ProfileForm() {
 
       <div
         className={cn(
-          "flex w-full flex-col items-center gap-2",
+          "flex w-full flex-col items-start gap-2",
           state === "expanded"
             ? "xl2:flex-row xl2:justify-between md:flex-col"
             : "md:flex-row md:justify-between",
         )}
       >
-        <Label htmlFor="email" className="category-text !font-semibold">
+        <Label htmlFor="lastname" className="category-text">
+          Прізвище
+        </Label>
+        <div
+          className={cn(
+            "relative w-full",
+            state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+          )}
+        >
+          <Input
+            id="lastname"
+            className={cn(
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+              state === "expanded"
+                ? "xl2:w-[325px] md:w-full"
+                : "md:ml-auto md:w-[325px]",
+            )}
+            placeholder="Шевченко"
+            {...register("lastname", { required: "Це поле обов'язкове" })}
+          />
+          {errors.lastname && (
+            <p className="absolute text-sm text-red-500">
+              {errors.lastname.message}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div
+        className={cn(
+          "flex w-full flex-col items-start gap-2",
+          state === "expanded"
+            ? "xl2:flex-row xl2:justify-between md:flex-col"
+            : "md:flex-row md:justify-between",
+        )}
+      >
+        <Label htmlFor="email" className="category-text">
           Email
         </Label>
         <div
@@ -84,13 +121,13 @@ export default function ProfileForm() {
           <Input
             id="email"
             className={cn(
-              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+              "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
               state === "expanded"
                 ? "xl2:w-[325px] md:w-full"
                 : "md:ml-auto md:w-[325px]",
             )}
             type="email"
-            placeholder="pedro.pascal@example.com"
+            placeholder="sto.hryven@example.com"
             {...register("email", {
               required: "Це поле обов'язкове",
               pattern: {
@@ -109,25 +146,22 @@ export default function ProfileForm() {
 
       <div
         className={cn(
-          "flex w-full flex-col items-center gap-2",
+          "flex w-full flex-col items-start gap-2",
           state === "expanded"
             ? "xl2:flex-row xl2:justify-between md:flex-col"
             : "md:flex-row md:justify-between",
         )}
       >
-        <Label
-          htmlFor="about"
-          className="category-text !font-semibold md:self-start"
-        >
+        <Label htmlFor="about" className="category-text md:self-start">
           Про себе
         </Label>
         <Textarea
           id="about"
           className={cn(
-            "border border-solid border-[var(--stroke-field)] px-3 py-2.5",
+            "border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
             state === "expanded" ? "xl2:w-[325px] md:w-full" : "md:w-[325px]",
           )}
-          placeholder="Enter a description..."
+          placeholder="Мені тринадцятий минало..."
           {...register("about")}
         />
       </div>
@@ -137,7 +171,7 @@ export default function ProfileForm() {
         className={cn(
           "w-full",
           state === "expanded"
-            ? "xl2:w-[325px] xl2:self-end md:w-full"
+            ? "xl2:w-[325px] xl2:self-end"
             : "md:w-[325px] md:self-end",
         )}
       >
