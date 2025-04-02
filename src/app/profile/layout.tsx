@@ -1,10 +1,11 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 import AppSidebar from "@/components/layouts/Sidebar";
 import withAuth from "@/hoc/withAuth";
+import Loader from "@/app/loader";
 
 function AccountLayout({
   children,
@@ -17,7 +18,7 @@ function AccountLayout({
         <AppSidebar />
 
         <div className="xl2:ml-6 w-full flex-1 overflow-hidden overflow-y-auto md:ml-5 md:rounded-2xl">
-          {children}
+          <Suspense fallback={<Loader />}>{children}</Suspense>
         </div>
       </SidebarProvider>
     </div>
