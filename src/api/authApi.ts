@@ -51,7 +51,7 @@ export const registerUserApi = (userData: Iregister) =>
   api.post("/auth/register", userData);
 
 export const validateRegistrationEmailApi = (otp: string) =>
-  api.get(`/auth/register/${otp}`);
+  api.get(`/auth/verify_email/${otp}`);
 
 export const loginUserApi = (credentials: Record<string, string>) =>
   api.post("/login", credentials);

@@ -32,10 +32,6 @@ export function SingUpForm() {
   });
 
   const onSubmit: SubmitHandler<ISingUpForm> = (data) => {
-    alert(`Email: ${data.email}
-    Password: ${data.password}
-    PasswordConfirm: ${data.passwordConfirm}
-    TermsAccepted: ${data.isTermsAccepted}`);
     dispatch(
       registerUser({
         email: data.email,

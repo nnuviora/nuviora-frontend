@@ -7,14 +7,20 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
+import { AppDispatch } from "@lib/redux/store";
+import { useDispatch } from "react-redux";
+import { validateRegistrationEmail } from "@lib/redux/auth/operations";
+const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function EmailOTPForm() {
+  const dispatch = useAppDispatch();
   const { control, handleSubmit } = useForm({
     defaultValues: { otp: "" },
   });
 
   const onSubmit = (data: { otp: string }) => {
     alert(`OTP Code:", ${data.otp}`);
+    dispatch(validateRegistrationEmail(data.otp));
   };
 
   return (
