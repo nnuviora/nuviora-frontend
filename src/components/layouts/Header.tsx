@@ -18,10 +18,13 @@ import {
 } from "@lib/redux/toggleModal/selectors";
 import { AppDispatch } from "@lib/redux/store";
 import { openModal } from "@lib/redux/toggleModal/slice";
+import { useDeviceType } from "@/hooks";
+import Link from "next/link";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function Header() {
+  const deviceType = useDeviceType();
   const router = useRouter();
   const isLogIn = useSelector(selectLogIn);
   const dispatch = useAppDispatch();
@@ -36,7 +39,6 @@ export function Header() {
   function handleUser() {
     if (isLogIn) {
       router.push("/profile");
-      // router.push("/account");
     } else {
       dispatch(openModal("isSignIn"));
     }
@@ -45,9 +47,12 @@ export function Header() {
   return (
     <header className="w-full bg-[var(--button-primary-default)]">
       <div className="xl2:max-w-[90rem] xl2:px-18 xl2:py-2 mx-auto flex w-full items-center justify-between gap-6 px-4 py-2">
-        <h2 className="h2-text leading-[1.2] text-[var(--text-white)]">
+        <Link
+          className="h2-text leading-[1.2] text-[var(--text-white)]"
+          href={"/"}
+        >
           Nuviora
-        </h2>
+        </Link>
         <SearchInput
           name="headerSearch"
           placeholder="Search..."
@@ -58,10 +63,12 @@ export function Header() {
             {isLogIn ? <UserPlus size={36} /> : <UserMinus size={36} />}
           </div>
         </Button>
-        <Button className="p-1">
-          <ShoppingCart size={36} />
-        </Button>
 
+        {deviceType === "desktop" && (
+          <Button className="p-1">
+            <ShoppingCart size={36} />
+          </Button>
+        )}
         {isSignIn && <SignIn />}
         {isLogOut && <LogOut />}
         {isSignUp && <SignUp />}
