@@ -4,10 +4,12 @@ import { Poppins, Roboto } from "next/font/google";
 
 import type { Metadata } from "next";
 import Providers from "@/lib/providers";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 
 import Header from "@components/layouts/Header";
 import { cn } from "@lib/utils";
+import BottomNavigationBar from "@components/bottomNavigationBar/bottomNavigationBar";
+import Loader from "@/app/loader";
 
 const poppinsFont = Poppins({
   variable: "--font-poppins",
@@ -48,9 +50,10 @@ export default function RootLayout({
 
           <div className="flex w-full flex-1 overflow-hidden">
             <main className="xl2:max-w-[1440px] xl2:px-18 xl2:py-10 mr-auto ml-auto flex-1 overflow-y-auto px-5 py-5">
-              {children}
+              <Suspense fallback={<Loader />}>{children}</Suspense>
             </main>
           </div>
+          <BottomNavigationBar />
         </Providers>
       </body>
     </html>

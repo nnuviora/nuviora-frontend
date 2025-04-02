@@ -1,23 +1,20 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
 type DeviceType = "mobile" | "tablet" | "desktop";
 
-export function useDeviceType(): DeviceType {
+export function useDeviceType(): DeviceType | null {
   const getDeviceType = (width: number): DeviceType => {
     if (width < 768) return "mobile";
     if (width < 1024) return "tablet";
     return "desktop";
   };
 
-  const [deviceType, setDeviceType] = useState<DeviceType>(
-    typeof window !== "undefined"
-      ? getDeviceType(window.innerWidth)
-      : "desktop",
-  );
+  const [deviceType, setDeviceType] = useState<DeviceType | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    setDeviceType(getDeviceType(window.innerWidth));
 
     const handleResize = () => {
       setDeviceType(getDeviceType(window.innerWidth));
