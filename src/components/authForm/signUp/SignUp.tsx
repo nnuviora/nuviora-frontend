@@ -40,7 +40,7 @@ export function SignUp() {
         aria-describedby={undefined}
         className="flex w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:flex-row"
       >
-        <div className="xl2:px-25 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-2/3 lg:px-20 xl:w-1/2">
+        <div className="xl2:px-25 flex w-full flex-col justify-center gap-4 px-2 py-15 sm:px-20 lg:w-2/3 lg:px-20 xl:w-1/2">
           <DialogHeader>
             <DialogTitle className="h2-text text-[var(--text-black)]">
               Реєстрація

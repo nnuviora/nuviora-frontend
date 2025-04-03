@@ -39,70 +39,22 @@ export default function ProfileChangeForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full max-w-[597px] flex-col items-center justify-center gap-10"
+      className="xl2:max-w-[597px] flex w-full max-w-[450px] flex-col justify-center gap-6"
+      noValidate
     >
-      <Controller
-        name="firstname"
-        control={control}
-        render={({ field }) => (
-          <div
-            className={cn(
-              "flex w-full flex-col items-start gap-2",
-              state === "expanded"
-                ? "xl2:flex-row xl2:justify-between md:flex-col"
-                : "md:flex-row md:justify-between",
-            )}
-          >
-            <Label htmlFor={`${id}+${field.name}`} className="category-text">
-              Ім&apos;я
-            </Label>
-            <div
-              className={cn(
-                "relative w-full",
-                state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
-              )}
-            >
-              <Input
-                id={`${id}+${field.name}`}
-                {...field}
-                type="text"
-                placeholder="Тарас"
-                className={cn(
-                  "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  state === "expanded"
-                    ? "xl2:w-[325px] md:w-full"
-                    : "md:ml-auto md:w-[325px]",
-                )}
-              />
-              {errors.firstname && (
-                <InputErrorMassage message={errors.firstname.message || ""} />
-              )}
-            </div>
-          </div>
-        )}
-      />
-
       <Controller
         name="lastname"
         control={control}
         render={({ field }) => (
           <div
             className={cn(
-              "flex w-full flex-col items-start gap-2",
-              state === "expanded"
-                ? "xl2:flex-row xl2:justify-between md:flex-col"
-                : "md:flex-row md:justify-between",
+              "xl2:flex-row xl2:justify-between xl2:items-center flex w-full flex-col items-start gap-1",
             )}
           >
             <Label htmlFor={`${id}+${field.name}`} className="category-text">
               Прізвище
             </Label>
-            <div
-              className={cn(
-                "relative w-full",
-                state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
-              )}
-            >
+            <div className={cn("xl2:w-auto relative w-full")}>
               <Input
                 id={`${id}+${field.name}`}
                 {...field}
@@ -111,12 +63,45 @@ export default function ProfileChangeForm() {
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
                   state === "expanded"
-                    ? "xl2:w-[325px] md:w-full"
-                    : "md:ml-auto md:w-[325px]",
+                    ? "md:w-[325px]"
+                    : "xl2:w-[325px] md:w-full",
                 )}
               />
               {errors.lastname && (
                 <InputErrorMassage message={errors.lastname.message || ""} />
+              )}
+            </div>
+          </div>
+        )}
+      />
+
+      <Controller
+        name="firstname"
+        control={control}
+        render={({ field }) => (
+          <div
+            className={cn(
+              "xl2:flex-row xl2:justify-between xl2:items-center flex w-full flex-col items-start gap-1",
+            )}
+          >
+            <Label htmlFor={`${id}+${field.name}`} className="category-text">
+              Ім&apos;я
+            </Label>
+            <div className={cn("xl2:w-auto relative w-full")}>
+              <Input
+                id={`${id}+${field.name}`}
+                {...field}
+                type="text"
+                placeholder="Тарас"
+                className={cn(
+                  "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                  state === "expanded"
+                    ? "md:w-[325px]"
+                    : "xl2:w-[325px] md:w-full",
+                )}
+              />
+              {errors.firstname && (
+                <InputErrorMassage message={errors.firstname.message || ""} />
               )}
             </div>
           </div>
@@ -129,21 +114,13 @@ export default function ProfileChangeForm() {
         render={({ field }) => (
           <div
             className={cn(
-              "flex w-full flex-col items-start gap-2",
-              state === "expanded"
-                ? "xl2:flex-row xl2:justify-between md:flex-col"
-                : "md:flex-row md:justify-between",
+              "xl2:flex-row xl2:justify-between xl2:items-center flex w-full flex-col items-start gap-1",
             )}
           >
             <Label htmlFor={`${id}+${field.name}`} className="category-text">
               Email
             </Label>
-            <div
-              className={cn(
-                "relative w-full",
-                state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
-              )}
-            >
+            <div className={cn("xl2:w-auto relative w-full")}>
               <Input
                 id={`${id}+${field.name}`}
                 {...field}
@@ -152,8 +129,8 @@ export default function ProfileChangeForm() {
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
                   state === "expanded"
-                    ? "xl2:w-[325px] md:w-full"
-                    : "md:ml-auto md:w-[325px]",
+                    ? "md:w-[325px]"
+                    : "xl2:w-[325px] md:w-full",
                 )}
               />
               {errors.email && (
@@ -170,10 +147,7 @@ export default function ProfileChangeForm() {
         render={({ field }) => (
           <div
             className={cn(
-              "flex w-full flex-col items-start gap-2",
-              state === "expanded"
-                ? "xl2:flex-row xl2:justify-between md:flex-col"
-                : "md:flex-row md:justify-between",
+              "xl2:flex-row xl2:justify-between xl2:items-center flex w-full flex-col items-start gap-1",
             )}
           >
             <Label htmlFor={`${id}+${field.name}`} className="category-text">
@@ -184,27 +158,21 @@ export default function ProfileChangeForm() {
               id={`${id}+${field.name}`}
               {...field}
               className={cn(
-                "border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                state === "expanded"
-                  ? "xl2:w-[325px] md:w-full"
-                  : "md:w-[325px]",
+                "xl2:w-[325px] placeholder:text-[14px]",
+                state === "expanded" ? "md:w-[325px]" : "md:w-full",
               )}
               placeholder="Мені тринадцятий минало..."
             />
-            {errors.about && (
-              <InputErrorMassage message={errors.about.message || ""} />
-            )}
           </div>
         )}
       />
 
       <Button
         type="submit"
+        size="default"
         className={cn(
-          "w-full",
-          state === "expanded"
-            ? "xl2:w-[325px] xl2:self-end"
-            : "md:w-[325px] md:self-end",
+          "xl2:w-[325px] xl2:self-end mt-4 w-full",
+          state === "expanded" ? "md:w-[325px]" : "md:w-full",
         )}
       >
         Зберегти зміни

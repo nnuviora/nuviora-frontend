@@ -1,27 +1,27 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Lock, MapPinned, User } from "lucide-react";
+import { Lock, User } from "lucide-react";
 import ProfileForm from "../accountForm/ProfileChangeForm";
 import PasswordChangeForm from "../accountForm/PasswordChangeForm";
-import AddressChangeForm from "../accountForm/AddressChangeForm";
+// import AddressChangeForm from "../accountForm/AddressChangeForm";
 
 export function ProfileTabs() {
   return (
     <Tabs defaultValue="account" className="w-full">
-      <TabsList className="min-h-10 w-full flex-nowrap overflow-x-auto overflow-y-hidden">
-        <TabsTrigger value="account" className="button-text h-10 px-3 py-2">
+      <TabsList className="min-h-10 w-auto flex-nowrap overflow-x-auto overflow-y-hidden">
+        <TabsTrigger value="account" className="button-text h-10 px-3 py-1">
           <User size={18} color="#BDBCDB" />
           <span>Профіль</span>
         </TabsTrigger>
 
-        <TabsTrigger value="password" className="button-text h-10 px-3 py-2">
+        <TabsTrigger value="password" className="button-text h-10 px-3 py-1">
           <Lock size={18} color="#BDBCDB" />
           <span>Зміна паролю</span>
         </TabsTrigger>
 
-        <TabsTrigger value="address" className="button-text h-10 px-3 py-2">
+        {/* <TabsTrigger value="address" className="button-text h-10 px-3 py-2">
           <MapPinned size={18} color="#BDBCDB" />
           <span>Моя адреса</span>
-        </TabsTrigger>
+        </TabsTrigger> */}
       </TabsList>
 
       <TabsContent value="account">
@@ -34,10 +34,10 @@ export function ProfileTabs() {
         <PasswordChangeForm />
       </TabsContent>
 
-      <TabsContent value="address">
+      {/* <TabsContent value="address">
         <h2 className="subtitle3-text mb-6">Моя адреса</h2>
         <AddressChangeForm />
-      </TabsContent>
+      </TabsContent> */}
     </Tabs>
   );
 }

@@ -13,7 +13,7 @@ export default function FormFooter() {
         >
           <div className="flex w-full items-center justify-center gap-3">
             <FcGoogle size={18} />
-            <p className="text-[18px] font-semibold text-[var(--text-grey)]">
+            <p className="button-text font-semibold text-[var(--text-grey)]">
               Продовжити з Google
             </p>
           </div>
@@ -30,7 +30,7 @@ export default function FormFooter() {
         >
           <div className="flex w-full items-center justify-center gap-3">
             <Heart size={18} className="stroke-[var(--text-grey)]" />
-            <p className="text-[18px] font-semibold text-[var(--text-grey)]">
+            <p className="button-text font-semibold text-[var(--text-grey)]">
               Підтримати нас
             </p>
           </div>

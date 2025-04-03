@@ -4,21 +4,19 @@ import { Button, Input, InputErrorMassage } from "@components/ui";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISingUpForm } from "@/types";
-import { cn } from "@lib/utils";
-import { AppDispatch } from "@lib/redux/store";
-import { useDispatch, useSelector } from "react-redux";
+
 import { SignUpSchema } from "@components/authForm/validationSchema";
 import { registerUser } from "@lib/redux/auth/operations";
 import { Checkbox } from "@components/ui/checkbox";
 import { selectIsLoading } from "@lib/redux/auth/selectors";
 import { BarLoader } from "react-spinners";
 import { useId } from "react";
-
-const useAppDispatch: () => AppDispatch = useDispatch;
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export function SingUpForm() {
   const dispatch = useAppDispatch();
-  const isLoading = useSelector(selectIsLoading);
+
+  const isLoading = useAppSelector(selectIsLoading);
   const uniqueId = useId();
 
   const {
@@ -58,20 +56,16 @@ export function SingUpForm() {
           name="email"
           control={control}
           render={({ field }) => (
-            <div
-              className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
-                errors.email && "border-[var(--text-error)]",
-              )}
-            >
-              <Mail className="stroke-[var(--text-grey)]" size="16" />
-              <Input
-                {...field}
-                className="border-none p-0 placeholder-[var(--text-grey)] focus:ring-0"
-                type="email"
-                placeholder="Email"
-              />
-            </div>
+            <Input
+              {...field}
+              icon={<Mail className="stroke-[var(--text-grey)]" size="16" />}
+              className={
+                errors.email &&
+                "border-[var(--text-error)] bg-[var(--bg-error)]"
+              }
+              type="email"
+              placeholder="Email"
+            />
           )}
         />
         {errors.email && (
@@ -84,21 +78,17 @@ export function SingUpForm() {
           name="password"
           control={control}
           render={({ field }) => (
-            <div
-              className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
-                errors.password && "border-[var(--text-error)]",
-              )}
-            >
-              <Lock className="stroke-[var(--text-grey)]" size="16" />
-              <Input
-                {...field}
-                className="border-none p-0 placeholder-[var(--text-grey)] focus:ring-0"
-                type="password"
-                showToggle={true}
-                placeholder="Пароль"
-              />
-            </div>
+            <Input
+              {...field}
+              icon={<Lock className="stroke-[var(--text-grey)]" size="16" />}
+              className={
+                errors.password &&
+                "border-[var(--text-error)] bg-[var(--bg-error)]"
+              }
+              type="password"
+              showToggle={true}
+              placeholder="Пароль"
+            />
           )}
         />
         {errors.password && (
@@ -111,21 +101,17 @@ export function SingUpForm() {
           name="passwordConfirm"
           control={control}
           render={({ field }) => (
-            <div
-              className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
-                errors.passwordConfirm && "border-[var(--text-error)]",
-              )}
-            >
-              <Lock className="stroke-[var(--text-grey)]" size="16" />
-              <Input
-                {...field}
-                className="border-none p-0 placeholder-[var(--text-grey)] focus:ring-0"
-                type="password"
-                showToggle={true}
-                placeholder="Підвердіть пароль"
-              />
-            </div>
+            <Input
+              {...field}
+              icon={<Lock className="stroke-[var(--text-grey)]" size="16" />}
+              className={
+                errors.passwordConfirm &&
+                "border-[var(--text-error)] bg-[var(--bg-error)]"
+              }
+              type="password"
+              showToggle={true}
+              placeholder="Підвердіть пароль"
+            />
           )}
         />
         {errors.passwordConfirm && (
