@@ -10,6 +10,7 @@ import Header from "@components/layouts/Header";
 import { cn } from "@lib/utils";
 import BottomNavigationBar from "@components/bottomNavigationBar/bottomNavigationBar";
 import Loader from "@/app/loader";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const poppinsFont = Poppins({
   variable: "--font-poppins",
@@ -53,6 +54,19 @@ export default function RootLayout({
               <Suspense fallback={<Loader />}>{children}</Suspense>
             </main>
           </div>
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover={false}
+            theme="colored"
+            transition={Bounce}
+          />
           <BottomNavigationBar />
         </Providers>
       </body>

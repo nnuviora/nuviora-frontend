@@ -26,6 +26,7 @@ export default function Home() {
             <Button variant="outline">Outline</Button>
             <Button disabled>Disabled</Button>
           </div>
+
           <Footer />
         </section>
       )}

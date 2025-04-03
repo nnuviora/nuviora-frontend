@@ -48,13 +48,20 @@ export interface Iregister {
 //   },
 // );
 
-export const registerUserApi = (userData: Iregister) =>
-  api.post("/auth/register", userData);
+export const registerUserApi = async (userData: Iregister) =>
+  await api.post("/auth/register", userData);
 
-export const validateRegistrationEmailApi = (otp: string) =>
-  api.get(`/auth/verify_email/${otp}`);
+export const validateRegistrationEmailApi = async (otp: string) =>
+  await api.get(`/auth/verify_email/${otp}`);
 
-export const loginUserApi = (credentials: Record<string, string>) =>
-  api.post("/auth/login", credentials);
+export const loginUserApi = async (credentials: Record<string, string>) =>
+  await api.post("/auth/login", credentials);
 
-export const logoutUserApi = () => api.post("/auth/logout");
+export const logoutUserApi = async () => await api.post("/auth/logout");
+
+export const resendValidationCodeApi = async (id: string) =>
+  await api.get(`/auth/resend_email/${id}`);
+
+export const logoutApi = async () => {
+  await api.post("/auth/logout");
+};

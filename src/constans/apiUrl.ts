@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://nuviora.click/";
+export const API_BASE_URL = "http://nuviora.click/";
