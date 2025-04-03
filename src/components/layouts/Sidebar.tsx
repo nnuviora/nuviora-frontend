@@ -31,6 +31,7 @@ import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { openModal } from "@/lib/redux/toggleModal/slice";
+import { usePathname } from "next/navigation";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,
@@ -48,6 +49,8 @@ const iconMapFooter: { [key: string]: React.ComponentType } = {
 const AppSidebar = () => {
   const dispatch = useAppDispatch();
   const { state, isMobile } = useSidebar();
+  const pathname = usePathname();
+
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
   };
@@ -76,7 +79,7 @@ const AppSidebar = () => {
 
         <Avatar
           className={cn(
-            "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-6",
+            "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-14",
           )}
         >
           <AvatarImage src="https://github.com/shadcn.png" />
@@ -97,7 +100,10 @@ const AppSidebar = () => {
                 const IconComponent = iconMap[item.icon];
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname === `/${item.url}`}
+                    >
                       <a href={item.url}>
                         <IconComponent />
                         <span>{item.title}</span>
@@ -114,7 +120,10 @@ const AppSidebar = () => {
                 const IconComponentFooter = iconMapFooter[item.icon];
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname === `/${item.url}`}
+                    >
                       {item.url ? (
                         <a href={item.url}>
                           <IconComponentFooter />
