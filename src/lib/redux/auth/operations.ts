@@ -1,10 +1,33 @@
 import {
   Iregister,
+  logoutApi,
   registerUserApi,
+  resendValidationCodeApi,
   validateRegistrationEmailApi,
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+
+const handleApiError = (err: unknown, defaultMessage: string) => {
+  const error = err as AxiosError<{ message?: string }>;
+
+  if (!error.response) {
+    return "Network error. Please try again.";
+  }
+
+  const { status, data } = error.response;
+
+  const errorMessages: Record<number, string> = {
+    400: "Bad request",
+    401: "Unauthorized. Please log in again.",
+    405: "Method Not Allowed",
+    409: "Email уже зарегистрирован",
+    422: "Validation error",
+    429: "Too Many Requests. Please wait before retrying.",
+  };
+
+  return errorMessages[status] || data?.message || defaultMessage;
+};
 
 export const registerUser = createAsyncThunk(
   "auth/register",
@@ -13,17 +36,7 @@ export const registerUser = createAsyncThunk(
       const response = await registerUserApi(userData);
       return response.data;
     } catch (err) {
-      const error = err as AxiosError<{ message?: string }>;
-      switch (error.response?.status) {
-        case 400:
-          return rejectWithValue("Passwords do not match");
-        case 409:
-          return rejectWithValue("Email уще зарегистрирован");
-        case 422:
-          return rejectWithValue("Validation error");
-        default:
-          return rejectWithValue(error.response?.data || "Registration failed");
-      }
+      return rejectWithValue(handleApiError(err, "Registration failed"));
     }
   },
 );
@@ -35,17 +48,30 @@ export const validateRegistrationEmail = createAsyncThunk(
       const response = await validateRegistrationEmailApi(otpCode);
       return response.data;
     } catch (err) {
-      const error = err as AxiosError<{ message?: string }>;
-      switch (error.response?.status) {
-        case 400:
-          return rejectWithValue("Email verification token has expired");
-        case 405:
-          return rejectWithValue("Metod Not Allow");
-        case 422:
-          return rejectWithValue("Validation error");
-        default:
-          return rejectWithValue(error.response?.data || "Validation failed");
-      }
+      return rejectWithValue(handleApiError(err, "Validation failed"));
+    }
+  },
+);
+
+export const resendValidationCode = createAsyncThunk(
+  "auth/resendCode",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const response = await resendValidationCodeApi(id);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(handleApiError(err, "Validation failed"));
+    }
+  },
+);
+
+export const logOut = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await logoutApi();
+    } catch (err) {
+      return rejectWithValue(handleApiError(err, "Logout failed"));
     }
   },
 );
