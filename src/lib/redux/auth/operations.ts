@@ -1,5 +1,6 @@
 import {
   Iregister,
+  loginUserApi,
   logoutApi,
   registerUserApi,
   resendValidationCodeApi,
@@ -41,11 +42,24 @@ export const registerUser = createAsyncThunk(
   },
 );
 
+export const logInUser = createAsyncThunk(
+  "auth/login",
+  async (userData: Iregister, { rejectWithValue }) => {
+    try {
+      const response = await loginUserApi(userData);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(handleApiError(err, "Registration failed"));
+    }
+  },
+);
+
 export const validateRegistrationEmail = createAsyncThunk(
   "auth/validateEmail",
   async (otpCode: string, { rejectWithValue }) => {
     try {
       const response = await validateRegistrationEmailApi(otpCode);
+      console.log(response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(handleApiError(err, "Validation failed"));

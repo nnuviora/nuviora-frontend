@@ -16,12 +16,23 @@ import { selectIsValidateOTP } from "@lib/redux/toggleModal/selectors";
 import { Key } from "lucide-react";
 import ResendTimer from "@components/authForm/validateForm/timer";
 import { resetPendingUserId } from "@lib/redux/auth/slice";
+import { useEffect } from "react";
+import { notify } from "@components/notifi/notifi";
+import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export const ValidateOTP = () => {
   const isValidateOTP = useSelector(selectIsValidateOTP);
   const dispatch = useAppDispatch();
+  const isAutentificate = useSelector(selectIsAuthenticated);
+  useEffect(() => {
+    if (isAutentificate) {
+      notify({ message: "Успешно зарегистрирован", type: "success" });
+      dispatch(closeModal("isValidateOTP"));
+    }
+  }, [isAutentificate]);
+
   return (
     <Dialog
       open={isValidateOTP}

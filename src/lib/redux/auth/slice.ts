@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import {
+  logInUser,
   registerUser,
   resendValidationCode,
   validateRegistrationEmail,
@@ -12,17 +13,20 @@ export interface IAuthState {
   accessToken: string;
   user: object | null;
   isResend: boolean;
+  isAuthenticated: boolean;
 }
 
 const handlePending = (state: IAuthState) => {
   state.isLoading = true;
   state.error = null;
   state.isResend = false;
+  state.isAuthenticated = false;
 };
 
 const handleRejected = (state: IAuthState, action: PayloadAction<unknown>) => {
   state.isLoading = false;
   state.isResend = false;
+  state.isAuthenticated = false;
   state.error =
     typeof action.payload === "string" ? action.payload : "Unknown error";
 };
@@ -34,6 +38,7 @@ const initialState = {
   user: null,
   accessToken: "",
   isResend: false,
+  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
@@ -57,10 +62,15 @@ const authSlice = createSlice({
       state.pendingUserId = action.payload.id;
     });
 
+    builder.addCase(logInUser.fulfilled, (state) => {
+      state.isLoading = false;
+      state.isAuthenticated = true;
+    });
+
     builder.addCase(validateRegistrationEmail.fulfilled, (state, action) => {
       state.isLoading = false;
       state.accessToken = action.payload.access_token;
-      state.user = action.payload.user;
+      state.isAuthenticated = true;
     });
 
     builder
@@ -71,6 +81,7 @@ const authSlice = createSlice({
 
       .addMatcher(
         isAnyOf(
+          logInUser.pending,
           registerUser.pending,
           validateRegistrationEmail.pending,
           resendValidationCode.pending,
@@ -79,6 +90,7 @@ const authSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
+          logInUser.rejected,
           registerUser.rejected,
           validateRegistrationEmail.rejected,
           resendValidationCode.rejected,
