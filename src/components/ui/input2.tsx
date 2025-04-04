@@ -7,6 +7,7 @@ import {
   ReactElement,
   useState,
 } from "react";
+
 import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@lib/utils";
 
@@ -16,17 +17,15 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   showToggle?: boolean;
   className?: string;
-  icon?: ReactElement;
 }
 
-const Input = forwardRef(function Input(
+const Input2 = forwardRef(function Input(
   {
     type = "text",
     name,
     placeholder,
     className,
     showToggle = false,
-    icon,
     ...props
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>,
@@ -34,15 +33,13 @@ const Input = forwardRef(function Input(
   const [showPassword, setShowPassword] = useState<boolean>(!showToggle);
 
   return (
-    <div className="relative flex w-full items-center">
-      {icon && <span className="absolute left-2">{icon}</span>}
+    <div className="relative w-full">
       <input
         type={showToggle ? (showPassword ? "text" : "password") : type}
         name={name}
         placeholder={placeholder}
         className={cn(
-          "body-text relative w-full rounded-[8px] border border-[var(--stroke-field)] bg-[var(--white)] px-2 py-2 placeholder-[var(--text-grey)] transition outline-none focus-within:ring-2 focus-within:ring-[var(--button-primary-default)] hover:border-[var(--button-secondary-hover)]",
-          icon && "pl-8",
+          "body-text w-full rounded-[8px] border border-[var(-text-grey)] bg-transparent px-4.5 py-4 outline-none",
           className,
         )}
         {...props}
@@ -65,6 +62,6 @@ const Input = forwardRef(function Input(
   );
 });
 
-Input.displayName = "Input";
+Input2.displayName = "Input2";
 
-export { Input };
+export { Input2 };

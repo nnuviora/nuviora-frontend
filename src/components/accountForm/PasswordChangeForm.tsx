@@ -37,7 +37,7 @@ export default function PasswordChangeForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex max-w-[597px] flex-col items-center justify-center gap-10"
+      className="xl2:max-w-[597px] flex w-full max-w-[450px] flex-col justify-center gap-6"
       noValidate
     >
       <Controller
@@ -46,10 +46,7 @@ export default function PasswordChangeForm() {
         render={({ field }) => (
           <div
             className={cn(
-              "flex w-full flex-col items-start gap-2",
-              state === "expanded"
-                ? "xl2:flex-row xl2:justify-between md:flex-col"
-                : "md:flex-row md:justify-between",
+              "xl2:flex-row xl2:justify-between xl2:items-center flex w-full flex-col items-start gap-1",
             )}
           >
             <Label htmlFor={`${id}+${field.name}`} className="category-text">
@@ -57,8 +54,8 @@ export default function PasswordChangeForm() {
             </Label>
             <div
               className={cn(
-                "relative w-full",
-                state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+                "xl2:w-[325px] relative w-full",
+                state === "expanded" ? "md:w-[325px]" : "md:w-full",
               )}
             >
               <Input
@@ -68,10 +65,7 @@ export default function PasswordChangeForm() {
                 showToggle={true}
                 placeholder="Старий пароль"
                 className={cn(
-                  "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  state === "expanded"
-                    ? "xl2:w-[325px] md:w-full"
-                    : "md:ml-auto md:w-[325px]",
+                  "h-10 w-full border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
                 )}
               />
               {errors.oldPassword && (
@@ -88,10 +82,7 @@ export default function PasswordChangeForm() {
         render={({ field }) => (
           <div
             className={cn(
-              "flex w-full flex-col items-start gap-2",
-              state === "expanded"
-                ? "xl2:flex-row xl2:justify-between md:flex-col"
-                : "md:flex-row md:justify-between",
+              "xl2:flex-row xl2:justify-between xl2:items-center flex w-full flex-col items-start gap-1",
             )}
           >
             <Label htmlFor={`${id}+${field.name}`} className="category-text">
@@ -99,8 +90,8 @@ export default function PasswordChangeForm() {
             </Label>
             <div
               className={cn(
-                "relative w-full",
-                state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+                "xl2:w-[325px] relative w-full",
+                state === "expanded" ? "md:w-[325px]" : "md:w-full",
               )}
             >
               <Input
@@ -111,9 +102,6 @@ export default function PasswordChangeForm() {
                 placeholder="Новий пароль"
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  state === "expanded"
-                    ? "xl2:w-[325px] md:w-full"
-                    : "md:ml-auto md:w-[325px]",
                 )}
               />
               {errors.newPassword && (
@@ -130,10 +118,7 @@ export default function PasswordChangeForm() {
         render={({ field }) => (
           <div
             className={cn(
-              "flex w-full flex-col items-start gap-2",
-              state === "expanded"
-                ? "xl2:flex-row xl2:justify-between md:flex-col"
-                : "md:flex-row md:justify-between",
+              "xl2:flex-row xl2:justify-between xl2:items-center flex w-full flex-col items-start gap-1",
             )}
           >
             <Label htmlFor={`${id}+${field.name}`} className="category-text">
@@ -141,8 +126,8 @@ export default function PasswordChangeForm() {
             </Label>
             <div
               className={cn(
-                "relative w-full",
-                state === "expanded" ? "xl2:w-auto w-full" : "w-auto",
+                "xl2:w-[325px] relative w-full",
+                state === "expanded" ? "md:w-[325px]" : "md:w-full",
               )}
             >
               <Input
@@ -153,9 +138,6 @@ export default function PasswordChangeForm() {
                 placeholder="Повторіть новий пароль"
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  state === "expanded"
-                    ? "xl2:w-[325px] md:w-full"
-                    : "md:ml-auto md:w-[325px]",
                 )}
               />
               {errors.newPasswordRepeat && (
@@ -170,11 +152,10 @@ export default function PasswordChangeForm() {
 
       <Button
         type="submit"
+        size="default"
         className={cn(
-          "w-full",
-          state === "expanded"
-            ? "xl2:w-[325px] xl2:self-end"
-            : "md:w-[325px] md:self-end",
+          "xl2:w-[325px] xl2:self-end mt-4 w-full",
+          state === "expanded" ? "md:w-[325px]" : "md:w-full",
         )}
       >
         Зберегти пароль
