@@ -48,10 +48,7 @@ export function EmailOTPForm() {
         )}
       />
 
-      <Button
-        type="submit"
-        className="w-full bg-green-500 text-white md:max-w-104"
-      >
+      <Button className="w-full bg-green-500 text-white md:max-w-104">
         Підтвердити
       </Button>
     </form>

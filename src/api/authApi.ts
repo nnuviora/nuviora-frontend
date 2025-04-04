@@ -54,8 +54,8 @@ export const registerUserApi = async (userData: Iregister) =>
 export const validateRegistrationEmailApi = async (otp: string) =>
   await api.get(`/auth/verify_email/${otp}`);
 
-export const loginUserApi = async (credentials: Record<string, string>) =>
-  await api.post("/auth/login", credentials);
+export const loginUserApi = async (userData: Iregister) =>
+  await api.post("/auth/login", userData);
 
 export const logoutUserApi = async () => await api.post("/auth/logout");
 

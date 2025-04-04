@@ -53,7 +53,7 @@ export function SignInForm() {
           render={({ field }) => (
             <Input
               {...field}
-              icon={<Mail className="stroke-[var(--text-grey)]" size="16" />}
+              icon={<Mail size="16" className="stroke-[var(--text-grey)]" />}
               className={
                 errors.email &&
                 "border-[var(--text-error)] bg-[var(--bg-error)]"
