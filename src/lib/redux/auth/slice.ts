@@ -1,20 +1,13 @@
 import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import {
   logInUser,
+  logOut,
   registerUser,
-  resendValidationCode,
   validateRegistrationEmail,
+  resendValidationCode,
 } from "@lib/redux/auth/operations";
-
-export interface IAuthState {
-  isLoading: boolean;
-  error: string | null;
-  pendingUserId: string;
-  accessToken: string;
-  user: object | null;
-  isResend: boolean;
-  isAuthenticated: boolean;
-}
+import { IAuthResponse, IAuthState, IRegistrationResponse } from "../types";
+// import { act } from "react";
 
 const handlePending = (state: IAuthState) => {
   state.isLoading = true;
@@ -31,12 +24,13 @@ const handleRejected = (state: IAuthState, action: PayloadAction<unknown>) => {
     typeof action.payload === "string" ? action.payload : "Unknown error";
 };
 
-const initialState = {
-  isLoading: false,
-  error: null,
-  pendingUserId: "",
+const initialState: IAuthState = {
   user: null,
   accessToken: "",
+  pendingUserId: "",
+  isLoading: false,
+  error: null,
+  isLoggedIn: false,
   isResend: false,
   isAuthenticated: false,
 };
@@ -46,7 +40,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     resetPendingUserId: (state) => {
-      state.pendingUserId = "";
+      // state.pendingUserId = "";
       state.isLoading = false;
       state.error = null;
     },
@@ -57,32 +51,53 @@ const authSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.pendingUserId = action.payload.id;
-    });
+    builder.addCase(
+      registerUser.fulfilled,
+      (state: IAuthState, action: PayloadAction<IRegistrationResponse>) => {
+        state.isLoading = false;
+        state.error = null;
+        state.pendingUserId = action.payload.id;
+      },
+    );
 
-    builder.addCase(logInUser.fulfilled, (state) => {
-      state.isLoading = false;
-      state.isAuthenticated = true;
-    });
+    builder.addCase(
+      logInUser.fulfilled,
+      (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
+        state.user = action.payload.user;
+        state.accessToken = action.payload.access_token;
+        state.isLoading = false;
+        state.error = null;
+        state.isAuthenticated = true;
+        state.isLoggedIn = true;
+      },
+    );
 
-    builder.addCase(validateRegistrationEmail.fulfilled, (state, action) => {
+    builder.addCase(
+      validateRegistrationEmail.fulfilled,
+      (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
+        state.isLoading = false;
+        state.error = null;
+        state.accessToken = action.payload.access_token;
+        state.user = action.payload.user;
+        state.isAuthenticated = true;
+      },
+    );
+
+    builder.addCase(resendValidationCode.fulfilled, (state: IAuthState) => {
       state.isLoading = false;
-      state.accessToken = action.payload.access_token;
-      state.isAuthenticated = true;
+      state.error = null;
+      state.isResend = true;
     });
 
     builder
-      .addCase(resendValidationCode.fulfilled, (state) => {
-        state.isLoading = false;
-        state.isResend = true;
+      .addCase(logOut.fulfilled, () => {
+        return initialState;
       })
 
       .addMatcher(
         isAnyOf(
-          logInUser.pending,
           registerUser.pending,
+          logInUser.pending,
           validateRegistrationEmail.pending,
           resendValidationCode.pending,
         ),
@@ -90,8 +105,9 @@ const authSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
-          logInUser.rejected,
           registerUser.rejected,
+          logInUser.rejected,
+          logOut.rejected,
           validateRegistrationEmail.rejected,
           resendValidationCode.rejected,
         ),

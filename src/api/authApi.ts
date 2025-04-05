@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "@/constans";
+import { ILoginCredentials } from "@/lib/redux/types";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -54,7 +55,7 @@ export const registerUserApi = async (userData: Iregister) =>
 export const validateRegistrationEmailApi = async (otp: string) =>
   await api.get(`/auth/verify_email/${otp}`);
 
-export const loginUserApi = async (userData: Iregister) =>
+export const loginUserApi = async (userData: ILoginCredentials) =>
   await api.post("/auth/login", userData);
 
 export const logoutUserApi = async () => await api.post("/auth/logout");
@@ -63,5 +64,5 @@ export const resendValidationCodeApi = async (id: string) =>
   await api.get(`/auth/resend_email/${id}`);
 
 export const logoutApi = async () => {
-  await api.post("/auth/logout");
+  await api.get("/auth/logout");
 };

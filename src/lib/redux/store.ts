@@ -1,8 +1,8 @@
 "use client";
 import { configureStore } from "@reduxjs/toolkit";
-import modalReducer, { IModalState } from "@lib/redux/toggleModal/slice";
-import authReducer, { IAuthState } from "@lib/redux/auth/slice";
-import loginSlice, { ILogInState } from "@lib/redux/logIn/slice";
+import modalReducer from "@lib/redux/toggleModal/slice";
+import authReducer from "@lib/redux/auth/slice";
+import loginSlice from "@lib/redux/logIn/slice";
 import {
   persistStore,
   persistReducer,
@@ -14,11 +14,6 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-export interface RootState {
-  modal: IModalState;
-  login: ILogInState;
-  auth: IAuthState;
-}
 
 const persistedAuthReducer = persistReducer(
   {
@@ -43,6 +38,7 @@ const store = configureStore({
     }),
 });
 
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export default store;

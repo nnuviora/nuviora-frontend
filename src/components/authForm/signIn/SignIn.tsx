@@ -7,18 +7,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@components/ui";
-import { useDispatch, useSelector } from "react-redux";
 import { selectIsSignIn } from "@lib/redux/toggleModal/selectors";
-import { AppDispatch } from "@lib/redux/store";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { SignInForm } from "@components/authForm/signIn/SignInForm";
 import FormFooter from "@components/authForm/formFooter";
 import Image from "next/image";
-
-const useAppDispatch: () => AppDispatch = useDispatch;
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export const SignIn = () => {
-  const isSignIn = useSelector(selectIsSignIn);
+  const isSignIn = useAppSelector(selectIsSignIn);
   const dispatch = useAppDispatch();
   return (
     <Dialog

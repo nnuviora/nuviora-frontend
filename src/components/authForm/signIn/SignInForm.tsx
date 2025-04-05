@@ -7,15 +7,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ISingInForm } from "@/types";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 
-import { logIn } from "@lib/redux/logIn/slice";
 import { SignInSchema } from "@components/authForm/validationSchema";
 import { BarLoader } from "react-spinners";
-import { selectIsLoading } from "@lib/redux/auth/selectors";
+import { selectIsLoggedIn } from "@lib/redux/auth/selectors";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { logInUser } from "@/lib/redux/auth/operations";
 
 export function SignInForm() {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectIsLoading);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const {
     control,
@@ -35,8 +35,9 @@ export function SignInForm() {
     alert(`Email: ${data.email}
     Password: ${data.password}
 `);
+
     dispatch(closeModal("isSignIn"));
-    dispatch(logIn());
+    dispatch(logInUser(data));
     reset();
   };
 
@@ -92,8 +93,8 @@ export function SignInForm() {
         )}
       </div>
 
-      <Button className="font-semibold" disabled={isLoading}>
-        {!isLoading ? (
+      <Button className="font-semibold" disabled={isLoggedIn}>
+        {!isLoggedIn ? (
           "Увійти"
         ) : (
           <div className="flex flex-col items-center justify-center gap-1">

@@ -13,7 +13,7 @@ import { useId } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Textarea } from "../ui/textarea";
 import { ProfileSchema } from "./profileValidationSchema";
-import { IProfileFormData } from "@/types/profileTypes";
+import { IProfileFormData } from "@/types";
 
 export default function ProfileChangeForm() {
   const id = useId();

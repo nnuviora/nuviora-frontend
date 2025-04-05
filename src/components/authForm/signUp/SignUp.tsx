@@ -7,9 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@components/ui";
-import { useDispatch, useSelector } from "react-redux";
 import { selectIsSignUp } from "@lib/redux/toggleModal/selectors";
-import { AppDispatch } from "@lib/redux/store";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { SingUpForm } from "@components/authForm/signUp/SignUpForm";
 import FormFooter from "@components/authForm/formFooter";
@@ -21,14 +19,13 @@ import {
 } from "@lib/redux/auth/selectors";
 import { clearError } from "@lib/redux/auth/slice";
 import { notify } from "@components/notifi/notifi";
-
-const useAppDispatch: () => AppDispatch = useDispatch;
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export function SignUp() {
-  const isSignUp = useSelector(selectIsSignUp);
-  const pendingUserId = useSelector(selectPendingUserId);
+  const isSignUp = useAppSelector(selectIsSignUp);
+  const pendingUserId = useAppSelector(selectPendingUserId);
   const dispatch = useAppDispatch();
-  const IsError = useSelector(selectAuthError);
+  const IsError = useAppSelector(selectAuthError);
 
   useEffect(() => {
     if (pendingUserId !== "") {

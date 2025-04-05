@@ -11,20 +11,20 @@ import {
   AlertDialogTitle,
 } from "@components/ui";
 
-import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogOut } from "@lib/redux/toggleModal/selectors";
-import { AppDispatch } from "@lib/redux/store";
 import { closeModal } from "@lib/redux/toggleModal/slice";
-import { logOut } from "@lib/redux/logIn/slice";
-
-const useAppDispatch: () => AppDispatch = useDispatch;
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { logOut } from "@/lib/redux/auth/operations";
 
 export const LogOut = () => {
-  const logOutState = useSelector(selectIsLogOut);
+  const logOutState = useAppSelector(selectIsLogOut);
   const dispatch = useAppDispatch();
 
   return (
-    <AlertDialog open={logOutState}>
+    <AlertDialog
+      open={logOutState}
+      onOpenChange={() => dispatch(closeModal("isLogOut"))}
+    >
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

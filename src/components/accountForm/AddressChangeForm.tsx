@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { useId } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AddressSchema } from "./profileValidationSchema";
-import { IAddressFormData } from "@/types/profileTypes";
+import { IAddressFormData } from "@/types";
 
 export default function AddressChangeForm() {
   const id = useId();
