@@ -9,7 +9,7 @@ import {
 import { IAuthResponse, IAuthState, IRegistrationResponse } from "../types";
 // import { act } from "react";
 
-const handlePending = (state: IAuthState, action: PayloadAction<any>) => {
+const handlePending = (state: IAuthState) => {
   state.isLoading = true;
   state.error = null;
   state.isResend = false;
