@@ -9,7 +9,7 @@ import {
   InputErrorMassage,
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import { IPasswordFormData } from "@/types/profileTypes";
+import { IPasswordFormData } from "@/types";
 import { useId } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PasswordSchema } from "./profileValidationSchema";

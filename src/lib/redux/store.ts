@@ -14,11 +14,11 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-export interface RootState {
-  modal: IModalState;
-  login: ILogInState;
-  auth: IAuthState;
-}
+// export interface RootState {
+//   modal: IModalState;
+//   login: ILogInState;
+//   auth: IAuthState;
+// }
 
 const persistedAuthReducer = persistReducer(
   {
@@ -43,6 +43,7 @@ const store = configureStore({
     }),
 });
 
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export default store;

@@ -21,14 +21,18 @@ import {
 } from "@lib/redux/auth/selectors";
 import { clearError } from "@lib/redux/auth/slice";
 import { notify } from "@components/notifi/notifi";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
-const useAppDispatch: () => AppDispatch = useDispatch;
+// const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function SignUp() {
-  const isSignUp = useSelector(selectIsSignUp);
-  const pendingUserId = useSelector(selectPendingUserId);
+  // const isSignUp = useSelector(selectIsSignUp);
+  const isSignUp = useAppSelector(selectIsSignUp);
+  // const pendingUserId = useSelector(selectPendingUserId);
+  const pendingUserId = useAppSelector(selectPendingUserId);
   const dispatch = useAppDispatch();
-  const IsError = useSelector(selectAuthError);
+  // const IsError = useSelector(selectAuthError);
+  const IsError = useAppSelector(selectAuthError);
 
   useEffect(() => {
     if (pendingUserId !== "") {

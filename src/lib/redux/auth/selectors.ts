@@ -11,3 +11,7 @@ export const selectIsResend = (state: RootState) => state.auth.isResend;
 
 export const selectIsAuthenticated = (state: RootState) =>
   state.auth.isAuthenticated;
+
+export const selectUser = (state: RootState) => state.auth.user;
+
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;

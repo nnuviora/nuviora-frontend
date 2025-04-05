@@ -8,6 +8,7 @@ import {
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+import { ILoginCredentials } from "../types";
 
 const handleApiError = (err: unknown, defaultMessage: string) => {
   const error = err as AxiosError<{ message?: string }>;
@@ -44,7 +45,7 @@ export const registerUser = createAsyncThunk(
 
 export const logInUser = createAsyncThunk(
   "auth/login",
-  async (userData: Iregister, { rejectWithValue }) => {
+  async (userData: ILoginCredentials, { rejectWithValue }) => {
     try {
       const response = await loginUserApi(userData);
       return response.data;
