@@ -30,7 +30,7 @@ const initialState: IAuthState = {
   pendingUserId: "",
   isLoading: false,
   error: null,
-  isLoggedIn: false,
+  isLoggedIn: true, //false
   isResend: false,
   isAuthenticated: false,
 };
