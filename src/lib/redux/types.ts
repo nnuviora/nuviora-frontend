@@ -8,12 +8,17 @@ export interface IUser {
   address: string;
 }
 
+export interface IUserState {
+  user: IUser | null;
+  isEdit: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
 export interface IAuthState {
   user: IUser | null;
   accessToken: string | null;
   isLoading: boolean;
   error: string | null;
-  isLoggedIn: boolean;
   pendingUserId: string;
   isResend: boolean;
   isAuthenticated: boolean;

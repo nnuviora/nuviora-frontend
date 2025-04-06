@@ -3,22 +3,22 @@
 import { ComponentType, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "@/lib/redux/auth/selectors";
+import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 
 export default function withAuth<T extends object>(
   Component: ComponentType<T>,
 ) {
   return function ProtectedComponent(props: T) {
     const router = useRouter();
-    const IsLoggedIn = useSelector(selectIsLoggedIn);
+    const isAuthenticated = useSelector(selectIsAuthenticated);
 
     useEffect(() => {
-      if (!IsLoggedIn) {
+      if (!isAuthenticated) {
         router.replace("/");
       }
-    }, [IsLoggedIn, router]);
+    }, [isAuthenticated, router]);
 
-    if (!IsLoggedIn) return null;
+    if (!isAuthenticated) return null;
 
     return <Component {...props} />;
   };

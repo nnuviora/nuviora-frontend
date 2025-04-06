@@ -2,6 +2,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from "@lib/redux/toggleModal/slice";
 import authReducer from "@lib/redux/auth/slice";
+import userReducer from "@lib/redux/user/slice";
 import {
   persistStore,
   persistReducer,
@@ -27,6 +28,7 @@ const store = configureStore({
   reducer: {
     modal: modalReducer,
     auth: persistedAuthReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

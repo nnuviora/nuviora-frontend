@@ -19,14 +19,16 @@ import { AppDispatch } from "@lib/redux/store";
 import { openModal } from "@lib/redux/toggleModal/slice";
 import { useDeviceType } from "@/hooks";
 import Link from "next/link";
-import { selectIsLoggedIn } from "@/lib/redux/auth/selectors";
+import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
+import { useEffect } from "react";
+import { fetchProfile } from "@/lib/redux/user/operations";
 
 const useAppDispatch: () => AppDispatch = useDispatch;
 
 export function Header() {
   const deviceType = useDeviceType();
   const router = useRouter();
-  const IsLoggedIn = useSelector(selectIsLoggedIn);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const dispatch = useAppDispatch();
   const isSignIn = useSelector(selectIsSignIn);
   const isSignUp = useSelector(selectIsSignUp);
@@ -36,8 +38,16 @@ export function Header() {
     selectIsPasswordRecoveryPassword,
   );
 
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+
+    if (isAuthenticated || token) {
+      dispatch(fetchProfile());
+    }
+  }, [dispatch, isAuthenticated]);
+
   function handleUser() {
-    if (IsLoggedIn) {
+    if (isAuthenticated) {
       router.push("/profile");
     } else {
       dispatch(openModal("isSignIn"));
@@ -61,7 +71,7 @@ export function Header() {
         />
         <Button className="p-1 leading-[1.2]" onClick={handleUser}>
           <div className="flex items-center justify-between gap-3">
-            {IsLoggedIn ? <UserPlus size={36} /> : <UserMinus size={36} />}
+            {isAuthenticated ? <UserPlus size={36} /> : <UserMinus size={36} />}
           </div>
         </Button>
 

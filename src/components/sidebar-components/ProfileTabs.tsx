@@ -1,10 +1,19 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Lock, User } from "lucide-react";
+import { Lock, Pencil, User } from "lucide-react";
 import ProfileForm from "../accountForm/ProfileChangeForm";
 import PasswordChangeForm from "../accountForm/PasswordChangeForm";
+import { Button } from "../ui/button2";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { editProfile } from "@/lib/redux/user/slice";
+import { selectIsEdit } from "@/lib/redux/user/selectors";
 // import AddressChangeForm from "../accountForm/AddressChangeForm";
 
 export function ProfileTabs() {
+  const dispatch = useAppDispatch();
+  const isEdit = useAppSelector(selectIsEdit);
+  const handleEdit = () => {
+    dispatch(editProfile());
+  };
   return (
     <Tabs defaultValue="account" className="w-full">
       <TabsList className="min-h-10 w-auto flex-nowrap overflow-x-auto overflow-y-hidden">
@@ -25,7 +34,18 @@ export function ProfileTabs() {
       </TabsList>
 
       <TabsContent value="account">
-        <h2 className="subtitle3-text mb-6">Профіль</h2>
+        <div className="mb-6 flex items-center gap-8">
+          <h2 className="subtitle3-text">Профіль</h2>
+          {!isEdit && (
+            <Button
+              variant="ghost"
+              className="body-text gap-0.5 text-[var(--text-success)]"
+              onClick={handleEdit}
+            >
+              <Pencil color="#BDBCDB" /> Редагувати
+            </Button>
+          )}
+        </div>
         <ProfileForm />
       </TabsContent>
 

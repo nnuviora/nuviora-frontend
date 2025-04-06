@@ -7,7 +7,6 @@ import {
   resendValidationCode,
 } from "@lib/redux/auth/operations";
 import { IAuthResponse, IAuthState, IRegistrationResponse } from "../types";
-// import { act } from "react";
 
 const handlePending = (state: IAuthState) => {
   state.isLoading = true;
@@ -30,7 +29,6 @@ const initialState: IAuthState = {
   pendingUserId: "",
   isLoading: false,
   error: null,
-  isLoggedIn: true, //false
   isResend: false,
   isAuthenticated: false,
 };
@@ -68,7 +66,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.isAuthenticated = true;
-        state.isLoggedIn = true;
       },
     );
 
