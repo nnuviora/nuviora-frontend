@@ -9,13 +9,13 @@ import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 
 import { SignInSchema } from "@components/authForm/validationSchema";
 import { BarLoader } from "react-spinners";
-import { selectIsLoggedIn } from "@lib/redux/auth/selectors";
+import { selectIsLoading } from "@lib/redux/auth/selectors";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { logInUser } from "@/lib/redux/auth/operations";
 
 export function SignInForm() {
   const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const isLoading = useAppSelector(selectIsLoading);
 
   const {
     control,
@@ -93,8 +93,8 @@ export function SignInForm() {
         )}
       </div>
 
-      <Button className="font-semibold" disabled={isLoggedIn}>
-        {!isLoggedIn ? (
+      <Button className="font-semibold" disabled={isLoading}>
+        {!isLoading ? (
           "Увійти"
         ) : (
           <div className="flex flex-col items-center justify-center gap-1">

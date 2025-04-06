@@ -14,9 +14,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Textarea } from "../ui/textarea";
 import { ProfileSchema } from "./profileValidationSchema";
 import { IProfileFormData } from "@/types";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { selectIsEdit } from "@/lib/redux/user/selectors";
+import { readProfile } from "@/lib/redux/user/slice";
+import { selectUser } from "@/lib/redux/auth/selectors";
 
 export default function ProfileChangeForm() {
   const id = useId();
+  const isEdit = useAppSelector(selectIsEdit);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
   const { state } = useSidebar();
   const {
     control,
@@ -24,9 +31,9 @@ export default function ProfileChangeForm() {
     formState: { errors },
   } = useForm<IProfileFormData>({
     defaultValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
+      firstname: user?.firstName || "",
+      lastname: user?.lastName || "",
+      email: user?.email || "",
       about: "",
     },
     resolver: yupResolver(ProfileSchema),
@@ -34,6 +41,7 @@ export default function ProfileChangeForm() {
 
   const onSubmit: SubmitHandler<IProfileFormData> = (data) => {
     console.log(data);
+    dispatch(readProfile());
   };
 
   return (
@@ -55,20 +63,29 @@ export default function ProfileChangeForm() {
               Прізвище
             </Label>
             <div className={cn("xl2:w-auto relative w-full")}>
-              <Input
-                id={`${id}+${field.name}`}
-                {...field}
-                type="text"
-                placeholder="Шевченко"
-                className={cn(
-                  "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  state === "expanded"
-                    ? "md:w-[325px]"
-                    : "xl2:w-[325px] md:w-full",
-                )}
-              />
-              {errors.lastname && (
-                <InputErrorMassage message={errors.lastname.message || ""} />
+              {isEdit ? (
+                <>
+                  <Input
+                    id={`${id}+${field.name}`}
+                    {...field}
+                    type="text"
+                    defaultValue={user?.lastName}
+                    placeholder="Шевченко"
+                    className={cn(
+                      "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                      state === "expanded"
+                        ? "md:w-[325px]"
+                        : "xl2:w-[325px] md:w-full",
+                    )}
+                  />
+                  {errors.lastname && (
+                    <InputErrorMassage
+                      message={errors.lastname.message || ""}
+                    />
+                  )}
+                </>
+              ) : (
+                <p>{user?.lastName || "-"}</p>
               )}
             </div>
           </div>
@@ -88,20 +105,29 @@ export default function ProfileChangeForm() {
               Ім&apos;я
             </Label>
             <div className={cn("xl2:w-auto relative w-full")}>
-              <Input
-                id={`${id}+${field.name}`}
-                {...field}
-                type="text"
-                placeholder="Тарас"
-                className={cn(
-                  "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  state === "expanded"
-                    ? "md:w-[325px]"
-                    : "xl2:w-[325px] md:w-full",
-                )}
-              />
-              {errors.firstname && (
-                <InputErrorMassage message={errors.firstname.message || ""} />
+              {isEdit ? (
+                <>
+                  <Input
+                    id={`${id}+${field.name}`}
+                    {...field}
+                    type="text"
+                    value={user?.firstName}
+                    placeholder="Тарас"
+                    className={cn(
+                      "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                      state === "expanded"
+                        ? "md:w-[325px]"
+                        : "xl2:w-[325px] md:w-full",
+                    )}
+                  />
+                  {errors.firstname && (
+                    <InputErrorMassage
+                      message={errors.firstname.message || ""}
+                    />
+                  )}
+                </>
+              ) : (
+                <p>{user?.firstName || "-"}</p>
               )}
             </div>
           </div>
@@ -121,20 +147,27 @@ export default function ProfileChangeForm() {
               Email
             </Label>
             <div className={cn("xl2:w-auto relative w-full")}>
-              <Input
-                id={`${id}+${field.name}`}
-                {...field}
-                type="text"
-                placeholder="sto.hryven@example.com"
-                className={cn(
-                  "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  state === "expanded"
-                    ? "md:w-[325px]"
-                    : "xl2:w-[325px] md:w-full",
-                )}
-              />
-              {errors.email && (
-                <InputErrorMassage message={errors.email.message || ""} />
+              {isEdit ? (
+                <>
+                  <Input
+                    id={`${id}+${field.name}`}
+                    {...field}
+                    type="text"
+                    value={user?.email}
+                    placeholder="sto.hryven@example.com"
+                    className={cn(
+                      "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                      state === "expanded"
+                        ? "md:w-[325px]"
+                        : "xl2:w-[325px] md:w-full",
+                    )}
+                  />
+                  {errors.email && (
+                    <InputErrorMassage message={errors.email.message || ""} />
+                  )}
+                </>
+              ) : (
+                <p>{user?.email}</p>
               )}
             </div>
           </div>
@@ -153,30 +186,50 @@ export default function ProfileChangeForm() {
             <Label htmlFor={`${id}+${field.name}`} className="category-text">
               Про себе
             </Label>
-
-            <Textarea
-              id={`${id}+${field.name}`}
-              {...field}
-              className={cn(
-                "xl2:w-[325px] placeholder:text-[14px]",
-                state === "expanded" ? "md:w-[325px]" : "md:w-full",
-              )}
-              placeholder="Мені тринадцятий минало..."
-            />
+            {isEdit ? (
+              <Textarea
+                id={`${id}+${field.name}`}
+                {...field}
+                className={cn(
+                  "xl2:w-[325px] placeholder:text-[14px]",
+                  state === "expanded" ? "md:w-[325px]" : "md:w-full",
+                )}
+                placeholder="Мені тринадцятий минало..."
+              />
+            ) : (
+              <p>Про себе</p>
+            )}
           </div>
         )}
       />
 
-      <Button
-        type="submit"
-        size="default"
-        className={cn(
-          "xl2:w-[325px] xl2:self-end mt-4 w-full",
-          state === "expanded" ? "md:w-[325px]" : "md:w-full",
-        )}
-      >
-        Зберегти зміни
-      </Button>
+      {isEdit && (
+        <>
+          <Button
+            type="submit"
+            size="default"
+            className={cn(
+              "xl2:w-[325px] xl2:self-end mt-4 w-full",
+              state === "expanded" ? "md:w-[325px]" : "md:w-full",
+            )}
+          >
+            Зберегти зміни
+          </Button>
+
+          <Button
+            type="submit"
+            size="default"
+            variant="outline"
+            className={cn(
+              "xl2:w-[325px] xl2:self-end mt-4 w-full",
+              state === "expanded" ? "md:w-[325px]" : "md:w-full",
+            )}
+            onClick={() => dispatch(readProfile())}
+          >
+            Відмінити зміни
+          </Button>
+        </>
+      )}
     </form>
   );
 }
