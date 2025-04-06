@@ -10,6 +10,7 @@ import {
 } from "@/components/ui";
 import { ArrowLeft, PanelLeftOpen } from "lucide-react";
 import React from "react";
+import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 
 const ProfilePage = ({}) => {
   const router = useRouter();
@@ -18,12 +19,13 @@ const ProfilePage = ({}) => {
   };
 
   return (
-    <section className="flex min-h-full w-full flex-col md:bg-[var(--bg-disabled)] md:p-6">
+    <section className="xl2:h-[calc(100vh-129px-24px)] flex h-[calc(100vh-116px-91px)] min-h-full w-full flex-col md:bg-[var(--bg-disabled)] md:p-6">
       <p className="subtitle1-text mb-4 hidden md:block">
         Профіль / Зміна паролю
       </p>
-      <nav className="mb-6 flex justify-between md:hidden">
+      <nav className="mb-6 flex items-center justify-between md:hidden">
         <ArrowLeft color="#BDBCDB" onClick={handleBack} />
+        <Breadcrumbs className="ml-2 md:hidden" />
         <SidebarTrigger className="size-6 p-0">
           <PanelLeftOpen className="size-6" color="#BDBCDB" />
         </SidebarTrigger>

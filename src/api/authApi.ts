@@ -1,17 +1,11 @@
 import axios from "axios";
 import { API_BASE_URL } from "@/constans";
-import { ILoginCredentials } from "@/lib/redux/types";
+import { ILoginCredentials, IRegisterCredentials } from "@/lib/redux/types";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
 });
-
-export interface Iregister {
-  email: string;
-  hash_password: string;
-  repeat_password: string;
-}
 
 // api.interceptors.request.use(
 //   (config: AxiosRequestConfig) => {
@@ -49,7 +43,7 @@ export interface Iregister {
 //   },
 // );
 
-export const registerUserApi = async (userData: Iregister) =>
+export const registerUserApi = async (userData: IRegisterCredentials) =>
   await api.post("/auth/register", userData);
 
 export const validateRegistrationEmailApi = async (otp: string) =>

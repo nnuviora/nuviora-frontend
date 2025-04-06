@@ -1,5 +1,4 @@
 import {
-  Iregister,
   loginUserApi,
   logoutApi,
   registerUserApi,
@@ -8,7 +7,7 @@ import {
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
-import { ILoginCredentials } from "../types";
+import { ILoginCredentials, IRegisterCredentials } from "../types";
 
 const handleApiError = (err: unknown, defaultMessage: string) => {
   const error = err as AxiosError<{ message?: string }>;
@@ -33,7 +32,7 @@ const handleApiError = (err: unknown, defaultMessage: string) => {
 
 export const registerUser = createAsyncThunk(
   "auth/register",
-  async (userData: Iregister, { rejectWithValue }) => {
+  async (userData: IRegisterCredentials, { rejectWithValue }) => {
     try {
       const response = await registerUserApi(userData);
       return response.data;

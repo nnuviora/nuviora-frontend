@@ -11,6 +11,7 @@ import { cn } from "@lib/utils";
 import BottomNavigationBar from "@components/bottomNavigationBar/bottomNavigationBar";
 import Loader from "@/app/loader";
 import { Bounce, ToastContainer } from "react-toastify";
+import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 
 const poppinsFont = Poppins({
   variable: "--font-poppins",
@@ -49,8 +50,9 @@ export default function RootLayout({
         <Providers>
           <Header />
 
-          <div className="flex w-full flex-1 overflow-hidden">
-            <main className="xl2:max-w-[1440px] xl2:px-18 xl2:py-10 mr-auto ml-auto flex-1 overflow-y-auto px-5 py-5 md:px-8 md:py-6">
+          <div className="xl2:max-w-[1440px] xl2:px-18 xl2:py-4 mr-auto ml-auto flex w-full flex-1 flex-col overflow-hidden px-5 py-5 md:px-8 md:py-4">
+            <Breadcrumbs className="hidden md:mb-4 md:block" />
+            <main className="overflow-y-auto">
               <Suspense fallback={<Loader />}>{children}</Suspense>
             </main>
           </div>

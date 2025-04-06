@@ -59,7 +59,7 @@ const AppSidebar = () => {
       variant="floating"
       collapsible={isMobile ? "offcanvas" : "icon"}
       className={cn(
-        "xl2:h-[calc(100vh-116px-40px)] xl2:w-(--sidebar-width) h-[calc(100vh-88px-99px)] w-full group-data-[collapsible=icon]:items-center group-data-[variant=floating]:rounded-2xl md:w-[280px] lg:h-[calc(100vh-88px-24px)]",
+        "xl2:h-[calc(100vh-129px-24px)] xl2:w-(--sidebar-width) h-[calc(100vh-116px-91px)] w-full group-data-[collapsible=icon]:items-center group-data-[variant=floating]:rounded-2xl md:w-[280px] lg:h-[calc(100vh-116px-24px)]",
       )}
     >
       <SidebarHeader className="mb-6">
