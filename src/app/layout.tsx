@@ -32,6 +32,9 @@ const robotoFont = Roboto({
 export const metadata: Metadata = {
   title: "Nuviora",
   description: "Nuviora is a online shop",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

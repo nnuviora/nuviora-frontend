@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button, SearchInput } from "@components/ui";
 import { ShoppingCart, UserPlus, UserMinus } from "lucide-react";
@@ -19,7 +20,7 @@ import { AppDispatch } from "@lib/redux/store";
 import { openModal } from "@lib/redux/toggleModal/slice";
 import { useDeviceType } from "@/hooks";
 import Link from "next/link";
-import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
+import { selectIsAuthenticated, selectToken } from "@/lib/redux/auth/selectors";
 import { useEffect } from "react";
 import { fetchProfile } from "@/lib/redux/user/operations";
 
@@ -38,13 +39,12 @@ export function Header() {
     selectIsPasswordRecoveryPassword,
   );
 
+  const token = useSelector(selectToken);
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-
     if (isAuthenticated || token) {
       dispatch(fetchProfile());
     }
-  }, [dispatch, isAuthenticated]);
+  }, [dispatch, isAuthenticated, token]);
 
   function handleUser() {
     if (isAuthenticated) {
@@ -62,8 +62,16 @@ export function Header() {
           className="h2-text leading-[1.2] text-[var(--text-white)]"
           href={"/"}
         >
-          Nuviora
+          <Image
+            src="/Logo_Medium.svg"
+            alt="Nuviora Logo"
+            width={70}
+            height={70}
+          />
         </Link>
+        <Button className="p-1 leading-[1.2]" onClick={handleUser}>
+          Каталог
+        </Button>
         <SearchInput
           name="headerSearch"
           placeholder="Search..."
