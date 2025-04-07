@@ -28,10 +28,6 @@ export const fetchProfile = createAsyncThunk<
     const response = await fetchProfileApi();
     return response.data;
   } catch (err) {
-    // const err = error as AxiosError<IErrorResponse>;
-    //
-    // const message =
-    //   err.response?.data?.detail?.[0]?.msg || "Не вдалося отримати профіль";
     return rejectWithValue(handleApiError(err, "Не вдалося отримати профіль"));
   }
 });

@@ -11,13 +11,9 @@ import {
 import { ArrowLeft, PanelLeftOpen } from "lucide-react";
 import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
-import { useAppSelector } from "@/lib/redux/hooks";
-import { selectUser } from "@/lib/redux/auth/selectors";
 
 const ProfilePage = ({}) => {
   const router = useRouter();
-  const user = useAppSelector(selectUser);
-  console.log("user :>> ", user);
   const handleBack = () => {
     router.back();
   };
