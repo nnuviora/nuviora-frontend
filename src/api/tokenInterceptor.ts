@@ -5,10 +5,7 @@ import Router from "next/router";
 
 export const setupTokenInterceptor = (getState: () => RootState) => {
   api.interceptors.request.use((config) => {
-    // const token = localStorage.getItem("accessToken");
-
     const token = getState().auth.accessToken;
-    console.log(token);
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -19,13 +16,12 @@ export const setupTokenInterceptor = (getState: () => RootState) => {
     (response) => response,
     async (error) => {
       const originalRequest = error.config;
-      console.log(error);
-      console.log(error.response?.status);
-      console.log(originalRequest);
+
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
           const response = await store.dispatch(refreshAccessToken()).unwrap();
+          console.log(response);
           localStorage.setItem("accessToken", response.access_token);
           originalRequest.headers.Authorization = `Bearer ${response.access_token}`;
           return api(originalRequest);
@@ -35,6 +31,13 @@ export const setupTokenInterceptor = (getState: () => RootState) => {
           Router.push("/login");
           return Promise.reject(err);
         }
+      }
+
+      if (error.response?.status === 410) {
+        console.log("Токен невозможно обновить");
+        store.dispatch(logOut());
+        Router.push("/login");
+        return Promise.reject(error);
       }
 
       return Promise.reject(error);

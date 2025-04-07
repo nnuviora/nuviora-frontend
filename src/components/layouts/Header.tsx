@@ -20,7 +20,7 @@ import { AppDispatch } from "@lib/redux/store";
 import { openModal } from "@lib/redux/toggleModal/slice";
 import { useDeviceType } from "@/hooks";
 import Link from "next/link";
-import { selectIsAuthenticated, selectToken } from "@/lib/redux/auth/selectors";
+import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 import { useEffect } from "react";
 import { fetchProfile } from "@/lib/redux/user/operations";
 
@@ -38,13 +38,12 @@ export function Header() {
   const isPasswordRecoveryPassword = useSelector(
     selectIsPasswordRecoveryPassword,
   );
-
-  const token = useSelector(selectToken);
+  // const token = useSelector(selectToken);
   useEffect(() => {
-    if (isAuthenticated || token) {
+    if (isAuthenticated) {
       dispatch(fetchProfile());
     }
-  }, [dispatch, isAuthenticated, token]);
+  }, [dispatch, isAuthenticated]);
 
   function handleUser() {
     if (isAuthenticated) {
