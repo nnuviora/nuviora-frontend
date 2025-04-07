@@ -72,6 +72,8 @@ export default function ProfileChangeForm() {
                     placeholder="Шевченко"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                      errors.lastname &&
+                        "border-[var(--text-error)] bg-[var(--bg-error)]",
                       state === "expanded"
                         ? "md:w-[325px]"
                         : "xl2:w-[325px] md:w-full",
@@ -114,6 +116,8 @@ export default function ProfileChangeForm() {
                     placeholder="Тарас"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                      errors.firstname &&
+                        "border-[var(--text-error)] bg-[var(--bg-error)]",
                       state === "expanded"
                         ? "md:w-[325px]"
                         : "xl2:w-[325px] md:w-full",
@@ -156,6 +160,8 @@ export default function ProfileChangeForm() {
                     placeholder="sto.hryven@example.com"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                      errors.email &&
+                        "border-[var(--text-error)] bg-[var(--bg-error)]",
                       state === "expanded"
                         ? "md:w-[325px]"
                         : "xl2:w-[325px] md:w-full",
