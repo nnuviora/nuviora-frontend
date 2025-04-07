@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@components/ui";
+
 import Footer from "@components/layouts/Footer";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -27,10 +27,6 @@ export default function Home() {
           <h2 className="h1-text">
             {isAuthenticate ? "Вход выполнен " : "Вход не выполнен "}
           </h2>
-          <div className="mb-4 flex items-center gap-16">
-            <Button variant="outline">Outline</Button>
-            <Button disabled>Disabled</Button>
-          </div>
 
           <Footer />
         </section>

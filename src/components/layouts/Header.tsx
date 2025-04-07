@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button, SearchInput } from "@components/ui";
 import { ShoppingCart, UserPlus, UserMinus } from "lucide-react";
@@ -41,7 +42,6 @@ export function Header() {
   const token = useSelector(selectToken);
   useEffect(() => {
     if (isAuthenticated || token) {
-      console.log("Authenticated");
       dispatch(fetchProfile());
     }
   }, [dispatch, isAuthenticated, token]);
@@ -62,8 +62,16 @@ export function Header() {
           className="h2-text leading-[1.2] text-[var(--text-white)]"
           href={"/"}
         >
-          Nuviora
+          <Image
+            src="/Logo_Medium.svg"
+            alt="Nuviora Logo"
+            width={70}
+            height={70}
+          />
         </Link>
+        <Button className="p-1 leading-[1.2]" onClick={handleUser}>
+          Каталог
+        </Button>
         <SearchInput
           name="headerSearch"
           placeholder="Search..."
