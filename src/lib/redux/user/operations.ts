@@ -1,27 +1,37 @@
 import { fetchProfileApi } from "@/api/profileApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
-import { IErrorResponse, IUser } from "../types";
-import { RootState } from "../store";
+import { IUser } from "../types";
+
+const handleApiError = (err: unknown, defaultMessage: string) => {
+  const error = err as AxiosError<{ message?: string }>;
+  if (!error.response) return "Network error. Please try again.";
+  const { status, data } = error.response;
+  const messages: Record<number, string> = {
+    400: "Bad request",
+    401: "Unauthorized. Please log in again.",
+    405: "Method Not Allowed",
+    422: "Validation error",
+    429: "Too Many Requests. Please wait before retrying.",
+  };
+  return messages[status] || data?.message || defaultMessage;
+};
 
 export const fetchProfile = createAsyncThunk<
   IUser,
   void,
   {
     rejectValue: string;
-    state: RootState;
   }
->("user/profile", async (_, { rejectWithValue, getState }) => {
+>("user/profile", async (_, { rejectWithValue }) => {
   try {
-    const state = getState();
-    const token = state.auth.accessToken;
-    if (!token) return;
-    const response = await fetchProfileApi(token);
+    const response = await fetchProfileApi();
     return response.data;
-  } catch (error) {
-    const err = error as AxiosError<IErrorResponse>;
-    const message =
-      err.response?.data?.detail?.[0]?.msg || "Не вдалося отримати профіль";
-    return rejectWithValue(message);
+  } catch (err) {
+    // const err = error as AxiosError<IErrorResponse>;
+    //
+    // const message =
+    //   err.response?.data?.detail?.[0]?.msg || "Не вдалося отримати профіль";
+    return rejectWithValue(handleApiError(err, "Не вдалося отримати профіль"));
   }
 });

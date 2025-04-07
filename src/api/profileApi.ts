@@ -1,15 +1,5 @@
-import axios from "axios";
-import { API_BASE_URL } from "@/constans";
+import { api } from "@/api/authApi";
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
-});
-
-export const fetchProfileApi = async (token: string) => {
-  return await api.get(`/profile/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const fetchProfileApi = async () => {
+  return await api.get(`/profile/me`);
 };

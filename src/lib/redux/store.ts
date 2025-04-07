@@ -14,12 +14,13 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { setupTokenInterceptor } from "@/api/tokenInterceptor";
 
 const persistedAuthReducer = persistReducer(
   {
     key: "auth",
     storage,
-    whitelist: ["accessToken"],
+    whitelist: ["accessToken", "isAuthenticated"],
   },
   authReducer,
 );
@@ -37,6 +38,7 @@ const store = configureStore({
       },
     }),
 });
+setupTokenInterceptor(store.getState);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
