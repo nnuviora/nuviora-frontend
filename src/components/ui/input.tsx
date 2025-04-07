@@ -41,7 +41,7 @@ const Input = forwardRef(function Input(
         name={name}
         placeholder={placeholder}
         className={cn(
-          "body-text w-full rounded-[8px] border border-[var(--stroke-field)] bg-[var(--white)] px-2 py-2 placeholder-[var(--text-grey)] transition outline-none focus-within:ring-2 focus-within:ring-[var(--button-primary-default)] hover:border-[var(--button-secondary-hover)]",
+          "body-text w-full rounded-[8px] border border-[var(--stroke-field)] bg-[var(--white)] px-2 py-2 placeholder-[var(--text-grey)] transition outline-none focus-within:ring-[var(--button-primary-default)] hover:border-[var(--button-secondary-hover)] focus:border-2 focus:border-[var(--button-primary-default)]",
           icon && "pl-8",
           className,
         )}
