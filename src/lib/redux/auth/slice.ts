@@ -5,6 +5,7 @@ import {
   registerUser,
   validateRegistrationEmail,
   resendValidationCode,
+  refreshAccessToken,
 } from "@lib/redux/auth/operations";
 import { IAuthResponse, IAuthState, IRegistrationResponse } from "../types";
 
@@ -86,6 +87,16 @@ const authSlice = createSlice({
       state.isResend = true;
     });
 
+    builder.addCase(
+      refreshAccessToken.fulfilled,
+      (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
+        state.isLoading = false;
+        state.error = null;
+        state.accessToken = action.payload.access_token;
+        state.isAuthenticated = true;
+      },
+    );
+
     builder
       .addCase(logOut.fulfilled, () => {
         return initialState;
@@ -97,6 +108,7 @@ const authSlice = createSlice({
           logInUser.pending,
           validateRegistrationEmail.pending,
           resendValidationCode.pending,
+          refreshAccessToken.pending,
         ),
         handlePending,
       )
@@ -107,6 +119,7 @@ const authSlice = createSlice({
           logOut.rejected,
           validateRegistrationEmail.rejected,
           resendValidationCode.rejected,
+          refreshAccessToken.rejected,
         ),
         handleRejected,
       );

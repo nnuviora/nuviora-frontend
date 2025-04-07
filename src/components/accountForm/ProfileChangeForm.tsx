@@ -15,9 +15,8 @@ import { Textarea } from "../ui/textarea";
 import { ProfileSchema } from "./profileValidationSchema";
 import { IProfileFormData } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { selectIsEdit } from "@/lib/redux/user/selectors";
+import { selectIsEdit, selectUser } from "@/lib/redux/user/selectors";
 import { readProfile } from "@/lib/redux/user/slice";
-import { selectUser } from "@/lib/redux/auth/selectors";
 
 export default function ProfileChangeForm() {
   const id = useId();

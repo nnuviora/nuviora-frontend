@@ -1,9 +1,11 @@
 import {
+  registerUserApi,
   loginUserApi,
   logoutApi,
-  registerUserApi,
+  refreshAccessTokenApi,
   resendValidationCodeApi,
   validateRegistrationEmailApi,
+  api,
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
@@ -11,14 +13,9 @@ import { ILoginCredentials, IRegisterCredentials } from "../types";
 
 const handleApiError = (err: unknown, defaultMessage: string) => {
   const error = err as AxiosError<{ message?: string }>;
-
-  if (!error.response) {
-    return "Network error. Please try again.";
-  }
-
+  if (!error.response) return "Network error. Please try again.";
   const { status, data } = error.response;
-
-  const errorMessages: Record<number, string> = {
+  const messages: Record<number, string> = {
     400: "Bad request",
     401: "Unauthorized. Please log in again.",
     405: "Method Not Allowed",
@@ -26,8 +23,7 @@ const handleApiError = (err: unknown, defaultMessage: string) => {
     422: "Validation error",
     429: "Too Many Requests. Please wait before retrying.",
   };
-
-  return errorMessages[status] || data?.message || defaultMessage;
+  return messages[status] || data?.message || defaultMessage;
 };
 
 export const registerUser = createAsyncThunk(
@@ -59,7 +55,6 @@ export const validateRegistrationEmail = createAsyncThunk(
   async (otpCode: string, { rejectWithValue }) => {
     try {
       const response = await validateRegistrationEmailApi(otpCode);
-      console.log(response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(handleApiError(err, "Validation failed"));
@@ -79,11 +74,25 @@ export const resendValidationCode = createAsyncThunk(
   },
 );
 
+export const refreshAccessToken = createAsyncThunk(
+  "auth/refresh",
+
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await refreshAccessTokenApi();
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(handleApiError(err, "Token refresh failed"));
+    }
+  },
+);
+
 export const logOut = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
       await logoutApi();
+      delete api.defaults.headers.common["Authorization"];
     } catch (err) {
       return rejectWithValue(handleApiError(err, "Logout failed"));
     }
