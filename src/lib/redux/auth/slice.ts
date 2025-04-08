@@ -6,6 +6,10 @@ import {
   validateRegistrationEmail,
   resendValidationCode,
   refreshAccessToken,
+  recoveryPassword,
+  // verifyEmail,
+  changePassword,
+  verifyEmail,
 } from "@lib/redux/auth/operations";
 import { IAuthResponse, IAuthState, IRegistrationResponse } from "../types";
 
@@ -24,14 +28,25 @@ const handleRejected = (state: IAuthState, action: PayloadAction<unknown>) => {
     typeof action.payload === "string" ? action.payload : "Unknown error";
 };
 
+const setAuthSuccess = (
+  state: IAuthState,
+  action: PayloadAction<IAuthResponse>,
+) => {
+  state.accessToken = action.payload.access_token;
+  state.isLoading = false;
+  state.error = null;
+  state.isAuthenticated = true;
+};
+
 const initialState: IAuthState = {
-  user: null,
   accessToken: "",
   pendingUserId: "",
   isLoading: false,
   error: null,
   isResend: false,
   isAuthenticated: false,
+  isVerify: false,
+  id: "",
 };
 
 const authSlice = createSlice({
@@ -59,27 +74,9 @@ const authSlice = createSlice({
       },
     );
 
-    builder.addCase(
-      logInUser.fulfilled,
-      (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
-        state.user = action.payload.user;
-        state.accessToken = action.payload.access_token;
-        state.isLoading = false;
-        state.error = null;
-        state.isAuthenticated = true;
-      },
-    );
+    builder.addCase(logInUser.fulfilled, setAuthSuccess);
 
-    builder.addCase(
-      validateRegistrationEmail.fulfilled,
-      (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
-        state.isLoading = false;
-        state.error = null;
-        state.accessToken = action.payload.access_token;
-        state.user = action.payload.user;
-        state.isAuthenticated = true;
-      },
-    );
+    builder.addCase(validateRegistrationEmail.fulfilled, setAuthSuccess);
 
     builder.addCase(resendValidationCode.fulfilled, (state: IAuthState) => {
       state.isLoading = false;
@@ -87,15 +84,24 @@ const authSlice = createSlice({
       state.isResend = true;
     });
 
+    builder.addCase(refreshAccessToken.fulfilled, setAuthSuccess);
+
     builder.addCase(
-      refreshAccessToken.fulfilled,
-      (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
+      recoveryPassword.fulfilled,
+      (state: IAuthState, action: PayloadAction<IRegistrationResponse>) => {
         state.isLoading = false;
         state.error = null;
-        state.accessToken = action.payload.access_token;
-        state.isAuthenticated = true;
+        state.id = action.payload.id;
       },
     );
+
+    builder.addCase(verifyEmail.fulfilled, (state: IAuthState) => {
+      state.isLoading = false;
+      state.error = null;
+      state.isVerify = true;
+    });
+
+    builder.addCase(changePassword.fulfilled, setAuthSuccess);
 
     builder
       .addCase(logOut.fulfilled, () => {
@@ -109,6 +115,8 @@ const authSlice = createSlice({
           validateRegistrationEmail.pending,
           resendValidationCode.pending,
           refreshAccessToken.pending,
+          changePassword.pending,
+          recoveryPassword.pending,
         ),
         handlePending,
       )
@@ -120,6 +128,8 @@ const authSlice = createSlice({
           validateRegistrationEmail.rejected,
           resendValidationCode.rejected,
           refreshAccessToken.rejected,
+          changePassword.rejected,
+          recoveryPassword.rejected,
         ),
         handleRejected,
       );

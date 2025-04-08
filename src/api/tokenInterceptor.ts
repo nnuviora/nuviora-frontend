@@ -21,12 +21,11 @@ export const setupTokenInterceptor = (getState: () => RootState) => {
         originalRequest._retry = true;
         try {
           const response = await store.dispatch(refreshAccessToken()).unwrap();
-          console.log(response);
+
           localStorage.setItem("accessToken", response.access_token);
           originalRequest.headers.Authorization = `Bearer ${response.access_token}`;
           return api(originalRequest);
         } catch (err) {
-          console.log(err);
           store.dispatch(logOut());
           Router.push("/login");
           return Promise.reject(err);
@@ -34,7 +33,6 @@ export const setupTokenInterceptor = (getState: () => RootState) => {
       }
 
       if (error.response?.status === 410) {
-        console.log("Токен невозможно обновить");
         store.dispatch(logOut());
         Router.push("/login");
         return Promise.reject(error);

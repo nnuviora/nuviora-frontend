@@ -1,23 +1,16 @@
 import { Mail } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-import { object, ObjectSchema, string } from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { cn } from "@lib/utils";
 import { IPasswordRecoveryEmail } from "@/types";
-import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
-import { AppDispatch } from "@lib/redux/store";
-import { useDispatch } from "react-redux";
-
-const useAppDispatch: () => AppDispatch = useDispatch;
-
-const passwordRecoverySchema: ObjectSchema<IPasswordRecoveryEmail> =
-  object().shape({
-    email: string().email("Invalid email").required("Email is required"),
-  });
+import { recoveryPassword } from "@/lib/redux/auth/operations";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { passwordRecoveryEmailSchema } from "../validationSchema";
 
 export const PasswordRecoveryFormEmail = () => {
   const dispatch = useAppDispatch();
+
   const {
     control,
     handleSubmit,
@@ -27,14 +20,11 @@ export const PasswordRecoveryFormEmail = () => {
     defaultValues: {
       email: "",
     },
-    resolver: yupResolver(passwordRecoverySchema),
-    mode: "onSubmit",
+    resolver: yupResolver(passwordRecoveryEmailSchema),
   });
 
   const onSubmit: SubmitHandler<IPasswordRecoveryEmail> = (data) => {
-    alert(`Email: ${data.email}`);
-    dispatch(closeModal("isPasswordRecoveryEmail"));
-    dispatch(openModal("isPasswordRecoveryPassword"));
+    dispatch(recoveryPassword(data));
     reset();
   };
 
@@ -59,7 +49,11 @@ export const PasswordRecoveryFormEmail = () => {
               <Mail className="stroke-[var(--text-grey)]" size="16" />
               <Input
                 {...field}
-                className="border-none p-0 placeholder-[var(--text-grey)] focus:ring-0"
+                className={cn(
+                  "border-none p-0 placeholder-[var(--text-grey)] focus:ring-0",
+                  errors.email &&
+                    "border-[var(--text-error)] bg-[var(--bg-error)]",
+                )}
                 type="email"
                 placeholder="Email"
               />

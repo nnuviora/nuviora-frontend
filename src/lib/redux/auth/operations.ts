@@ -6,10 +6,19 @@ import {
   resendValidationCodeApi,
   validateRegistrationEmailApi,
   api,
+  requestRecoveryPasswordApi,
+  verifyEmailApi,
+  changePasswordApi,
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
-import { ILoginCredentials, IRegisterCredentials } from "../types";
+import {
+  IAuthResponse,
+  ILoginCredentials,
+  IRegisterCredentials,
+  IRegistrationResponse,
+} from "../types";
+import { IPasswordRecoveryCredentials } from "@/types";
 
 const handleApiError = (err: unknown, defaultMessage: string) => {
   const error = err as AxiosError<{ message?: string }>;
@@ -98,3 +107,45 @@ export const logOut = createAsyncThunk(
     }
   },
 );
+
+export const recoveryPassword = createAsyncThunk<
+  IRegistrationResponse,
+  { email: string },
+  { rejectValue: string }
+>("auth/recoveryPassword", async ({ email }, { rejectWithValue }) => {
+  try {
+    const response = await requestRecoveryPasswordApi({ email });
+    return response.data;
+  } catch (err) {
+    return rejectWithValue(
+      handleApiError(err, "Відновлення паролю не вдалося"),
+    );
+  }
+});
+
+export const verifyEmail = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>("auth/verifyEmail", async (otpCode, { rejectWithValue }) => {
+  try {
+    const response = await verifyEmailApi(otpCode);
+
+    return response.data;
+  } catch (err) {
+    return rejectWithValue(handleApiError(err, "Validation failed"));
+  }
+});
+
+export const changePassword = createAsyncThunk<
+  IAuthResponse,
+  IPasswordRecoveryCredentials,
+  { rejectValue: string }
+>("auth/changePassword", async (data, { rejectWithValue }) => {
+  try {
+    const response = await changePasswordApi(data);
+    return response.data;
+  } catch (err) {
+    return rejectWithValue(handleApiError(err, "Validation failed"));
+  }
+});

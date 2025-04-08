@@ -1,6 +1,7 @@
 import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { IUser, IUserState } from "../types";
 import { fetchProfile } from "./operations";
+import { logOut } from "../auth/operations";
 
 const handlePending = (state: IUserState) => {
   state.isLoading = true;
@@ -32,15 +33,20 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(
+      fetchProfile.fulfilled,
+      (state: IUserState, action: PayloadAction<IUser>) => {
+        state.user = action.payload;
+      },
+    );
+
     builder
-      .addCase(
-        fetchProfile.fulfilled,
-        (state: IUserState, action: PayloadAction<IUser>) => {
-          state.user = action.payload;
-        },
-      )
+      .addCase(logOut.fulfilled, () => {
+        return initialState;
+      })
 
       .addMatcher(isAnyOf(fetchProfile.pending), handlePending)
+
       .addMatcher(isAnyOf(fetchProfile.rejected), handleRejected);
   },
 });

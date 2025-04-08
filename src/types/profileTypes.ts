@@ -20,3 +20,14 @@ export interface IAddressFormData {
   houseNumber: string;
   apartmentNumber?: string;
 }
+
+export interface IModalState {
+  isSignIn: boolean;
+  isLogOut: boolean;
+  isSignUp: boolean;
+  isUserProfile: boolean;
+  isPasswordRecoveryEmail: boolean;
+  isPasswordRecoveryPassword: boolean;
+  isValidateOTP: boolean;
+  isVerifyOTP: boolean;
+}
