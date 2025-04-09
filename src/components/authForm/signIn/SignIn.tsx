@@ -13,10 +13,32 @@ import { SignInForm } from "@components/authForm/signIn/SignInForm";
 import FormFooter from "@components/authForm/formFooter";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import {
+  selectAuthError,
+  selectIsAuthenticated,
+} from "@/lib/redux/auth/selectors";
+import { notify } from "@/components/notifi/notifi";
+import { useEffect } from "react";
+import { clearError } from "@/lib/redux/auth/slice";
 
 export const SignIn = () => {
   const isSignIn = useAppSelector(selectIsSignIn);
   const dispatch = useAppDispatch();
+  const isAutentificate = useAppSelector(selectIsAuthenticated);
+  const IsError = useAppSelector(selectAuthError);
+
+  useEffect(() => {
+    if (isAutentificate) {
+      notify({ message: "Автентифікація успішна!", type: "success" });
+      dispatch(closeModal("isSignIn"));
+    }
+
+    if (IsError) {
+      notify({ message: IsError, type: "error" });
+      dispatch(clearError());
+    }
+  }, [isAutentificate, IsError, dispatch]);
+
   return (
     <Dialog
       open={isSignIn}

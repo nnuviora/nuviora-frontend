@@ -15,13 +15,14 @@ export interface IUserState {
   error: string | null;
 }
 export interface IAuthState {
-  user: IUser | null;
   accessToken: string | null;
   isLoading: boolean;
   error: string | null;
   pendingUserId: string;
   isResend: boolean;
   isAuthenticated: boolean;
+  id: string;
+  isVerify: boolean;
 }
 
 export interface IRegisterCredentials {

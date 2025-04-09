@@ -17,12 +17,12 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { logOut } from "@/lib/redux/auth/operations";
 
 export const LogOut = () => {
-  const logOutState = useAppSelector(selectIsLogOut);
+  const islogOut = useAppSelector(selectIsLogOut);
   const dispatch = useAppDispatch();
 
   return (
     <AlertDialog
-      open={logOutState}
+      open={islogOut}
       onOpenChange={() => dispatch(closeModal("isLogOut"))}
     >
       <AlertDialogContent>

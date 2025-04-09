@@ -14,7 +14,12 @@ export interface IPasswordRecoveryEmail {
   email: string;
 }
 
-export interface IPasswordRecoveryPassword {
+export interface IPasswordRecovery {
   password: string;
-  passwordConfirm: string;
+  repeatPassword: string;
+}
+export interface IPasswordRecoveryCredentials {
+  id: string;
+  hash_password: string;
+  repeat_password: string;
 }

@@ -1,14 +1,5 @@
+import { IModalState } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface IModalState {
-  isSignIn: boolean;
-  isLogOut: boolean;
-  isSignUp: boolean;
-  isUserProfile: boolean;
-  isPasswordRecoveryEmail: boolean;
-  isPasswordRecoveryPassword: boolean;
-  isValidateOTP: boolean;
-}
 
 const initialState: IModalState = {
   isSignIn: false,
@@ -18,6 +9,7 @@ const initialState: IModalState = {
   isPasswordRecoveryEmail: false,
   isPasswordRecoveryPassword: false,
   isValidateOTP: false,
+  isVerifyOTP: false,
 };
 
 const modalSlice = createSlice({
