@@ -21,6 +21,7 @@ import { IPasswordRecoveryCredentials } from "@/types";
 
 const handleApiError = (err: unknown, defaultMessage: string) => {
   const error = err as AxiosError<{ message?: string }>;
+
   if (!error.response) return "Network error. Please try again.";
   const { status, data } = error.response;
   const messages: Record<number, string> = {
