@@ -23,16 +23,16 @@ const handleApiError = (err: unknown, defaultMessage: string) => {
   const error = err as AxiosError<{ message?: string }>;
 
   if (!error.response) return "Network error. Please try again.";
-  const { status, data } = error.response;
+  const { status } = error.response;
   const messages: Record<number, string> = {
-    400: "Bad request",
+    400: "Невірний пароль або Email",
     401: "Unauthorized. Please log in again.",
     405: "Method Not Allowed",
-    409: "Email уже зарегистрирован",
+    409: "Email вже зареестрований",
     422: "Validation error",
     429: "Too Many Requests. Please wait before retrying.",
   };
-  return messages[status] || data?.message || defaultMessage;
+  return messages[status] || defaultMessage;
 };
 
 export const registerUser = createAsyncThunk(
@@ -42,7 +42,7 @@ export const registerUser = createAsyncThunk(
       const response = await registerUserApi(userData);
       return response.data;
     } catch (err) {
-      return rejectWithValue(handleApiError(err, "Registration failed"));
+      return rejectWithValue(handleApiError(err, "Помилка реєстрації"));
     }
   },
 );
@@ -54,7 +54,7 @@ export const logInUser = createAsyncThunk(
       const response = await loginUserApi(userData);
       return response.data;
     } catch (err) {
-      return rejectWithValue(handleApiError(err, "Registration failed"));
+      return rejectWithValue(handleApiError(err, "Помилка входу"));
     }
   },
 );
@@ -103,7 +103,7 @@ export const logOut = createAsyncThunk(
       await logoutApi();
       delete api.defaults.headers.common["Authorization"];
     } catch (err) {
-      return rejectWithValue(handleApiError(err, "Logout failed"));
+      return rejectWithValue(handleApiError(err, "Помилка виходу"));
     }
   },
 );
