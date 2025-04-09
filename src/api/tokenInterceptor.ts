@@ -17,7 +17,7 @@ export const setupTokenInterceptor = (getState: () => RootState) => {
     async (error) => {
       const originalRequest = error.config;
       const isAuthenticated = getState().auth.isAuthenticated;
-      if (!isAuthenticated) return;
+      if (!isAuthenticated) return Promise.reject(error);
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
