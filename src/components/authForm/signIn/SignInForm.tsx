@@ -31,7 +31,6 @@ export function SignInForm() {
   });
 
   const onSubmit: SubmitHandler<ISingInForm> = (data) => {
-    dispatch(closeModal("isSignIn"));
     dispatch(logInUser(data));
     reset();
   };

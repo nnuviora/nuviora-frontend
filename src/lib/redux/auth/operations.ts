@@ -13,7 +13,6 @@ import {
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import {
-  IAuthResponse,
   ILoginCredentials,
   IRegisterCredentials,
   IRegistrationResponse,
@@ -22,6 +21,7 @@ import { IPasswordRecoveryCredentials } from "@/types";
 
 const handleApiError = (err: unknown, defaultMessage: string) => {
   const error = err as AxiosError<{ message?: string }>;
+
   if (!error.response) return "Network error. Please try again.";
   const { status, data } = error.response;
   const messages: Record<number, string> = {
@@ -138,13 +138,12 @@ export const verifyEmail = createAsyncThunk<
 });
 
 export const changePassword = createAsyncThunk<
-  IAuthResponse,
+  void,
   IPasswordRecoveryCredentials,
   { rejectValue: string }
 >("auth/changePassword", async (data, { rejectWithValue }) => {
   try {
-    const response = await changePasswordApi(data);
-    return response.data;
+    await changePasswordApi(data);
   } catch (err) {
     return rejectWithValue(handleApiError(err, "Validation failed"));
   }
