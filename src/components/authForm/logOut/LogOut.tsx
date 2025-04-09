@@ -41,7 +41,6 @@ export const LogOut = () => {
           <AlertDialogAction
             onClick={() => {
               dispatch(logOut());
-              dispatch(closeModal("isLogOut"));
             }}
           >
             Continue

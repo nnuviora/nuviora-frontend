@@ -7,7 +7,6 @@ import {
   resendValidationCode,
   refreshAccessToken,
   recoveryPassword,
-  // verifyEmail,
   changePassword,
   verifyEmail,
 } from "@lib/redux/auth/operations";
