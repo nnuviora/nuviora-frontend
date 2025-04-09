@@ -23,6 +23,7 @@ export interface IAuthState {
   isAuthenticated: boolean;
   id: string;
   isVerify: boolean;
+  isPasswordChange: boolean;
 }
 
 export interface IRegisterCredentials {

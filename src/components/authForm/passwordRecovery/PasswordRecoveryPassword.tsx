@@ -13,7 +13,10 @@ import { PasswordRecoveryFormPassword } from "@components/authForm/passwordRecov
 import { GoBack } from "@components/authForm/passwordRecovery/goBack";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { selectAuthError, selectToken } from "@/lib/redux/auth/selectors";
+import {
+  selectAuthError,
+  selectIsPasswordChange,
+} from "@/lib/redux/auth/selectors";
 import { notify } from "@/components/notifi/notifi";
 import { clearError } from "@/lib/redux/auth/slice";
 import { useEffect } from "react";
@@ -23,11 +26,11 @@ export const PasswordRecoveryPassword = () => {
     selectIsPasswordRecoveryPassword,
   );
   const dispatch = useAppDispatch();
-  const token = useAppSelector(selectToken);
+  const isPasswordChange = useAppSelector(selectIsPasswordChange);
   const IsError = useAppSelector(selectAuthError);
 
   useEffect(() => {
-    if (token) {
+    if (isPasswordChange) {
       notify({ message: "Пароль успішно оновлено!", type: "success" });
       dispatch(closeModal("isPasswordRecoveryPassword"));
     }
@@ -35,7 +38,7 @@ export const PasswordRecoveryPassword = () => {
       notify({ message: IsError, type: "error" });
       dispatch(clearError());
     }
-  }, [IsError, token, dispatch]);
+  }, [IsError, isPasswordChange, dispatch]);
 
   return (
     <Dialog

@@ -9,11 +9,13 @@ import {
   DialogTitle,
 } from "@components/ui";
 import { Key } from "lucide-react";
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { notify } from "@components/notifi/notifi";
 import ResendTimer from "@components/authForm/validateForm/timer";
 import { GoBack } from "./passwordRecovery/goBack";
 import { IModalState } from "@/types";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { clearError } from "@/lib/redux/auth/slice";
 
 interface OtpDialogProps {
   formComponent: React.ReactNode;
@@ -30,38 +32,30 @@ interface OtpDialogProps {
 }
 
 export const OtpDialog = ({
-  formComponent,
-  isOpen,
-  onClose,
-  isSuccess,
-  successMessage,
-  onSuccess,
-  error,
-  onError,
-  modal,
+  formComponent, // форма для відправки
+  isOpen, // назва модального вікна для компонента
+  onClose, // функція для закриття модального вікна
+  isSuccess, // тригер для успішного запиту
+  successMessage, // повідомлення нотіфікашка при успішному запиті
+  onSuccess, // функції при успішному запиті
+  error, // помилка при не успішному запиті
+  // onError, // функція при не успішному запиті
+  modal, // назва модального вікна для закриття при поверненні назад
   title = "Верифікація акаунта",
   description = "Ми надіслали код на Ваш Email, перевірте папку Спам",
 }: OtpDialogProps) => {
-  const handleSuccess = useCallback(() => {
-    notify({ message: successMessage, type: "success" });
-    onSuccess();
-  }, [successMessage, onSuccess]);
-
-  const handleError = useCallback(() => {
-    if (error) {
-      notify({ message: error, type: "error" });
-      onError?.(error);
-    }
-  }, [error, onError]);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isSuccess) {
-      handleSuccess();
+      notify({ message: successMessage, type: "success" });
+      onSuccess();
     }
     if (error) {
-      handleError();
+      notify({ message: error, type: "error" });
+      dispatch(clearError());
     }
-  }, [isSuccess, error, handleSuccess, handleError]);
+  }, [successMessage, isSuccess, onSuccess, error, dispatch]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

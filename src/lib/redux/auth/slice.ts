@@ -46,6 +46,7 @@ const initialState: IAuthState = {
   isAuthenticated: false,
   isVerify: false,
   id: "",
+  isPasswordChange: false,
 };
 
 const authSlice = createSlice({
@@ -53,7 +54,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     resetPendingUserId: (state) => {
-      // state.pendingUserId = "";
+      state.pendingUserId = "";
       state.isLoading = false;
       state.error = null;
     },
@@ -100,7 +101,13 @@ const authSlice = createSlice({
       state.isVerify = true;
     });
 
-    builder.addCase(changePassword.fulfilled, setAuthSuccess);
+    builder.addCase(changePassword.fulfilled, (state: IAuthState) => {
+      state.isLoading = false;
+      state.error = null;
+      state.isVerify = false;
+      state.id = "";
+      state.isPasswordChange = true;
+    });
 
     builder
       .addCase(logOut.fulfilled, () => {
