@@ -1,40 +1,38 @@
 import { Lock } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
-import { object, ObjectSchema, ref, string } from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { cn } from "@lib/utils";
-import { IPasswordRecoveryPassword } from "@/types";
-
-const passwordRecoverySchema: ObjectSchema<IPasswordRecoveryPassword> =
-  object().shape({
-    password: string()
-      .min(6, "Minimum 6 character")
-      .required("Password is required"),
-    passwordConfirm: string()
-      .oneOf([ref("password")], "Passwords must match")
-      .required("Password confirmation is required"),
-  });
+import { IPasswordRecovery } from "@/types";
+import { changePassword } from "@/lib/redux/auth/operations";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { selectIdUser } from "@/lib/redux/auth/selectors";
+import { passwordRecoverySchema } from "../validationSchema";
 
 export const PasswordRecoveryFormPassword = () => {
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector(selectIdUser);
+
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IPasswordRecoveryPassword>({
+  } = useForm<IPasswordRecovery>({
     defaultValues: {
       password: "",
-      passwordConfirm: "",
+      repeatPassword: "",
     },
     resolver: yupResolver(passwordRecoverySchema),
-    mode: "onSubmit",
   });
 
-  const onSubmit: SubmitHandler<IPasswordRecoveryPassword> = (data) => {
-    alert(
-      `Password: ${data.password.trim()}, 
-       Passwords confirmed: ${data.passwordConfirm.trim()}`,
+  const onSubmit: SubmitHandler<IPasswordRecovery> = (data) => {
+    dispatch(
+      changePassword({
+        id: userId,
+        hash_password: data.password,
+        repeat_password: data.repeatPassword,
+      }),
     );
     reset();
   };
@@ -74,13 +72,13 @@ export const PasswordRecoveryFormPassword = () => {
 
       <div className="relative w-full">
         <Controller
-          name="passwordConfirm"
+          name="repeatPassword"
           control={control}
           render={({ field }) => (
             <div
               className={cn(
                 "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
-                errors.passwordConfirm && "border-[var(--text-error)]",
+                errors.repeatPassword && "border-[var(--text-error)]",
               )}
             >
               <Lock className="stroke-[var(--text-grey)]" size="16" />
@@ -94,8 +92,8 @@ export const PasswordRecoveryFormPassword = () => {
             </div>
           )}
         />
-        {errors.passwordConfirm && (
-          <InputErrorMassage message={errors.passwordConfirm.message || ""} />
+        {errors.repeatPassword && (
+          <InputErrorMassage message={errors.repeatPassword.message || ""} />
         )}
       </div>
 

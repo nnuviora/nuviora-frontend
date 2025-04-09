@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button, SearchInput } from "@components/ui";
 import { ShoppingCart, UserPlus, UserMinus } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
 import { SignIn } from "@components/authForm/signIn/SignIn";
 import { LogOut } from "@components/authForm/logOut/LogOut";
 import { SignUp } from "@components/authForm/signUp/SignUp";
@@ -16,29 +15,27 @@ import {
   selectIsSignIn,
   selectIsSignUp,
 } from "@lib/redux/toggleModal/selectors";
-import { AppDispatch } from "@lib/redux/store";
 import { openModal } from "@lib/redux/toggleModal/slice";
 import { useDeviceType } from "@/hooks";
 import Link from "next/link";
 import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 import { useEffect } from "react";
 import { fetchProfile } from "@/lib/redux/user/operations";
-
-const useAppDispatch: () => AppDispatch = useDispatch;
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export function Header() {
   const deviceType = useDeviceType();
   const router = useRouter();
-  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const dispatch = useAppDispatch();
-  const isSignIn = useSelector(selectIsSignIn);
-  const isSignUp = useSelector(selectIsSignUp);
-  const isLogOut = useSelector(selectIsLogOut);
-  const isPasswordRecoveryEmail = useSelector(selectIsPasswordRecoveryEmail);
-  const isPasswordRecoveryPassword = useSelector(
+  const isSignIn = useAppSelector(selectIsSignIn);
+  const isSignUp = useAppSelector(selectIsSignUp);
+  const isLogOut = useAppSelector(selectIsLogOut);
+  const isPasswordRecoveryEmail = useAppSelector(selectIsPasswordRecoveryEmail);
+  const isPasswordRecoveryPassword = useAppSelector(
     selectIsPasswordRecoveryPassword,
   );
-  // const token = useSelector(selectToken);
+
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchProfile());
@@ -46,6 +43,7 @@ export function Header() {
   }, [dispatch, isAuthenticated]);
 
   function handleUser() {
+    dispatch(fetchProfile());
     if (isAuthenticated) {
       router.push("/profile");
     } else {

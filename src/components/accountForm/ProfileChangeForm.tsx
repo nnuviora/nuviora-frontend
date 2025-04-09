@@ -209,12 +209,12 @@ export default function ProfileChangeForm() {
       />
 
       {isEdit && (
-        <>
+        <div className="mt-4 flex flex-col gap-6">
           <Button
             type="submit"
             size="default"
             className={cn(
-              "xl2:w-[325px] xl2:self-end mt-4 w-full",
+              "xl2:w-[325px] xl2:self-end w-full",
               state === "expanded" ? "md:w-[325px]" : "md:w-full",
             )}
           >
@@ -226,14 +226,14 @@ export default function ProfileChangeForm() {
             size="default"
             variant="outline"
             className={cn(
-              "xl2:w-[325px] xl2:self-end mt-4 w-full",
+              "xl2:w-[325px] xl2:self-end w-full",
               state === "expanded" ? "md:w-[325px]" : "md:w-full",
             )}
             onClick={() => dispatch(readProfile())}
           >
             Відмінити зміни
           </Button>
-        </>
+        </div>
       )}
     </form>
   );

@@ -29,18 +29,18 @@ export function SignUp() {
 
   useEffect(() => {
     if (pendingUserId !== "") {
-      notify({ message: "На Email код підтвердження", type: "success" });
+      notify({
+        message: "На ваш email відправлено код підтвердження",
+        type: "success",
+      });
       dispatch(closeModal("isSignUp"));
       dispatch(openModal("isValidateOTP"));
     }
-  }, [pendingUserId]);
-
-  useEffect(() => {
     if (IsError) {
       notify({ message: IsError, type: "error" });
+      dispatch(clearError());
     }
-    dispatch(clearError());
-  }, [IsError]);
+  }, [IsError, pendingUserId, dispatch]);
 
   return (
     <>

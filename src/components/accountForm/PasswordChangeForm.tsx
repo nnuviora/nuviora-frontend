@@ -66,6 +66,8 @@ export default function PasswordChangeForm() {
                 placeholder="Старий пароль"
                 className={cn(
                   "h-10 w-full border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                  errors.oldPassword &&
+                    "border-[var(--text-error)] bg-[var(--bg-error)]",
                 )}
               />
               {errors.oldPassword && (
@@ -102,6 +104,8 @@ export default function PasswordChangeForm() {
                 placeholder="Новий пароль"
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                  errors.newPassword &&
+                    "border-[var(--text-error)] bg-[var(--bg-error)]",
                 )}
               />
               {errors.newPassword && (
@@ -138,6 +142,8 @@ export default function PasswordChangeForm() {
                 placeholder="Повторіть новий пароль"
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
+                  errors.newPasswordRepeat &&
+                    "border-[var(--text-error)] bg-[var(--bg-error)]",
                 )}
               />
               {errors.newPasswordRepeat && (

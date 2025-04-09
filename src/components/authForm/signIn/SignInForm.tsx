@@ -28,14 +28,9 @@ export function SignInForm() {
       password: "",
     },
     resolver: yupResolver(SignInSchema),
-    mode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<ISingInForm> = (data) => {
-    alert(`Email: ${data.email}
-    Password: ${data.password}
-`);
-
     dispatch(closeModal("isSignIn"));
     dispatch(logInUser(data));
     reset();
