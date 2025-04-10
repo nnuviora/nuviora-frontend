@@ -19,6 +19,8 @@ const buttonVariants = cva(
           "active:bg-[var(--bg-hover-active)] active:border-[var(--button-tertiary-active)] active:text-[var(--button-tertiary-active)]",
 
         link: "text-[var(--button-primary-default)] underline-offset-4 hover:underline",
+
+        icon: "border-none bg-transparent text-[var(--white)] hover:text-[var(--text-error)]",
         // !Пока не использовать
         // destructive:
         //   "bg-destructive text-white shadow-xs hover:bg-destructive/90 " +
