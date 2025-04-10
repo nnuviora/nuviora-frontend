@@ -70,7 +70,6 @@
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: #d0f0d0;
-  /* --sidebar-accent: oklch(0.97 0 0); */
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
@@ -155,7 +154,7 @@ body {
 
 /* ========== Body text ========== */
 .body-text {
-  @apply xl2:text-[18px] xl2:leading-[1.2] font-[family-name:var(--font-roboto)] text-[14px] leading-[1.4] font-normal md:text-[16px];
+  @apply xl2:text-[18px] xl2:leading-[1.2] font-[family-name:var(--font-roboto)] text-[14px] font-normal md:text-[16px];
 }
 
 /* ========== Buttons ========== */
@@ -176,17 +175,6 @@ body {
 /* ========== Captions ========== */
 .captions-text {
   @apply font-[family-name:var(--font-roboto)] text-[12px] md:text-[14px] leading-[1.4] font-normal;
-}
-
-.dark {
-  --sidebar: hsl(240 5.9% 10%);
-  --sidebar-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-primary: hsl(224.3 76.3% 48%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
 @layer base {

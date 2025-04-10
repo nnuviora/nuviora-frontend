@@ -7,7 +7,7 @@ type DeviceType = "mobile" | "tablet" | "desktop";
 export function useDeviceType(): DeviceType | null {
   const getDeviceType = (width: number): DeviceType => {
     if (width < 768) return "mobile";
-    if (width < 1024) return "tablet";
+    if (width < 1280) return "tablet";
     return "desktop";
   };
 
