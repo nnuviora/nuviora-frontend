@@ -5,7 +5,7 @@ export * from "./dialog";
 export * from "./input";
 export * from "./label";
 export * from "./inputErrorMassage";
-export * from "./searchInput";
+export * from "../Header/searchInput";
 export * from "./avatar";
 export * from "./navigation-menu";
 export * from "./radioButton";

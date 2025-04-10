@@ -59,6 +59,7 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "react-hook-form": "^7.55.0",
     "redux-persist": "^6.0.0",
+    "tailwind-scrollbar": "^4.0.2",
     "typescript": "^5",
     "yup": "^1.6.1"
   },
