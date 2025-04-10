@@ -1,23 +1,25 @@
 import { useState, useEffect, JSX } from "react";
 import { Button } from "@/components/ui/button";
-import { AppDispatch } from "@lib/redux/store";
-import { useDispatch, useSelector } from "react-redux";
 import { resendValidationCode } from "@lib/redux/auth/operations";
 import {
   selectAuthError,
+  // selectIdUser,
   selectIsResend,
   selectPendingUserId,
 } from "@lib/redux/auth/selectors";
 import { notify } from "@components/notifi/notifi";
 import { clearError } from "@lib/redux/auth/slice";
-const useAppDispatch: () => AppDispatch = useDispatch;
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+
 export default function ResendTimer(): JSX.Element {
-  const pendingUserId = useSelector(selectPendingUserId);
-  const IsError = useSelector(selectAuthError);
-  const IsResend = useSelector(selectIsResend);
+  const pendingUserId = useAppSelector(selectPendingUserId);
+  // const userId = useAppSelector(selectIdUser);
+  const IsError = useAppSelector(selectAuthError);
+  const IsResend = useAppSelector(selectIsResend);
 
   const [timeLeft, setTimeLeft] = useState<number>(100);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (timeLeft > 0) {
       const timer: NodeJS.Timeout = setTimeout(
@@ -41,6 +43,7 @@ export default function ResendTimer(): JSX.Element {
 
   const handleClick = () => {
     setTimeLeft(100);
+    // dispatch(resendValidationCode(userId));
     dispatch(resendValidationCode(pendingUserId));
   };
 

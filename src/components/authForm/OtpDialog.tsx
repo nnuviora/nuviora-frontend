@@ -16,6 +16,7 @@ import { GoBack } from "./passwordRecovery/goBack";
 import { IModalState } from "@/types";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { clearError } from "@/lib/redux/auth/slice";
+import Link from "next/link";
 
 interface OtpDialogProps {
   formComponent: React.ReactNode;
@@ -60,24 +61,33 @@ export const OtpDialog = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className="xl2:max-w-142 xl2:px-15 xl2:py-30 flex w-full max-w-74 flex-col gap-4 px-5 py-20 md:max-w-4/5 md:px-30 md:py-30"
+        className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 pt-20 pb-12 md:w-[465px] md:px-16 md:py-20"
         aria-describedby={undefined}
       >
-        <GoBack modal={modal} />
+        <GoBack
+          modal={modal}
+          className="xl2:top-8 xl2:left-8 absolute top-5 left-4 md:top-6 md:left-6"
+        />
         <DialogHeader>
           <Key size={56} />
-          <DialogTitle className="h2-text font-semibold text-[var(--text-black)]">
+          <DialogTitle className="h3-text font-semibold text-[var(--text-black)]">
             {title}
           </DialogTitle>
-          <DialogDescription className="body-text">
+          <DialogDescription className="captions-text text-start text-[var(--text-black)]">
             {description}
           </DialogDescription>
         </DialogHeader>
 
         {formComponent}
 
-        <DialogFooter className="items-center">
+        <DialogFooter className="flex flex-1 flex-col justify-between">
           <ResendTimer />
+          <Link
+            className="font-[family-name:var(--font-roboto)] text-[20px] font-semibold text-[var(--text-black)]"
+            href="/"
+          >
+            Служба підтримки
+          </Link>
         </DialogFooter>
       </DialogContent>
     </Dialog>

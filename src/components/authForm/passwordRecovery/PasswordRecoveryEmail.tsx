@@ -41,18 +41,24 @@ export const PasswordRecoveryEmail = () => {
       open={isPasswordRecoveryEmail}
       onOpenChange={() => dispatch(closeModal("isPasswordRecoveryEmail"))}
     >
-      <DialogContent className="gap-4 px-8 py-8" aria-describedby={undefined}>
-        <GoBack modal="isPasswordRecoveryEmail" />
-        <DialogHeader>
-          <DialogTitle className="mb-2 text-[24px] font-semibold text-[var(--text-black)]">
+      <DialogContent
+        className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 pt-5 pb-15 md:w-[465px] md:px-16 md:py-20"
+        aria-describedby={undefined}
+      >
+        <GoBack
+          modal="isPasswordRecoveryEmail"
+          className="xl2:top-8 xl2:left-8 absolute top-5 left-4 md:top-6 md:left-6"
+        />
+        <DialogHeader className="pt-20">
+          <DialogTitle className="h3-text font-semibold text-[var(--text-black)]">
             Відновлення паролю
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="captions-text text-start text-[var(--text-black)]">
             Введіть Ваш E-mail, після чого ми відправимо на нього новий пароль
           </DialogDescription>
         </DialogHeader>
         <PasswordRecoveryFormEmail />
-        <DialogFooter className="items-center">
+        <DialogFooter className="flex-1 items-center justify-end">
           <Link
             className="font-[family-name:var(--font-roboto)] text-[20px] font-semibold text-[var(--text-black)]"
             href="/"
