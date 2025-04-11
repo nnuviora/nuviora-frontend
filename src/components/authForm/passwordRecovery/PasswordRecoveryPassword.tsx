@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@components/ui";
 import { selectIsPasswordRecoveryPassword } from "@lib/redux/toggleModal/selectors";
-import { closeModal } from "@lib/redux/toggleModal/slice";
+import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { PasswordRecoveryFormPassword } from "@components/authForm/passwordRecovery/PasswordRecoveryFormPassword";
 import { GoBack } from "@components/authForm/passwordRecovery/goBack";
@@ -31,8 +31,9 @@ export const PasswordRecoveryPassword = () => {
 
   useEffect(() => {
     if (isPasswordChange) {
-      notify({ message: "Пароль успішно оновлено!", type: "success" });
+      notify({ message: "Пароль успішно змінено", type: "success" });
       dispatch(closeModal("isPasswordRecoveryPassword"));
+      dispatch(openModal("isSignIn"));
     }
     if (IsError) {
       notify({ message: IsError, type: "error" });
@@ -45,19 +46,27 @@ export const PasswordRecoveryPassword = () => {
       open={isPasswordRecoveryPassword}
       onOpenChange={() => dispatch(closeModal("isPasswordRecoveryPassword"))}
     >
-      <DialogContent className="gap-4 px-8 py-8" aria-describedby={undefined}>
-        <GoBack modal="isPasswordRecoveryPassword" />
+      <DialogContent
+        className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 py-15 md:w-[465px] md:px-16 md:py-20"
+        aria-describedby={undefined}
+      >
+        <GoBack
+          modal="isPasswordRecoveryPassword"
+          className="xl2:top-8 xl2:left-8 absolute top-5 left-4 md:top-6 md:left-6"
+        />
         <DialogHeader>
-          <DialogTitle className="mb-2 text-[24px] font-semibold text-[var(--text-black)]">
+          <DialogTitle className="h3-text font-semibold text-[var(--text-black)]">
             Відновлення паролю
           </DialogTitle>
-          <DialogDescription>Введіть новий пароль</DialogDescription>
+          <DialogDescription className="captions-text text-start text-[var(--text-black)]">
+            Введіть Ваш email, після чого ми відправимо на нього новий пароль
+          </DialogDescription>
         </DialogHeader>
         <PasswordRecoveryFormPassword />
-        <DialogFooter className="items-center">
+        <DialogFooter className="flex-1 items-center justify-end">
           <Link
             className="font-[family-name:var(--font-roboto)] text-[20px] font-semibold text-[var(--text-black)]"
-            href="#"
+            href="/"
           >
             Служба підтримки
           </Link>

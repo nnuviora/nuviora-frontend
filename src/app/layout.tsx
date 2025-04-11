@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import Providers from "@/lib/providers";
 import { ReactNode, Suspense } from "react";
 
-import Header from "@components/layouts/Header";
+import Header from "@components/Header/Header";
 import { cn } from "@lib/utils";
 import BottomNavigationBar from "@components/bottomNavigationBar/bottomNavigationBar";
 import Loader from "@/app/loader";

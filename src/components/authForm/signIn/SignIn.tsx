@@ -24,11 +24,11 @@ import { clearError } from "@/lib/redux/auth/slice";
 export const SignIn = () => {
   const isSignIn = useAppSelector(selectIsSignIn);
   const dispatch = useAppDispatch();
-  const isAutentificate = useAppSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const IsError = useAppSelector(selectAuthError);
 
   useEffect(() => {
-    if (isAutentificate) {
+    if (isAuthenticated) {
       notify({ message: "Автентифікація успішна!", type: "success" });
       dispatch(closeModal("isSignIn"));
     }
@@ -37,7 +37,7 @@ export const SignIn = () => {
       notify({ message: IsError, type: "error" });
       dispatch(clearError());
     }
-  }, [isAutentificate, IsError, dispatch]);
+  }, [isAuthenticated, IsError, dispatch]);
 
   return (
     <Dialog
