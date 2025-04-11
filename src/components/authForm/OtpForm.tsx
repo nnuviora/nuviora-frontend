@@ -25,7 +25,6 @@ export function OtpForm({
   className,
 }: OtpFormProps) {
   const isLoading = useAppSelector(selectIsLoading);
-  console.log("isLoading :>> ", isLoading);
   const { control, handleSubmit } = useForm({ defaultValues: { otp: "" } });
 
   const onSubmit = (data: { otp: string }) => {

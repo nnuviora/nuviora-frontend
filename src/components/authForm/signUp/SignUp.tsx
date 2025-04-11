@@ -15,7 +15,8 @@ import Image from "next/image";
 import { useEffect } from "react";
 import {
   selectAuthError,
-  selectPendingUserId,
+  selectIdUser,
+  // selectPendingUserId,
 } from "@lib/redux/auth/selectors";
 import { clearError } from "@lib/redux/auth/slice";
 import { notify } from "@components/notifi/notifi";
@@ -23,12 +24,14 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export function SignUp() {
   const isSignUp = useAppSelector(selectIsSignUp);
-  const pendingUserId = useAppSelector(selectPendingUserId);
+  const userId = useAppSelector(selectIdUser);
+  // const pendingUserId = useAppSelector(selectPendingUserId);
   const dispatch = useAppDispatch();
   const IsError = useAppSelector(selectAuthError);
 
   useEffect(() => {
-    if (pendingUserId !== "") {
+    if (userId !== "") {
+      // if (pendingUserId !== "") {
       notify({
         message: "На ваш email відправлено код підтвердження",
         type: "success",
@@ -40,7 +43,8 @@ export function SignUp() {
       notify({ message: IsError, type: "error" });
       dispatch(clearError());
     }
-  }, [IsError, pendingUserId, dispatch]);
+  }, [IsError, userId, dispatch]);
+  // }, [IsError, pendingUserId, dispatch]);
 
   return (
     <>

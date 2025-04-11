@@ -3,17 +3,17 @@ import { Button } from "@/components/ui/button";
 import { resendValidationCode } from "@lib/redux/auth/operations";
 import {
   selectAuthError,
-  // selectIdUser,
+  selectIdUser,
   selectIsResend,
-  selectPendingUserId,
+  // selectPendingUserId,
 } from "@lib/redux/auth/selectors";
 import { notify } from "@components/notifi/notifi";
-import { clearError } from "@lib/redux/auth/slice";
+import { clearError, resendEmail } from "@lib/redux/auth/slice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export default function ResendTimer(): JSX.Element {
-  const pendingUserId = useAppSelector(selectPendingUserId);
-  // const userId = useAppSelector(selectIdUser);
+  // const pendingUserId = useAppSelector(selectPendingUserId);
+  const userId = useAppSelector(selectIdUser);
   const IsError = useAppSelector(selectAuthError);
   const IsResend = useAppSelector(selectIsResend);
 
@@ -42,9 +42,10 @@ export default function ResendTimer(): JSX.Element {
   }, [IsError, IsResend]);
 
   const handleClick = () => {
-    setTimeLeft(100);
-    // dispatch(resendValidationCode(userId));
-    dispatch(resendValidationCode(pendingUserId));
+    setTimeLeft(1020);
+    dispatch(resendEmail());
+    dispatch(resendValidationCode(userId));
+    // dispatch(resendValidationCode(pendingUserId));
   };
 
   return (

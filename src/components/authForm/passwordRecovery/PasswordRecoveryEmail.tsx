@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { selectAuthError, selectIdUser } from "@/lib/redux/auth/selectors";
 import { notify } from "@/components/notifi/notifi";
 import { clearError } from "@/lib/redux/auth/slice";
+import { logOut } from "@/lib/redux/auth/operations";
 
 export const PasswordRecoveryEmail = () => {
   const isPasswordRecoveryEmail = useAppSelector(selectIsPasswordRecoveryEmail);
@@ -39,7 +40,10 @@ export const PasswordRecoveryEmail = () => {
   return (
     <Dialog
       open={isPasswordRecoveryEmail}
-      onOpenChange={() => dispatch(closeModal("isPasswordRecoveryEmail"))}
+      onOpenChange={() => {
+        dispatch(closeModal("isPasswordRecoveryEmail"));
+        dispatch(logOut());
+      }}
     >
       <DialogContent
         className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 pt-5 pb-15 md:w-[465px] md:px-16 md:py-20"

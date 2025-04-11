@@ -10,16 +10,18 @@ import {
 } from "@lib/redux/auth/selectors";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { OtpDialog } from "../OtpDialog";
+import { resetResendEmail } from "@/lib/redux/auth/slice";
 
 export const ValidateOTP = () => {
   const dispatch = useAppDispatch();
   const isValidateOTP = useAppSelector(selectIsValidateOTP);
-  const isAutentificate = useAppSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const IsError = useAppSelector(selectAuthError);
 
   const handleClose = () => dispatch(closeModal("isValidateOTP"));
   const handleSuccess = () => {
     dispatch(closeModal("isValidateOTP"));
+    dispatch(resetResendEmail());
   };
 
   return (
@@ -27,7 +29,7 @@ export const ValidateOTP = () => {
       formComponent={<EmailOTPForm />}
       isOpen={isValidateOTP}
       onClose={handleClose}
-      isSuccess={isAutentificate}
+      isSuccess={isAuthenticated}
       successMessage="Реєстрація успішна!"
       onSuccess={handleSuccess}
       error={IsError}
