@@ -118,6 +118,7 @@
 @theme {
   --breakpoint-xl2: 90rem;
   /* 1440px */
+  --breakpoint-xs: 375px;
 }
 
 body {
@@ -136,7 +137,7 @@ body {
 }
 
 .h3-text {
-  @apply xl2:text-[40px] font-[family-name:var(--font-poppins)] text-[24px] leading-[1.2] font-semibold md:text-[32px];
+  @apply xl2:text-[36px] font-[family-name:var(--font-poppins)] text-[24px] leading-[1.2] font-semibold md:text-[30px];
 }
 
 /* ========== Subtitles ========== */

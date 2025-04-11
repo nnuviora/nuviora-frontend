@@ -26,7 +26,7 @@ export const VerifyOTP = () => {
       isOpen={isVerifyOTP}
       onClose={handleClose}
       isSuccess={isVerify}
-      successMessage="Аутентифікація успішна!"
+      successMessage="Верифікація пройшла успішно"
       onSuccess={handleSuccess}
       error={error}
       modal="isVerifyOTP"

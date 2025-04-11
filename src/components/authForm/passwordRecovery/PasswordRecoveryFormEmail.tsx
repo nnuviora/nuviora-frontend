@@ -2,14 +2,16 @@ import { Mail } from "lucide-react";
 import { Button, Input, InputErrorMassage } from "@components/ui";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { cn } from "@lib/utils";
 import { IPasswordRecoveryEmail } from "@/types";
 import { recoveryPassword } from "@/lib/redux/auth/operations";
-import { useAppDispatch } from "@/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { passwordRecoveryEmailSchema } from "../validationSchema";
+import { selectIsLoading } from "@/lib/redux/auth/selectors";
+import { BarLoader } from "react-spinners";
 
 export const PasswordRecoveryFormEmail = () => {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectIsLoading);
 
   const {
     control,
@@ -31,7 +33,7 @@ export const PasswordRecoveryFormEmail = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="xl2:gap-8 flex flex-col gap-6"
+      className="xl2:gap-8 flex flex-col gap-8"
       noValidate
     >
       <div className="relative w-full">
@@ -39,33 +41,41 @@ export const PasswordRecoveryFormEmail = () => {
           name="email"
           control={control}
           render={({ field }) => (
-            <div
-              className={cn(
-                "flex items-center gap-2 rounded-lg border border-[var(--stroke-field)] bg-[var(--white)] px-3 " +
-                  "py-2 transition focus-within:ring-2 focus-within:ring-[var(--button-primary-default)]",
-                errors.email && "border-[var(--text-error)]",
-              )}
-            >
-              <Mail className="stroke-[var(--text-grey)]" size="16" />
-              <Input
-                {...field}
-                className={cn(
-                  "border-none p-0 placeholder-[var(--text-grey)] focus:ring-0",
-                  errors.email &&
-                    "border-[var(--text-error)] bg-[var(--bg-error)]",
-                )}
-                type="email"
-                placeholder="Email"
-              />
-            </div>
+            <Input
+              {...field}
+              icon={<Mail size="16" className="stroke-[var(--text-grey)]" />}
+              className={
+                errors.email &&
+                "border-[var(--text-error)] bg-[var(--bg-error)]"
+              }
+              type="email"
+              placeholder="Email"
+            />
           )}
         />
+
         {errors.email && (
           <InputErrorMassage message={errors.email.message || ""} />
         )}
       </div>
 
-      <Button type="submit">Відновити пароль</Button>
+      <Button className="font-semibold" disabled={isLoading}>
+        {!isLoading ? (
+          "Відновити пароль"
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="xl2:text-[16px] text-[12px] leading-[1] md:text-[14px]">
+              Перевірка
+            </p>
+            <BarLoader
+              color="#04b22b"
+              height={5}
+              speedMultiplier={1}
+              width={150}
+            />
+          </div>
+        )}
+      </Button>
     </form>
   );
 };

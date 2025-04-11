@@ -6,12 +6,14 @@ import { cn } from "@lib/utils";
 import { IPasswordRecovery } from "@/types";
 import { changePassword } from "@/lib/redux/auth/operations";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { selectIdUser } from "@/lib/redux/auth/selectors";
+import { selectIdUser, selectIsLoading } from "@/lib/redux/auth/selectors";
 import { passwordRecoverySchema } from "../validationSchema";
+import { BarLoader } from "react-spinners";
 
 export const PasswordRecoveryFormPassword = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(selectIdUser);
+  const isLoading = useAppSelector(selectIsLoading);
 
   const {
     control,
@@ -97,7 +99,24 @@ export const PasswordRecoveryFormPassword = () => {
         )}
       </div>
 
-      <Button type="submit">Відновити пароль</Button>
+      {/* <Button type="submit">Відновити пароль</Button> */}
+      <Button className="font-semibold" disabled={isLoading}>
+        {!isLoading ? (
+          "Відновити пароль"
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-1">
+            <p className="xl2:text-[16px] text-[12px] leading-[1] md:text-[14px]">
+              Перевірка
+            </p>
+            <BarLoader
+              color="#04b22b"
+              height={5}
+              speedMultiplier={1}
+              width={150}
+            />
+          </div>
+        )}
+      </Button>
     </form>
   );
 };
