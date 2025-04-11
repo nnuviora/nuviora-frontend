@@ -20,6 +20,7 @@ import {
 import { notify } from "@/components/notifi/notifi";
 import { clearError } from "@/lib/redux/auth/slice";
 import { useEffect } from "react";
+import { logOut } from "@/lib/redux/auth/operations";
 
 export const PasswordRecoveryPassword = () => {
   const isPasswordRecoveryPassword = useAppSelector(
@@ -44,7 +45,10 @@ export const PasswordRecoveryPassword = () => {
   return (
     <Dialog
       open={isPasswordRecoveryPassword}
-      onOpenChange={() => dispatch(closeModal("isPasswordRecoveryPassword"))}
+      onOpenChange={() => {
+        dispatch(closeModal("isPasswordRecoveryPassword"));
+        dispatch(logOut());
+      }}
     >
       <DialogContent
         className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 py-15 md:w-[465px] md:px-16 md:py-20"

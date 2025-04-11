@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { selectAuthError, selectIsVerify } from "@/lib/redux/auth/selectors";
 import { VerifyOTPForm } from "./verifyOTPForm";
 import { OtpDialog } from "../OtpDialog";
+import { logOut } from "@/lib/redux/auth/operations";
 
 export const VerifyOTP = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +15,10 @@ export const VerifyOTP = () => {
   const isVerify = useAppSelector(selectIsVerify);
   const error = useAppSelector(selectAuthError);
 
-  const handleClose = () => dispatch(closeModal("isVerifyOTP"));
+  const handleClose = () => {
+    dispatch(closeModal("isVerifyOTP"));
+    dispatch(logOut());
+  };
   const handleSuccess = () => {
     dispatch(closeModal("isVerifyOTP"));
     dispatch(openModal("isPasswordRecoveryPassword"));
