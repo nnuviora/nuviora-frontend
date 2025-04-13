@@ -10,7 +10,7 @@ import {
 } from "@lib/redux/auth/selectors";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { OtpDialog } from "../OtpDialog";
-import { resetResendEmail } from "@/lib/redux/auth/slice";
+import { clearId } from "@/lib/redux/auth/slice";
 
 export const ValidateOTP = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export const ValidateOTP = () => {
   const handleClose = () => dispatch(closeModal("isValidateOTP"));
   const handleSuccess = () => {
     dispatch(closeModal("isValidateOTP"));
-    dispatch(resetResendEmail());
+    dispatch(clearId());
   };
 
   return (

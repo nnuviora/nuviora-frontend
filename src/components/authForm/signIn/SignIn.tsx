@@ -64,7 +64,7 @@ export const SignIn = () => {
               }}
             >
               <span className="body-text mr-1 text-[var(--text-grey)]">
-                У вас ще немає акаунту?
+                У вас ще немає аккаунту?
               </span>
               Створити
             </Button>
@@ -74,7 +74,7 @@ export const SignIn = () => {
         <div className="relative hidden lg:block lg:w-1/3 xl:w-1/2">
           <Image
             src="/image24.jpg"
-            alt="Регистрация"
+            alt="Реєстрація"
             fill
             sizes="700px"
             style={{ objectFit: "cover" }}

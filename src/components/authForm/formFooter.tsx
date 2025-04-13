@@ -1,8 +1,18 @@
+"use client";
+
 import { Button } from "@components/ui";
 import { FcGoogle } from "react-icons/fc";
 import { Heart } from "lucide-react";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { fetchGoogleAuth } from "@/lib/redux/auth/operations";
 
 export default function FormFooter() {
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => {
+    dispatch(fetchGoogleAuth());
+  };
+
   return (
     <>
       <div className="flex w-full flex-col items-center justify-center gap-2">
@@ -10,6 +20,7 @@ export default function FormFooter() {
         <Button
           variant="outline"
           className="w-full border-[var(--stroke-normal)]"
+          onClick={handleClick}
         >
           <div className="flex w-full items-center justify-center gap-3">
             <FcGoogle size={18} />

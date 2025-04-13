@@ -13,11 +13,7 @@ import { SingUpForm } from "@components/authForm/signUp/SignUpForm";
 import FormFooter from "@components/authForm/formFooter";
 import Image from "next/image";
 import { useEffect } from "react";
-import {
-  selectAuthError,
-  selectIdUser,
-  // selectPendingUserId,
-} from "@lib/redux/auth/selectors";
+import { selectAuthError, selectIdUser } from "@lib/redux/auth/selectors";
 import { clearError } from "@lib/redux/auth/slice";
 import { notify } from "@components/notifi/notifi";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
@@ -25,13 +21,11 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 export function SignUp() {
   const isSignUp = useAppSelector(selectIsSignUp);
   const userId = useAppSelector(selectIdUser);
-  // const pendingUserId = useAppSelector(selectPendingUserId);
   const dispatch = useAppDispatch();
   const IsError = useAppSelector(selectAuthError);
 
   useEffect(() => {
     if (userId !== "") {
-      // if (pendingUserId !== "") {
       notify({
         message: "На ваш email відправлено код підтвердження",
         type: "success",
@@ -44,7 +38,6 @@ export function SignUp() {
       dispatch(clearError());
     }
   }, [IsError, userId, dispatch]);
-  // }, [IsError, pendingUserId, dispatch]);
 
   return (
     <>

@@ -27,7 +27,7 @@ export const PasswordRecoveryEmail = () => {
 
   useEffect(() => {
     if (userId !== "") {
-      notify({ message: "Email sent!", type: "success" });
+      notify({ message: "Код для верифікації надіслано", type: "success" });
       dispatch(closeModal("isPasswordRecoveryEmail"));
       dispatch(openModal("isVerifyOTP"));
     }
@@ -58,7 +58,8 @@ export const PasswordRecoveryEmail = () => {
             Відновлення паролю
           </DialogTitle>
           <DialogDescription className="captions-text text-start text-[var(--text-black)]">
-            Введіть Ваш E-mail, після чого ми відправимо на нього новий пароль
+            Введіть Ваш E-mail, після чого ми відправимо на нього код для
+            верифікації
           </DialogDescription>
         </DialogHeader>
         <PasswordRecoveryFormEmail />

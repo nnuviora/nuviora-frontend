@@ -9,10 +9,13 @@ import {
   requestRecoveryPasswordApi,
   verifyEmailApi,
   changePasswordApi,
+  fetchGoogleAuthApi,
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import {
+  IGoogleCallback,
+  IGoogleResponse,
   ILoginCredentials,
   IRegisterCredentials,
   IRegistrationResponse,
@@ -144,6 +147,32 @@ export const changePassword = createAsyncThunk<
 >("auth/changePassword", async (data, { rejectWithValue }) => {
   try {
     await changePasswordApi(data);
+  } catch (err) {
+    return rejectWithValue(handleApiError(err, "Validation failed"));
+  }
+});
+
+export const fetchGoogleAuth = createAsyncThunk<
+  IGoogleResponse,
+  void,
+  { rejectValue: string }
+>("auth/fetchGoogleAuth", async (_, { rejectWithValue }) => {
+  try {
+    const response = await fetchGoogleAuthApi();
+    return response.data;
+  } catch (err) {
+    return rejectWithValue(handleApiError(err, "Validation failed"));
+  }
+});
+
+export const fetchGoogleCallback = createAsyncThunk<
+  IGoogleCallback,
+  void,
+  { rejectValue: string }
+>("auth/fetchGoogleCallback", async (_, { rejectWithValue }) => {
+  try {
+    const response = await fetchGoogleAuthApi();
+    return response.data;
   } catch (err) {
     return rejectWithValue(handleApiError(err, "Validation failed"));
   }

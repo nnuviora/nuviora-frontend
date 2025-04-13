@@ -34,3 +34,9 @@ export const verifyEmailApi = async (otp: string) =>
 
 export const changePasswordApi = async (data: IPasswordRecoveryCredentials) =>
   await api.post(`/auth/forgot_password/change`, data);
+
+export const fetchGoogleAuthApi = async () =>
+  await api.get(`/auth/google_auth`);
+
+export const fetchGoogleCallbackApi = async () =>
+  await api.get(`/auth/google/callback`);
