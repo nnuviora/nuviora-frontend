@@ -18,12 +18,12 @@ export interface IAuthState {
   accessToken: string | null;
   isLoading: boolean;
   error: string | null;
-  pendingUserId: string;
   isResend: boolean;
   isAuthenticated: boolean;
   id: string;
   isVerify: boolean;
   isPasswordChange: boolean;
+  url: string;
 }
 
 export interface IRegisterCredentials {
@@ -53,4 +53,10 @@ export interface IErrorDetail {
 
 export interface IErrorResponse {
   detail: IErrorDetail[];
+}
+export interface IGoogleResponse {
+  url: string;
+}
+export interface IGoogleCallback {
+  access_token: string;
 }

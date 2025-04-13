@@ -5,19 +5,17 @@ import {
   selectAuthError,
   selectIdUser,
   selectIsResend,
-  // selectPendingUserId,
 } from "@lib/redux/auth/selectors";
 import { notify } from "@components/notifi/notifi";
 import { clearError, resendEmail } from "@lib/redux/auth/slice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export default function ResendTimer(): JSX.Element {
-  // const pendingUserId = useAppSelector(selectPendingUserId);
   const userId = useAppSelector(selectIdUser);
   const IsError = useAppSelector(selectAuthError);
   const IsResend = useAppSelector(selectIsResend);
 
-  const [timeLeft, setTimeLeft] = useState<number>(100);
+  const [timeLeft, setTimeLeft] = useState<number>(10);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -42,10 +40,9 @@ export default function ResendTimer(): JSX.Element {
   }, [IsError, IsResend]);
 
   const handleClick = () => {
-    setTimeLeft(1020);
+    setTimeLeft(10);
     dispatch(resendEmail());
     dispatch(resendValidationCode(userId));
-    // dispatch(resendValidationCode(pendingUserId));
   };
 
   return (

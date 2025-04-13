@@ -1,8 +1,5 @@
 import { RootState } from "@lib/redux/store";
 
-export const selectPendingUserId = (state: RootState) =>
-  state.auth.pendingUserId;
-
 export const selectIsLoading = (state: RootState) => state.auth.isLoading;
 
 export const selectAuthError = (state: RootState) => state.auth.error;
@@ -17,3 +14,4 @@ export const selectIdUser = (state: RootState) => state.auth.id;
 export const selectIsVerify = (state: RootState) => state.auth.isVerify;
 export const selectIsPasswordChange = (state: RootState) =>
   state.auth.isPasswordChange;
+export const selectURL = (state: RootState) => state.auth.url;
