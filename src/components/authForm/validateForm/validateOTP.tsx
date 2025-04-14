@@ -18,7 +18,10 @@ export const ValidateOTP = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const IsError = useAppSelector(selectAuthError);
 
-  const handleClose = () => dispatch(closeModal("isValidateOTP"));
+  const handleClose = () => {
+    dispatch(closeModal("isValidateOTP"));
+    dispatch(clearId());
+  };
   const handleSuccess = () => {
     dispatch(closeModal("isValidateOTP"));
     dispatch(clearId());
@@ -33,7 +36,6 @@ export const ValidateOTP = () => {
       successMessage="Реєстрація успішна!"
       onSuccess={handleSuccess}
       error={IsError}
-      modal="isValidateOTP"
     />
   );
 };

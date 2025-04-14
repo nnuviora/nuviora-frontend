@@ -33,7 +33,6 @@ export const VerifyOTP = () => {
       successMessage="Верифікація пройшла успішно"
       onSuccess={handleSuccess}
       error={error}
-      modal="isVerifyOTP"
     />
   );
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, JSX } from "react";
 import { Button } from "@/components/ui/button";
 import { resendValidationCode } from "@lib/redux/auth/operations";
@@ -15,7 +17,7 @@ export default function ResendTimer(): JSX.Element {
   const IsError = useAppSelector(selectAuthError);
   const IsResend = useAppSelector(selectIsResend);
 
-  const [timeLeft, setTimeLeft] = useState<number>(10);
+  const [timeLeft, setTimeLeft] = useState<number>(100);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function ResendTimer(): JSX.Element {
   }, [IsError, IsResend]);
 
   const handleClick = () => {
-    setTimeLeft(10);
+    setTimeLeft(100);
     dispatch(resendEmail());
     dispatch(resendValidationCode(userId));
   };

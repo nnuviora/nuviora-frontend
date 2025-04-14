@@ -8,6 +8,9 @@ export function EmailOTPForm() {
   const dispatch = useAppDispatch();
 
   return (
-    <OtpForm onSubmitOtp={(otp) => dispatch(validateRegistrationEmail(otp))} />
+    <OtpForm
+      onSubmitOtp={(otp) => dispatch(validateRegistrationEmail(otp))}
+      buttonText=""
+    />
   );
 }

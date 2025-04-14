@@ -65,7 +65,7 @@ export function SignUp() {
                 }}
               >
                 <span className="body-text mr-1 text-[var(--text-grey)]">
-                  Вже маєте акаунт?
+                  Вже маєте аккаунт?
                 </span>
                 Увійти
               </Button>
