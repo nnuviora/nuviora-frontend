@@ -10,7 +10,6 @@ import {
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
 import { PasswordRecoveryFormEmail } from "@components/authForm/passwordRecovery/PasswordRecoveryFormEmail";
 import { selectIsPasswordRecoveryEmail } from "@lib/redux/toggleModal/selectors";
-import { GoBack } from "@components/authForm/passwordRecovery/goBack";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { useEffect } from "react";
@@ -49,10 +48,6 @@ export const PasswordRecoveryEmail = () => {
         className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 pt-5 pb-15 md:w-[465px] md:px-16 md:py-20"
         aria-describedby={undefined}
       >
-        <GoBack
-          modal="isPasswordRecoveryEmail"
-          className="xl2:top-8 xl2:left-8 absolute top-5 left-4 md:top-6 md:left-6"
-        />
         <DialogHeader className="pt-20">
           <DialogTitle className="h3-text font-semibold text-[var(--text-black)]">
             Відновлення паролю

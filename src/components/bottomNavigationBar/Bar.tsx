@@ -1,4 +1,3 @@
-import { Button } from "../ui";
 import {
   Ellipsis,
   Heart,

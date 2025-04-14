@@ -1,16 +1,17 @@
 "use client";
+
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@components/ui";
 import { selectIsPasswordRecoveryPassword } from "@lib/redux/toggleModal/selectors";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
-import { DialogDescription } from "@radix-ui/react-dialog";
+// import { DialogDescription } from "@radix-ui/react-dialog";
 import { PasswordRecoveryFormPassword } from "@components/authForm/passwordRecovery/PasswordRecoveryFormPassword";
-import { GoBack } from "@components/authForm/passwordRecovery/goBack";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import {
@@ -54,10 +55,6 @@ export const PasswordRecoveryPassword = () => {
         className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 py-15 md:w-[465px] md:px-16 md:py-20"
         aria-describedby={undefined}
       >
-        <GoBack
-          modal="isPasswordRecoveryPassword"
-          className="xl2:top-8 xl2:left-8 absolute top-5 left-4 md:top-6 md:left-6"
-        />
         <DialogHeader>
           <DialogTitle className="h3-text font-semibold text-[var(--text-black)]">
             Відновлення паролю

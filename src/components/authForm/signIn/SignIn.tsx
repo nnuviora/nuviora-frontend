@@ -29,7 +29,7 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      notify({ message: "Автентифікація успішна!", type: "success" });
+      notify({ message: "Аутентифікація успішна!", type: "success" });
       dispatch(closeModal("isSignIn"));
     }
 
