@@ -10,7 +10,6 @@ import {
 } from "@components/ui";
 import { selectIsPasswordRecoveryPassword } from "@lib/redux/toggleModal/selectors";
 import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
-// import { DialogDescription } from "@radix-ui/react-dialog";
 import { PasswordRecoveryFormPassword } from "@components/authForm/passwordRecovery/PasswordRecoveryFormPassword";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";

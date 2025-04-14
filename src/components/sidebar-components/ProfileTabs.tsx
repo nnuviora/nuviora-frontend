@@ -2,7 +2,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Lock, Pencil, User } from "lucide-react";
 import ProfileForm from "../accountForm/ProfileChangeForm";
 import PasswordChangeForm from "../accountForm/PasswordChangeForm";
-import { Button } from "../ui/button2";
+
+import { Button } from "../ui";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { editProfile } from "@/lib/redux/user/slice";
 import { selectIsEdit } from "@/lib/redux/user/selectors";
@@ -39,7 +40,7 @@ export function ProfileTabs() {
           {!isEdit && (
             <Button
               variant="ghost"
-              className="body-text gap-0.5 text-[var(--text-success)]"
+              className="body-text flex items-center gap-1 text-[var(--text-success)]"
               onClick={handleEdit}
             >
               <Pencil color="#BDBCDB" /> Редагувати
