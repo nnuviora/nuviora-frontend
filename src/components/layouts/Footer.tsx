@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@components/ui";
 import { openModal } from "@lib/redux/toggleModal/slice";
 import { SignIn } from "@components/authForm/signIn/SignIn";
@@ -18,7 +19,8 @@ import { PasswordRecoveryPassword } from "@components/authForm/passwordRecovery/
 import { ValidateOTP } from "@components/authForm/validateForm/validateOTP";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { VerifyOTP } from "../authForm/passwordRecovery/verifyOTP";
-import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
+import { selectIsAuthenticated, selectURL } from "@/lib/redux/auth/selectors";
+import { useEffect } from "react";
 
 const Footer = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +35,13 @@ const Footer = () => {
   const isVerifyOTP = useAppSelector(selectIsVerifyOTP);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
+  const url = useAppSelector(selectURL);
+
+  useEffect(() => {
+    if (url) window.location.href = url;
+  }, [url]);
+
   return (
     <footer>
       <div className="xl2:max-w-[90rem] xl2:px-18 xl2:py-3.5 mx-auto flex w-full flex-wrap items-center justify-between gap-16 py-6">
@@ -41,7 +50,11 @@ const Footer = () => {
             Log In
           </Button>
         )}
-        <Button onClick={() => dispatch(openModal("isLogOut"))}>Log Out</Button>
+        {isAuthenticated && (
+          <Button onClick={() => dispatch(openModal("isLogOut"))}>
+            Log Out
+          </Button>
+        )}
         {!isAuthenticated && (
           <Button onClick={() => dispatch(openModal("isSignUp"))}>
             Register

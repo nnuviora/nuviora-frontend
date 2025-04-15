@@ -21,11 +21,9 @@ type OtpFormProps = {
 export function OtpForm({
   onSubmitOtp,
   maxLength = 4,
-  buttonText = "Перевірка",
   className,
 }: OtpFormProps) {
   const isLoading = useAppSelector(selectIsLoading);
-  console.log("isLoading :>> ", isLoading);
   const { control, handleSubmit } = useForm({ defaultValues: { otp: "" } });
 
   const onSubmit = (data: { otp: string }) => {
@@ -59,11 +57,11 @@ export function OtpForm({
 
       <Button className="h-12 w-full font-semibold" disabled={isLoading}>
         {!isLoading ? (
-          "Відновити пароль"
+          "Перевірити"
         ) : (
           <div className="flex flex-col items-center justify-center gap-1">
             <p className="xl2:text-[16px] text-[12px] leading-[1] md:text-[14px]">
-              {buttonText}
+              Верифікація
             </p>
             <BarLoader
               color="#04b22b"

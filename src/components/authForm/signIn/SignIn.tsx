@@ -29,7 +29,7 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      notify({ message: "Автентифікація успішна!", type: "success" });
+      notify({ message: "Аутентифікація успішна!", type: "success" });
       dispatch(closeModal("isSignIn"));
     }
 
@@ -46,7 +46,7 @@ export const SignIn = () => {
     >
       <DialogContent
         aria-describedby={undefined}
-        className="flex w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:flex-row"
+        className="flex min-h-3/5 w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:min-h-4/5 lg:flex-row"
       >
         <div className="xl2:px-25 xl2:w-1/2 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-2/3 lg:px-20">
           <DialogHeader>
@@ -64,7 +64,7 @@ export const SignIn = () => {
               }}
             >
               <span className="body-text mr-1 text-[var(--text-grey)]">
-                У вас ще немає акаунту?
+                У вас ще немає аккаунту?
               </span>
               Створити
             </Button>
@@ -74,7 +74,7 @@ export const SignIn = () => {
         <div className="relative hidden lg:block lg:w-1/3 xl:w-1/2">
           <Image
             src="/image24.jpg"
-            alt="Регистрация"
+            alt="Реєстрація"
             fill
             sizes="700px"
             style={{ objectFit: "cover" }}

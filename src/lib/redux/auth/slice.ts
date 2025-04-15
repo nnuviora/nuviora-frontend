@@ -9,13 +9,20 @@ import {
   recoveryPassword,
   changePassword,
   verifyEmail,
+  fetchGoogleAuth,
+  fetchGoogleCallback,
 } from "@lib/redux/auth/operations";
-import { IAuthResponse, IAuthState, IRegistrationResponse } from "../types";
+import {
+  IAuthResponse,
+  IAuthState,
+  IGoogleCallback,
+  IGoogleResponse,
+  IRegistrationResponse,
+} from "../types";
 
 const handlePending = (state: IAuthState) => {
   state.isLoading = true;
   state.error = null;
-  state.isResend = false;
   state.isAuthenticated = false;
 };
 
@@ -39,7 +46,6 @@ const setAuthSuccess = (
 
 const initialState: IAuthState = {
   accessToken: "",
-  pendingUserId: "",
   isLoading: false,
   error: null,
   isResend: false,
@@ -47,16 +53,19 @@ const initialState: IAuthState = {
   isVerify: false,
   id: "",
   isPasswordChange: false,
+  url: "",
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    resetPendingUserId: (state) => {
-      state.pendingUserId = "";
-      state.isLoading = false;
-      state.error = null;
+    clearId: (state) => {
+      state.id = "";
+    },
+
+    resendEmail: (state) => {
+      state.isResend = true;
     },
 
     clearError: (state) => {
@@ -70,7 +79,7 @@ const authSlice = createSlice({
       (state: IAuthState, action: PayloadAction<IRegistrationResponse>) => {
         state.isLoading = false;
         state.error = null;
-        state.pendingUserId = action.payload.id;
+        state.id = action.payload.id;
       },
     );
 
@@ -81,7 +90,7 @@ const authSlice = createSlice({
     builder.addCase(resendValidationCode.fulfilled, (state: IAuthState) => {
       state.isLoading = false;
       state.error = null;
-      state.isResend = true;
+      state.isResend = false;
     });
 
     builder.addCase(refreshAccessToken.fulfilled, setAuthSuccess);
@@ -109,6 +118,24 @@ const authSlice = createSlice({
       state.isPasswordChange = true;
     });
 
+    builder.addCase(
+      fetchGoogleAuth.fulfilled,
+      (state: IAuthState, action: PayloadAction<IGoogleResponse>) => {
+        state.isLoading = false;
+        state.error = null;
+        state.url = action.payload.url;
+      },
+    );
+
+    builder.addCase(
+      fetchGoogleCallback.fulfilled,
+      (state: IAuthState, action: PayloadAction<IGoogleCallback>) => {
+        state.isLoading = false;
+        state.error = null;
+        state.accessToken = action.payload.access_token;
+      },
+    );
+
     builder
       .addCase(logOut.fulfilled, () => {
         return initialState;
@@ -124,6 +151,7 @@ const authSlice = createSlice({
           changePassword.pending,
           verifyEmail.pending,
           recoveryPassword.pending,
+          fetchGoogleAuth.pending,
         ),
         handlePending,
       )
@@ -138,12 +166,13 @@ const authSlice = createSlice({
           changePassword.rejected,
           verifyEmail.rejected,
           recoveryPassword.rejected,
+          fetchGoogleAuth.rejected,
         ),
         handleRejected,
       );
   },
 });
 
-export const { resetPendingUserId, clearError } = authSlice.actions;
+export const { clearId, resendEmail, clearError } = authSlice.actions;
 
 export default authSlice.reducer;

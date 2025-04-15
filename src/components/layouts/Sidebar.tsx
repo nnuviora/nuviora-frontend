@@ -21,7 +21,6 @@ import {
   PiggyBank,
   Mail,
   Heart,
-  LifeBuoy,
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
@@ -42,7 +41,6 @@ const iconMap: { [key: string]: React.ComponentType } = {
   Heart,
 };
 const iconMapFooter: { [key: string]: React.ComponentType } = {
-  LifeBuoy,
   LogOut,
 };
 
@@ -59,7 +57,7 @@ const AppSidebar = () => {
       variant="floating"
       collapsible={isMobile ? "offcanvas" : "icon"}
       className={cn(
-        "xl2:h-[calc(100vh-129px-24px)] xl2:w-(--sidebar-width) h-[calc(100vh-116px-91px)] w-full group-data-[collapsible=icon]:items-center group-data-[variant=floating]:rounded-2xl md:w-[280px] lg:h-[calc(100vh-116px-24px)]",
+        "xl2:h-[calc(100vh-129px-24px)] xl2:w-(--sidebar-width) h-[calc(100vh-116px-91px)] w-full group-data-[collapsible=icon]:items-center group-data-[variant=floating]:rounded-2xl md:w-[280px]",
       )}
     >
       <SidebarHeader className="mb-6">
@@ -120,21 +118,11 @@ const AppSidebar = () => {
                 const IconComponentFooter = iconMapFooter[item.icon];
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={pathname === `/${item.url}`}
-                    >
-                      {item.url ? (
-                        <a href={item.url}>
-                          <IconComponentFooter />
-                          <span>{item.title}</span>
-                        </a>
-                      ) : (
-                        <button onClick={handleClick}>
-                          <IconComponentFooter />
-                          <span>{item.title}</span>
-                        </button>
-                      )}
+                    <SidebarMenuButton asChild>
+                      <button onClick={handleClick}>
+                        <IconComponentFooter />
+                        <span>{item.title}</span>
+                      </button>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

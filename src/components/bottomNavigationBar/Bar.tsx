@@ -1,4 +1,3 @@
-import { Button } from "../ui";
 import {
   Ellipsis,
   Heart,
@@ -7,6 +6,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui";
 
 export default function Bar() {
   const router = useRouter();

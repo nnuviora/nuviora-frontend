@@ -99,7 +99,6 @@ export const PasswordRecoveryFormPassword = () => {
         )}
       </div>
 
-      {/* <Button type="submit">Відновити пароль</Button> */}
       <Button className="font-semibold" disabled={isLoading}>
         {!isLoading ? (
           "Відновити пароль"

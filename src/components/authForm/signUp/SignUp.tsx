@@ -13,22 +13,19 @@ import { SingUpForm } from "@components/authForm/signUp/SignUpForm";
 import FormFooter from "@components/authForm/formFooter";
 import Image from "next/image";
 import { useEffect } from "react";
-import {
-  selectAuthError,
-  selectPendingUserId,
-} from "@lib/redux/auth/selectors";
+import { selectAuthError, selectIdUser } from "@lib/redux/auth/selectors";
 import { clearError } from "@lib/redux/auth/slice";
 import { notify } from "@components/notifi/notifi";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 
 export function SignUp() {
   const isSignUp = useAppSelector(selectIsSignUp);
-  const pendingUserId = useAppSelector(selectPendingUserId);
+  const userId = useAppSelector(selectIdUser);
   const dispatch = useAppDispatch();
   const IsError = useAppSelector(selectAuthError);
 
   useEffect(() => {
-    if (pendingUserId !== "") {
+    if (userId !== "") {
       notify({
         message: "На ваш email відправлено код підтвердження",
         type: "success",
@@ -40,7 +37,7 @@ export function SignUp() {
       notify({ message: IsError, type: "error" });
       dispatch(clearError());
     }
-  }, [IsError, pendingUserId, dispatch]);
+  }, [IsError, userId, dispatch]);
 
   return (
     <>
@@ -50,7 +47,7 @@ export function SignUp() {
       >
         <DialogContent
           aria-describedby={undefined}
-          className="flex w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:flex-row"
+          className="flex min-h-3/5 w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:min-h-4/5 lg:flex-row"
         >
           <div className="xl2:px-25 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-2/3 lg:px-20 xl:w-1/2">
             <DialogHeader>
@@ -68,7 +65,7 @@ export function SignUp() {
                 }}
               >
                 <span className="body-text mr-1 text-[var(--text-grey)]">
-                  Вже маєте акаунт?
+                  Вже маєте аккаунт?
                 </span>
                 Увійти
               </Button>
