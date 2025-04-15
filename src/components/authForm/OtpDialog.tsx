@@ -14,7 +14,7 @@ import { notify } from "@components/notifi/notifi";
 import ResendTimer from "@components/authForm/validateForm/timer";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { clearError } from "@/lib/redux/auth/slice";
-import Link from "next/link";
+
 
 interface OtpDialogProps {
   formComponent: React.ReactNode;
@@ -72,12 +72,6 @@ export const OtpDialog = ({
 
         <DialogFooter className="flex flex-1 flex-col justify-between">
           <ResendTimer />
-          <Link
-            className="font-[family-name:var(--font-roboto)] text-[20px] font-semibold text-[var(--text-black)]"
-            href="/"
-          >
-            Служба підтримки
-          </Link>
         </DialogFooter>
       </DialogContent>
     </Dialog>
