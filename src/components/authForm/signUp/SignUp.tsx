@@ -47,7 +47,7 @@ export function SignUp() {
       >
         <DialogContent
           aria-describedby={undefined}
-          className="flex w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:flex-row"
+          className="flex min-h-3/5 w-[90%] max-w-[1280px] flex-col gap-0 p-0 lg:min-h-4/5 lg:flex-row"
         >
           <div className="xl2:px-25 flex w-full flex-col justify-center gap-4 px-5 py-15 sm:px-20 lg:w-2/3 lg:px-20 xl:w-1/2">
             <DialogHeader>
