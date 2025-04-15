@@ -6,11 +6,13 @@ import { PasswordRecoveryPassword } from "@components/authForm/passwordRecovery/
 import { useAppSelector } from "@lib/redux/hooks";
 import {
   selectIsLogOut,
+  selectIsMenuOpen,
   selectIsPasswordRecoveryEmail,
   selectIsPasswordRecoveryPassword,
   selectIsSignIn,
   selectIsSignUp,
 } from "@lib/redux/toggleModal/selectors";
+import { Menu } from "../sidebar-components/Menu";
 
 export default function Modal() {
   const isSignIn = useAppSelector(selectIsSignIn);
@@ -20,6 +22,8 @@ export default function Modal() {
   const isPasswordRecoveryPassword = useAppSelector(
     selectIsPasswordRecoveryPassword,
   );
+  const isMenuOpen = useAppSelector(selectIsMenuOpen);
+
   return (
     <>
       {isSignIn && <SignIn />}
@@ -27,6 +31,7 @@ export default function Modal() {
       {isSignUp && <SignUp />}
       {isPasswordRecoveryEmail && <PasswordRecoveryEmail />}
       {isPasswordRecoveryPassword && <PasswordRecoveryPassword />}
+      {isMenuOpen && <Menu />}
     </>
   );
 }

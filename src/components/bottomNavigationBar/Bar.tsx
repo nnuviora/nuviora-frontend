@@ -7,9 +7,13 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { openModal } from "@/lib/redux/toggleModal/slice";
 
 export default function Bar() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
   return (
     <div className="flex h-[75px] w-full items-center justify-around px-1 sm:justify-center sm:gap-10">
       <Button
@@ -41,7 +45,10 @@ export default function Bar() {
           </p>
         </div>
       </Button>
-      <Button className="h-15 w-15 bg-transparent p-3">
+      <Button
+        className="h-15 w-15 bg-transparent p-3"
+        onClick={() => dispatch(openModal("isMenuOpen"))}
+      >
         <div className="flex flex-col items-center justify-center gap-1">
           <Ellipsis size="24 " className="stroke-[var(--stroke-default)]" />
           <p className="captions-text captions-text text-[var(--text-grey)]">

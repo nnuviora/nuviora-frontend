@@ -10,6 +10,7 @@ import {
   verifyEmailApi,
   changePasswordApi,
   fetchGoogleAuthApi,
+  fetchGoogleCallbackApi,
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
@@ -167,11 +168,11 @@ export const fetchGoogleAuth = createAsyncThunk<
 
 export const fetchGoogleCallback = createAsyncThunk<
   IGoogleCallback,
-  void,
+  string,
   { rejectValue: string }
->("auth/fetchGoogleCallback", async (_, { rejectWithValue }) => {
+>("auth/fetchGoogleCallback", async (code: string, { rejectWithValue }) => {
   try {
-    const response = await fetchGoogleAuthApi();
+    const response = await fetchGoogleCallbackApi(code);
     return response.data;
   } catch (err) {
     return rejectWithValue(handleApiError(err, "Validation failed"));
