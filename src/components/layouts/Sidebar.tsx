@@ -28,9 +28,10 @@ import {
 import items from "../../../data/sidebar-items.json";
 import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
-import { useAppDispatch } from "@/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { openModal } from "@/lib/redux/toggleModal/slice";
 import { usePathname } from "next/navigation";
+import { selectUser } from "@/lib/redux/user/selectors";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,
@@ -48,6 +49,8 @@ const AppSidebar = () => {
   const dispatch = useAppDispatch();
   const { state, isMobile } = useSidebar();
   const pathname = usePathname();
+  const { firstName = "Тарас", lastName = "Шевченко" } =
+    useAppSelector(selectUser) || {};
 
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
@@ -86,7 +89,7 @@ const AppSidebar = () => {
         </Avatar>
         {state === "expanded" && (
           <p className="category-text text-[var(--black)] transition-all duration-200 ease-linear">
-            Тарас Шевченко
+            {`${firstName} ${lastName}`}
           </p>
         )}
       </SidebarHeader>

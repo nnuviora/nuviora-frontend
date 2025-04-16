@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { fetchProfile } from "@lib/redux/user/operations";
 import { useAppDispatch, useAppSelector } from "@lib/redux/hooks";
 import AvatarHeader from "@components/Header/avatarHeader";
+import Modal from "./modal";
 
 export function Header() {
   const deviceType = useDeviceType();
@@ -81,6 +82,7 @@ export function Header() {
           </div>
         )}
       </div>
+      <Modal />
     </header>
   );
 }
