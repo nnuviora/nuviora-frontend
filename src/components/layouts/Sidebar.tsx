@@ -82,6 +82,7 @@ const AppSidebar = () => {
           className={cn(
             "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-14",
           )}
+          isEdit={state !== "collapsed"}
         >
           <AvatarImage src="https://github.com/shadcn.png" />
 
