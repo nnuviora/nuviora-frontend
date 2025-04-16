@@ -21,7 +21,6 @@ import {
   PiggyBank,
   Mail,
   Heart,
-  LifeBuoy,
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
@@ -43,7 +42,6 @@ const iconMap: { [key: string]: React.ComponentType } = {
   Heart,
 };
 const iconMapFooter: { [key: string]: React.ComponentType } = {
-  LifeBuoy,
   LogOut,
 };
 
@@ -123,21 +121,11 @@ const AppSidebar = () => {
                 const IconComponentFooter = iconMapFooter[item.icon];
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={pathname === `/${item.url}`}
-                    >
-                      {item.url ? (
-                        <a href={item.url}>
-                          <IconComponentFooter />
-                          <span>{item.title}</span>
-                        </a>
-                      ) : (
-                        <button onClick={handleClick}>
-                          <IconComponentFooter />
-                          <span>{item.title}</span>
-                        </button>
-                      )}
+                    <SidebarMenuButton asChild>
+                      <button onClick={handleClick}>
+                        <IconComponentFooter />
+                        <span>{item.title}</span>
+                      </button>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
