@@ -49,6 +49,7 @@ export function Menu() {
         side="left"
         className="w-6/7 rounded-tr-2xl border-none"
         hideCloseButton
+        aria-describedby={undefined}
       >
         <SheetHeader className="xl2:max-w-[90rem] xl2:min-h-[80px] xl2:px-18 flex min-h-[60px] w-full flex-row items-center rounded-tr-2xl bg-[var(--stroke-normal)] p-0 pl-4 md:min-h-[64px]">
           <div className="justify-items-start">

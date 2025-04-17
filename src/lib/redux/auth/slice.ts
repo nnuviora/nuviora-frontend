@@ -133,6 +133,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.accessToken = action.payload.access_token;
+        state.isAuthenticated = true;
       },
     );
 
