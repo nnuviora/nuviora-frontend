@@ -2,7 +2,7 @@ export interface IUser {
   first_name?: string | null;
   last_name?: string | null;
   username?: string | null;
-  email: string | null;
+  email: string;
   avatar?: string | null;
   phone?: string | null;
   birthDate?: Date | null;

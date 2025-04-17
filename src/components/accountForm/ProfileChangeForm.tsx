@@ -68,7 +68,7 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    defaultValue={user?.last_name}
+                    value={user?.last_name ?? ""}
                     placeholder="Шевченко"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -112,7 +112,7 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    value={user?.first_name}
+                    value={user?.first_name ?? ""}
                     placeholder="Тарас"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
