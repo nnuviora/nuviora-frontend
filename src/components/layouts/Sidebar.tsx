@@ -49,8 +49,11 @@ const AppSidebar = () => {
   const dispatch = useAppDispatch();
   const { state, isMobile } = useSidebar();
   const pathname = usePathname();
-  const { firstName = "Тарас", lastName = "Шевченко" } =
-    useAppSelector(selectUser) || {};
+  const user = useAppSelector(selectUser) || null;
+
+  const first_name = user?.first_name ?? "Тарас";
+  const last_name = user?.last_name ?? "Шевченко";
+  const username = `${first_name.charAt(0).toUpperCase()}${last_name.charAt(0).toUpperCase()}`;
 
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
@@ -86,11 +89,11 @@ const AppSidebar = () => {
         >
           <AvatarImage src="https://github.com/shadcn.png" />
 
-          <AvatarFallback>ПІ</AvatarFallback>
+          <AvatarFallback>{username}</AvatarFallback>
         </Avatar>
         {state === "expanded" && (
           <p className="category-text text-[var(--black)] transition-all duration-200 ease-linear">
-            {`${firstName} ${lastName}`}
+            {`${first_name} ${last_name}`}
           </p>
         )}
       </SidebarHeader>

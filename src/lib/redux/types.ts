@@ -1,11 +1,12 @@
 export interface IUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  avatar?: string;
-  phone?: string;
+  first_name?: string | null;
+  last_name?: string | null;
+  username?: string | null;
+  email: string | null;
+  avatar?: string | null;
+  phone?: string | null;
   birthDate?: Date | null;
-  address: string;
+  address: string | null;
 }
 
 export interface IUserState {
