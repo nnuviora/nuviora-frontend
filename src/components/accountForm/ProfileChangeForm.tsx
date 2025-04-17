@@ -30,8 +30,8 @@ export default function ProfileChangeForm() {
     formState: { errors },
   } = useForm<IProfileFormData>({
     defaultValues: {
-      firstname: user?.firstName || "",
-      lastname: user?.lastName || "",
+      firstname: user?.first_name || "",
+      lastname: user?.last_name || "",
       email: user?.email || "",
       about: "",
     },
@@ -68,7 +68,7 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    defaultValue={user?.lastName}
+                    value={user?.last_name ?? ""}
                     placeholder="Шевченко"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -86,7 +86,7 @@ export default function ProfileChangeForm() {
                   )}
                 </>
               ) : (
-                <p>{user?.lastName || "-"}</p>
+                <p>{user?.last_name || "-"}</p>
               )}
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    value={user?.firstName}
+                    value={user?.first_name ?? ""}
                     placeholder="Тарас"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -130,7 +130,7 @@ export default function ProfileChangeForm() {
                   )}
                 </>
               ) : (
-                <p>{user?.firstName || "-"}</p>
+                <p>{user?.first_name || "-"}</p>
               )}
             </div>
           </div>

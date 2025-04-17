@@ -31,8 +31,10 @@ import { useRouter } from "next/navigation";
 export function Menu() {
   const dispatch = useAppDispatch();
   const isMenuOpen = useAppSelector(selectIsMenuOpen);
-  const { firstName = "Тарас", lastName = "Шевченко" } =
-    useAppSelector(selectUser) || {};
+  const user = useAppSelector(selectUser) || null;
+
+  const first_name = user?.first_name ?? "Тарас";
+  const last_name = user?.last_name ?? "Шевченко";
   const router = useRouter();
 
   const handleClick = () => {
@@ -71,7 +73,7 @@ export function Menu() {
         <div className="flex flex-col gap-10 p-5">
           <Button className="button-text" onClick={handleClick}>
             <span className="font-semibold">
-              Вітаємо, {`${firstName} ${lastName}`}
+              Вітаємо, {`${first_name} ${last_name}`}
             </span>
           </Button>
 
