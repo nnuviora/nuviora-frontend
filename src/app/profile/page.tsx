@@ -13,22 +13,38 @@ import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { selectUser } from "@/lib/redux/user/selectors";
-// import { IUser } from "@/lib/redux/types";
 
 const ProfilePage = ({}) => {
   const router = useRouter();
 
-  // const {
-  //   first_name = "Тарас",
-  //   last_name = "Шевченко",
-  //   username = `first_name.charAt(0).toUpperCase()+last_name.charAt(0).toUpperCase()`,
-  // } = useAppSelector(selectUser) || {};
-
   const user = useAppSelector(selectUser) || null;
 
-  const first_name = user?.first_name ?? "Тарас";
-  const last_name = user?.last_name ?? "Шевченко";
-  const username = `${first_name.charAt(0).toUpperCase()}${last_name.charAt(0).toUpperCase()}`;
+  const first_name = user?.first_name?.trim();
+  const last_name = user?.last_name?.trim();
+  const email = user?.email?.trim();
+
+  let usernameInitials = "";
+
+  if (first_name && last_name) {
+    usernameInitials = `${first_name[0].toUpperCase()}${last_name[0].toUpperCase()}`;
+  } else if (first_name) {
+    usernameInitials = first_name[0].toUpperCase();
+  } else if (last_name) {
+    usernameInitials = last_name[0].toUpperCase();
+  } else if (email) {
+    usernameInitials = email[0].toUpperCase();
+  } else {
+    return;
+  }
+
+  const fullName =
+    first_name && last_name
+      ? `${first_name} ${last_name}`
+      : first_name
+        ? first_name
+        : last_name
+          ? last_name
+          : "Гість";
 
   const handleBack = () => {
     router.back();
@@ -50,10 +66,10 @@ const ProfilePage = ({}) => {
         <Avatar className="size-32 bg-[#eef0fd]">
           <AvatarImage src="https://github.com/shadcn.png" />
 
-          <AvatarFallback>{username}</AvatarFallback>
+          <AvatarFallback>{usernameInitials}</AvatarFallback>
         </Avatar>
 
-        <p className="body-text text-[var(--text-black)]">{`${first_name} ${last_name}`}</p>
+        <p className="body-text text-[var(--text-black)]">{fullName}</p>
       </div>
       <ProfileTabs />
     </section>

@@ -5,8 +5,6 @@ import { useAppDispatch } from "@/lib/redux/hooks";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-// interface PageProps {}
-
 const Page = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
