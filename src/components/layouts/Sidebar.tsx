@@ -32,6 +32,8 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { openModal } from "@/lib/redux/toggleModal/slice";
 import { usePathname } from "next/navigation";
 import { selectUser } from "@/lib/redux/user/selectors";
+import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
+import { useProfile } from "@/hoc/useProfile";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,
@@ -49,8 +51,11 @@ const AppSidebar = () => {
   const dispatch = useAppDispatch();
   const { state, isMobile } = useSidebar();
   const pathname = usePathname();
-  const user = useAppSelector(selectUser) || null;
-
+  // const user = useAppSelector(selectUser) || null;
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  if (!profile) return;
+  const user = profile.data;
   const first_name = user?.first_name?.trim();
   const last_name = user?.last_name?.trim();
   const email = user?.email?.trim();

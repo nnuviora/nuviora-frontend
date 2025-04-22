@@ -13,11 +13,17 @@ import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { selectUser } from "@/lib/redux/user/selectors";
+import { useProfile } from "@/hoc/useProfile";
+import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 
 const ProfilePage = ({}) => {
   const router = useRouter();
 
-  const user = useAppSelector(selectUser) || null;
+  // const user = useAppSelector(selectUser) || null;
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  if (!profile) return;
+  const user = profile.data;
 
   const first_name = user?.first_name?.trim();
   const last_name = user?.last_name?.trim();
