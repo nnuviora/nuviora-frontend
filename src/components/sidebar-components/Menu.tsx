@@ -33,8 +33,17 @@ export function Menu() {
   const isMenuOpen = useAppSelector(selectIsMenuOpen);
   const user = useAppSelector(selectUser) || null;
 
-  const first_name = user?.first_name ?? "Тарас";
-  const last_name = user?.last_name ?? "Шевченко";
+  const first_name = user?.first_name?.trim();
+  const last_name = user?.last_name?.trim();
+  const fullName =
+    first_name && last_name
+      ? `${first_name} ${last_name}`
+      : first_name
+        ? first_name
+        : last_name
+          ? last_name
+          : "Гість";
+
   const router = useRouter();
 
   const handleClick = () => {
@@ -72,9 +81,7 @@ export function Menu() {
         </SheetHeader>
         <div className="flex flex-col gap-10 p-5">
           <Button className="button-text" onClick={handleClick}>
-            <span className="font-semibold">
-              Вітаємо, {`${first_name} ${last_name}`}
-            </span>
+            <span className="font-semibold">Вітаємо, {fullName}</span>
           </Button>
 
           <nav className="flex flex-col gap-4 text-sm">

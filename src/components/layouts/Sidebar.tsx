@@ -51,10 +51,32 @@ const AppSidebar = () => {
   const pathname = usePathname();
   const user = useAppSelector(selectUser) || null;
 
-  const first_name = user?.first_name ?? "Тарас";
-  const last_name = user?.last_name ?? "Шевченко";
-  const username = `${first_name.charAt(0).toUpperCase()}${last_name.charAt(0).toUpperCase()}`;
+  const first_name = user?.first_name?.trim();
+  const last_name = user?.last_name?.trim();
+  const email = user?.email?.trim();
 
+  let usernameInitials = "";
+
+  if (first_name && last_name) {
+    usernameInitials = `${first_name[0].toUpperCase()}${last_name[0].toUpperCase()}`;
+  } else if (first_name) {
+    usernameInitials = first_name[0].toUpperCase();
+  } else if (last_name) {
+    usernameInitials = last_name[0].toUpperCase();
+  } else if (email) {
+    usernameInitials = email[0].toUpperCase();
+  } else {
+    return;
+  }
+
+  const fullName =
+    first_name && last_name
+      ? `${first_name} ${last_name}`
+      : first_name
+        ? first_name
+        : last_name
+          ? last_name
+          : "Гість";
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
   };
@@ -89,11 +111,11 @@ const AppSidebar = () => {
         >
           <AvatarImage src="https://github.com/shadcn.png" />
 
-          <AvatarFallback>{username}</AvatarFallback>
+          <AvatarFallback>{usernameInitials}</AvatarFallback>
         </Avatar>
         {state === "expanded" && (
           <p className="category-text text-[var(--black)] transition-all duration-200 ease-linear">
-            {`${first_name} ${last_name}`}
+            {fullName}
           </p>
         )}
       </SidebarHeader>
