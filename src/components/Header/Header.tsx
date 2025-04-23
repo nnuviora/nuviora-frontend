@@ -7,7 +7,6 @@ import { openModal } from "@lib/redux/toggleModal/slice";
 import { useDeviceType } from "@/hooks";
 import Link from "next/link";
 import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
-import { fetchProfile } from "@lib/redux/user/operations";
 import { useAppDispatch, useAppSelector } from "@lib/redux/hooks";
 import AvatarHeader from "@components/Header/avatarHeader";
 import Modal from "./modal";
