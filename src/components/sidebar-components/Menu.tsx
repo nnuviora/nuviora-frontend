@@ -28,7 +28,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 import { useProfile } from "@/hoc/useProfile";
-import { formatUserName } from "@/utils/formatUserName";
+import { formatUserName } from "@/lib/utils/formatUserName";
 
 export function Menu() {
   const dispatch = useAppDispatch();

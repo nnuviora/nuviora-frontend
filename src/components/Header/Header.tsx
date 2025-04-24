@@ -19,6 +19,7 @@ export function Header() {
   const dispatch = useAppDispatch();
 
   const { data: user, isLoading, error } = useProfile(isAuthenticated);
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   console.log(user);
