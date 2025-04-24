@@ -13,9 +13,9 @@ import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 import { useAppSelector } from "@/lib/redux/hooks";
 
-import { useProfile } from "@/hoc/useProfile";
 import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 import { formatUserName } from "@/utils/formatUserName";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 const ProfilePage = ({}) => {
   const router = useRouter();

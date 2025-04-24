@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchProfileApi } from "@/api/profileApi";
+import { fetchProfileApi } from "@/api/tanstackReactQuery/profile/requests";
 
 export const useProfile = (isAuthenticated: boolean) => {
   return useQuery({
