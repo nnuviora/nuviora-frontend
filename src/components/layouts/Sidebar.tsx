@@ -32,8 +32,8 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { openModal } from "@/lib/redux/toggleModal/slice";
 import { usePathname } from "next/navigation";
 import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
-import { useProfile } from "@/hoc/useProfile";
 import { formatUserName } from "@/lib/utils/formatUserName";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,

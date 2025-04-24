@@ -10,7 +10,7 @@ import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 import { useAppDispatch, useAppSelector } from "@lib/redux/hooks";
 import AvatarHeader from "@components/Header/avatarHeader";
 import Modal from "./modal";
-import { useProfile } from "@/hoc/useProfile";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 export function Header() {
   const deviceType = useDeviceType();

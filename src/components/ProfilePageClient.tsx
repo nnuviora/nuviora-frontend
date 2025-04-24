@@ -13,7 +13,7 @@ import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 import { useAppSelector } from "@/lib/redux/hooks";
 
-import { useProfile } from "@/hoc/useProfile";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 import { formatUserName } from "@/lib/utils/formatUserName";
 

@@ -13,9 +13,9 @@
 // import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 // import { useAppSelector } from "@/lib/redux/hooks";
 
-// import { useProfile } from "@/hoc/useProfile";
 // import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 // import { formatUserName } from "@/lib/utils/formatUserName";
+// import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 // const ProfilePage = ({}) => {
 //   const router = useRouter();
@@ -62,7 +62,7 @@
 
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import getQueryClient from "@/lib/utils/getQueryClient";
-import { fetchProfileApi } from "@/api/profileApi";
+import { fetchProfileApi } from "@/api/tanstackReactQuery/profile/requests";
 import ProfilePageClient from "@/components/ProfilePageClient";
 
 export default async function ProfilePage() {
