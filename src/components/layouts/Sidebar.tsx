@@ -31,7 +31,9 @@ import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { openModal } from "@/lib/redux/toggleModal/slice";
 import { usePathname } from "next/navigation";
-import { selectUser } from "@/lib/redux/user/selectors";
+import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
+import { useProfile } from "@/hoc/useProfile";
+import { formatUserName } from "@/utils/formatUserName";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,
@@ -49,34 +51,15 @@ const AppSidebar = () => {
   const dispatch = useAppDispatch();
   const { state, isMobile } = useSidebar();
   const pathname = usePathname();
-  const user = useAppSelector(selectUser) || null;
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!profile) return;
+  const user = profile.data;
 
-  const first_name = user?.first_name?.trim();
-  const last_name = user?.last_name?.trim();
-  const email = user?.email?.trim();
+  const { initials, fullName } = formatUserName(user);
 
-  let usernameInitials = "";
-
-  if (first_name && last_name) {
-    usernameInitials = `${first_name[0].toUpperCase()}${last_name[0].toUpperCase()}`;
-  } else if (first_name) {
-    usernameInitials = first_name[0].toUpperCase();
-  } else if (last_name) {
-    usernameInitials = last_name[0].toUpperCase();
-  } else if (email) {
-    usernameInitials = email[0].toUpperCase();
-  } else {
-    return;
-  }
-
-  const fullName =
-    first_name && last_name
-      ? `${first_name} ${last_name}`
-      : first_name
-        ? first_name
-        : last_name
-          ? last_name
-          : "Гість";
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
   };
@@ -111,7 +94,7 @@ const AppSidebar = () => {
         >
           <AvatarImage src="https://github.com/shadcn.png" />
 
-          <AvatarFallback>{usernameInitials}</AvatarFallback>
+          <AvatarFallback>{initials}</AvatarFallback>
         </Avatar>
         {state === "expanded" && (
           <p className="category-text text-[var(--black)] transition-all duration-200 ease-linear">

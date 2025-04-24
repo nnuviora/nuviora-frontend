@@ -23,28 +23,25 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { selectIsMenuOpen } from "@/lib/redux/toggleModal/selectors";
 import { closeModal } from "@/lib/redux/toggleModal/slice";
 import { fetchProfile } from "@/lib/redux/user/operations";
-import { selectUser } from "@/lib/redux/user/selectors";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
+import { useProfile } from "@/hoc/useProfile";
+import { formatUserName } from "@/utils/formatUserName";
 
 export function Menu() {
   const dispatch = useAppDispatch();
   const isMenuOpen = useAppSelector(selectIsMenuOpen);
-  const user = useAppSelector(selectUser) || null;
-
-  const first_name = user?.first_name?.trim();
-  const last_name = user?.last_name?.trim();
-  const fullName =
-    first_name && last_name
-      ? `${first_name} ${last_name}`
-      : first_name
-        ? first_name
-        : last_name
-          ? last_name
-          : "Гість";
 
   const router = useRouter();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!profile) return;
+  const user = profile.data;
+  const { fullName } = formatUserName(user);
 
   const handleClick = () => {
     dispatch(fetchProfile());

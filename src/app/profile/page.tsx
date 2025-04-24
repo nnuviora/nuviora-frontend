@@ -12,39 +12,21 @@ import { ArrowLeft, PanelLeftOpen } from "lucide-react";
 import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
 import { useAppSelector } from "@/lib/redux/hooks";
-import { selectUser } from "@/lib/redux/user/selectors";
+
+import { useProfile } from "@/hoc/useProfile";
+import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
+import { formatUserName } from "@/utils/formatUserName";
 
 const ProfilePage = ({}) => {
   const router = useRouter();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!profile) return;
+  const user = profile.data;
 
-  const user = useAppSelector(selectUser) || null;
-
-  const first_name = user?.first_name?.trim();
-  const last_name = user?.last_name?.trim();
-  const email = user?.email?.trim();
-
-  let usernameInitials = "";
-
-  if (first_name && last_name) {
-    usernameInitials = `${first_name[0].toUpperCase()}${last_name[0].toUpperCase()}`;
-  } else if (first_name) {
-    usernameInitials = first_name[0].toUpperCase();
-  } else if (last_name) {
-    usernameInitials = last_name[0].toUpperCase();
-  } else if (email) {
-    usernameInitials = email[0].toUpperCase();
-  } else {
-    return;
-  }
-
-  const fullName =
-    first_name && last_name
-      ? `${first_name} ${last_name}`
-      : first_name
-        ? first_name
-        : last_name
-          ? last_name
-          : "Гість";
+  const { initials, fullName } = formatUserName(user);
 
   const handleBack = () => {
     router.back();
@@ -66,7 +48,7 @@ const ProfilePage = ({}) => {
         <Avatar className="size-32 bg-[#eef0fd]">
           <AvatarImage src="https://github.com/shadcn.png" />
 
-          <AvatarFallback>{usernameInitials}</AvatarFallback>
+          <AvatarFallback>{initials}</AvatarFallback>
         </Avatar>
 
         <p className="body-text text-[var(--text-black)]">{fullName}</p>
