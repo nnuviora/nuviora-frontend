@@ -27,8 +27,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
-import { useProfile } from "@/hoc/useProfile";
 import { formatUserName } from "@/utils/formatUserName";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 export function Menu() {
   const dispatch = useAppDispatch();
