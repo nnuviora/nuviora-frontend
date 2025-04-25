@@ -6,7 +6,5 @@ export const useProfile = (isAuthenticated: boolean) => {
     queryKey: ["profile"],
     queryFn: fetchProfileApi,
     enabled: isAuthenticated,
-    staleTime: 60 * 1000,
-    gcTime: 3 * 60 * 1000,
   });
 };

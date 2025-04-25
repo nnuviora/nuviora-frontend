@@ -7,7 +7,6 @@ import { Button } from "../ui";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { editProfile } from "@/lib/redux/user/slice";
 import { selectIsEdit } from "@/lib/redux/user/selectors";
-// import AddressChangeForm from "../accountForm/AddressChangeForm";
 
 export function ProfileTabs() {
   const dispatch = useAppDispatch();
@@ -27,11 +26,6 @@ export function ProfileTabs() {
           <Lock size={18} color="#BDBCDB" />
           <span>Зміна паролю</span>
         </TabsTrigger>
-
-        {/* <TabsTrigger value="address" className="button-text h-10 px-3 py-2">
-          <MapPinned size={18} color="#BDBCDB" />
-          <span>Моя адреса</span>
-        </TabsTrigger> */}
       </TabsList>
 
       <TabsContent value="account">
@@ -54,11 +48,6 @@ export function ProfileTabs() {
         <h2 className="subtitle3-text mb-6">Зміна паролю</h2>
         <PasswordChangeForm />
       </TabsContent>
-
-      {/* <TabsContent value="address">
-        <h2 className="subtitle3-text mb-6">Моя адреса</h2>
-        <AddressChangeForm />
-      </TabsContent> */}
     </Tabs>
   );
 }
