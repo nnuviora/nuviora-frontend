@@ -1,18 +1,5 @@
-import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
-import { IUser, IUserState } from "../types";
-import { fetchProfile } from "./operations";
-import { logOut } from "../auth/operations";
-
-const handlePending = (state: IUserState) => {
-  state.isLoading = true;
-  state.error = null;
-};
-
-const handleRejected = (state: IUserState, action: PayloadAction<unknown>) => {
-  state.isLoading = false;
-  state.error =
-    typeof action.payload === "string" ? action.payload : "Unknown error";
-};
+import { createSlice } from "@reduxjs/toolkit";
+import { IUserState } from "../types";
 
 const initialState: IUserState = {
   user: null,
@@ -31,23 +18,6 @@ const userSlice = createSlice({
     readProfile: (state) => {
       state.isEdit = false;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(
-      fetchProfile.fulfilled,
-      (state: IUserState, action: PayloadAction<IUser>) => {
-        state.user = action.payload;
-      },
-    );
-
-    builder
-      .addCase(logOut.fulfilled, () => {
-        return initialState;
-      })
-
-      .addMatcher(isAnyOf(fetchProfile.pending), handlePending)
-
-      .addMatcher(isAnyOf(fetchProfile.rejected), handleRejected);
   },
 });
 

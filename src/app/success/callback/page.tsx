@@ -1,26 +1,31 @@
 "use client";
 
 import { fetchGoogleCallback } from "@/lib/redux/auth/operations";
-import { useAppDispatch } from "@/lib/redux/hooks";
+import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const Page = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get("code");
 
-    if (code) {
+    if (code && !isAuthenticated) {
       dispatch(fetchGoogleCallback(code));
-      router.push("/");
     }
-  }, [dispatch, router]);
+  }, [dispatch, isAuthenticated]);
+
+  useEffect(() => {
+    if (isAuthenticated) router.push("/");
+  }, [router, isAuthenticated]);
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <p>Завершаем вход через Google...</p>
+      <p>Вхід через Google...</p>
     </div>
   );
 };

@@ -40,4 +40,4 @@ export const fetchGoogleAuthApi = async () =>
   await api.get(`/auth/google_auth`);
 
 export const fetchGoogleCallbackApi = async (code: string) =>
-  await api.get(`/auth/google/callback?code=${code}`);
+  api.get(`/auth/google/callback?code=${code}`);

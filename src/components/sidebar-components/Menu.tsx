@@ -22,12 +22,11 @@ import {
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { selectIsMenuOpen } from "@/lib/redux/toggleModal/selectors";
 import { closeModal } from "@/lib/redux/toggleModal/slice";
-import { fetchProfile } from "@/lib/redux/user/operations";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
-import { formatUserName } from "@/utils/formatUserName";
+import { formatUserName } from "@/lib/utils/formatUserName";
 import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 export function Menu() {
@@ -37,14 +36,15 @@ export function Menu() {
   const router = useRouter();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   if (!profile) return;
+
   const user = profile.data;
   const { fullName } = formatUserName(user);
 
   const handleClick = () => {
-    dispatch(fetchProfile());
     dispatch(closeModal("isMenuOpen"));
     router.push("/profile");
   };
