@@ -28,7 +28,6 @@ export default function ProfileChangeForm() {
   const { data: user } = useProfile(isAuthenticated);
   const { state } = useSidebar();
 
-  console.log("user :>> ", user);
   const {
     control,
     handleSubmit,
