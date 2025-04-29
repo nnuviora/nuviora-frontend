@@ -7,10 +7,10 @@ import { openModal } from "@lib/redux/toggleModal/slice";
 import { useDeviceType } from "@/hooks";
 import Link from "next/link";
 import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
-import { useEffect } from "react";
-import { fetchProfile } from "@lib/redux/user/operations";
 import { useAppDispatch, useAppSelector } from "@lib/redux/hooks";
 import AvatarHeader from "@components/Header/avatarHeader";
+import Modal from "./modal";
+// import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 export function Header() {
   const deviceType = useDeviceType();
@@ -18,15 +18,14 @@ export function Header() {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchProfile());
-    }
-  }, [dispatch, isAuthenticated]);
+  // const { data: user, isLoading, error } = useProfile(isAuthenticated);
+
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+  // console.log(user);
 
   function handleUser() {
     if (isAuthenticated) {
-      dispatch(fetchProfile());
       router.push("/profile");
     } else {
       dispatch(openModal("isSignIn"));
@@ -81,6 +80,7 @@ export function Header() {
           </div>
         )}
       </div>
+      <Modal />
     </header>
   );
 }

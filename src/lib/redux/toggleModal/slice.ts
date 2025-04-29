@@ -10,6 +10,7 @@ const initialState: IModalState = {
   isPasswordRecoveryPassword: false,
   isValidateOTP: false,
   isVerifyOTP: false,
+  isMenuOpen: false,
 };
 
 const modalSlice = createSlice({

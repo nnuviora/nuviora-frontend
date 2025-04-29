@@ -12,3 +12,4 @@ export const selectIsPasswordRecoveryPassword = (state: RootState) =>
 export const selectIsValidateOTP = (state: RootState) =>
   state.modal.isValidateOTP;
 export const selectIsVerifyOTP = (state: RootState) => state.modal.isVerifyOTP;
+export const selectIsMenuOpen = (state: RootState) => state.modal.isMenuOpen;

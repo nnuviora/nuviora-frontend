@@ -14,7 +14,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { setupTokenInterceptor } from "@/api/tokenInterceptor";
+import { setupTokenInterceptor } from "@/api/axios/tokenInterceptor";
 
 const persistedAuthReducer = persistReducer(
   {

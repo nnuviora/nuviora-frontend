@@ -28,9 +28,12 @@ import {
 import items from "../../../data/sidebar-items.json";
 import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
-import { useAppDispatch } from "@/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { openModal } from "@/lib/redux/toggleModal/slice";
 import { usePathname } from "next/navigation";
+import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
+import { formatUserName } from "@/lib/utils/formatUserName";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 const iconMap: { [key: string]: React.ComponentType } = {
   User,
@@ -48,6 +51,15 @@ const AppSidebar = () => {
   const dispatch = useAppDispatch();
   const { state, isMobile } = useSidebar();
   const pathname = usePathname();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!profile) return;
+
+  const user = profile.data;
+  const { initials, fullName } = formatUserName(user);
 
   const handleClick = () => {
     dispatch(openModal("isLogOut"));
@@ -79,14 +91,15 @@ const AppSidebar = () => {
           className={cn(
             "size-32 transition-all duration-200 ease-in-out group-data-[collapsible=icon]:size-14",
           )}
+          isEdit={state !== "collapsed"}
         >
           <AvatarImage src="https://github.com/shadcn.png" />
 
-          <AvatarFallback>ПІ</AvatarFallback>
+          <AvatarFallback>{initials}</AvatarFallback>
         </Avatar>
         {state === "expanded" && (
           <p className="category-text text-[var(--black)] transition-all duration-200 ease-linear">
-            Тарас Шевченко
+            {fullName}
           </p>
         )}
       </SidebarHeader>

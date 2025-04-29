@@ -15,24 +15,28 @@ import { Textarea } from "../ui/textarea";
 import { ProfileSchema } from "./profileValidationSchema";
 import { IProfileFormData } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { selectIsEdit, selectUser } from "@/lib/redux/user/selectors";
+import { selectIsEdit } from "@/lib/redux/user/selectors";
 import { readProfile } from "@/lib/redux/user/slice";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
+import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 
 export default function ProfileChangeForm() {
   const id = useId();
   const isEdit = useAppSelector(selectIsEdit);
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { data: user } = useProfile(isAuthenticated);
   const { state } = useSidebar();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<IProfileFormData>({
     defaultValues: {
-      firstname: user?.firstName || "",
-      lastname: user?.lastName || "",
-      email: user?.email || "",
+      firstname: user?.data.first_name || "",
+      lastname: user?.data.last_name || "",
+      email: user?.data.email || "",
       about: "",
     },
     resolver: yupResolver(ProfileSchema),
@@ -68,7 +72,7 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    defaultValue={user?.lastName}
+                    value={user?.data.last_name ?? ""}
                     placeholder="Шевченко"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -86,7 +90,7 @@ export default function ProfileChangeForm() {
                   )}
                 </>
               ) : (
-                <p>{user?.lastName || "-"}</p>
+                <p>{user?.data.last_name || "-"}</p>
               )}
             </div>
           </div>
@@ -112,7 +116,7 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    value={user?.firstName}
+                    value={user?.data.first_name ?? ""}
                     placeholder="Тарас"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -130,7 +134,7 @@ export default function ProfileChangeForm() {
                   )}
                 </>
               ) : (
-                <p>{user?.firstName || "-"}</p>
+                <p>{user?.data.first_name || "-"}</p>
               )}
             </div>
           </div>
@@ -156,7 +160,7 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    value={user?.email}
+                    value={user?.data.email}
                     placeholder="sto.hryven@example.com"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -172,7 +176,7 @@ export default function ProfileChangeForm() {
                   )}
                 </>
               ) : (
-                <p>{user?.email}</p>
+                <p>{user?.data.email}</p>
               )}
             </div>
           </div>

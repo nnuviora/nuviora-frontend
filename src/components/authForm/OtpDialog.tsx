@@ -15,7 +15,6 @@ import ResendTimer from "@components/authForm/validateForm/timer";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { clearError } from "@/lib/redux/auth/slice";
 
-
 interface OtpDialogProps {
   formComponent: React.ReactNode;
   isOpen: boolean;
@@ -55,7 +54,7 @@ export const OtpDialog = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className="xl2:py-32 xl2:px-38 xl2:w-[642px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 pt-20 pb-12 md:w-[465px] md:px-16 md:py-20"
+        className="xl2:py-32 xl2:px-38 xl2:w-[636px] xl2:pt-10 xl2:pb-4 flex h-full max-h-3/5 w-[335px] flex-col justify-start gap-5 overflow-x-hidden overflow-y-auto px-4 pt-6 pb-6 sm:px-2 md:w-[465px] md:overflow-hidden md:px-4 md:py-20 md:pt-6 lg:pt-10"
         aria-describedby={undefined}
       >
         <DialogHeader>

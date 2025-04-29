@@ -30,4 +30,5 @@ export interface IModalState {
   isPasswordRecoveryPassword: boolean;
   isValidateOTP: boolean;
   isVerifyOTP: boolean;
+  isMenuOpen: boolean;
 }

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { API_BASE_URL } from "@/constans";
+
 import { ILoginCredentials, IRegisterCredentials } from "@/lib/redux/types";
 import { IPasswordRecoveryCredentials } from "@/types";
+import { API_BASE_URL } from "@/api/axios/apiUrl";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -38,5 +39,5 @@ export const changePasswordApi = async (data: IPasswordRecoveryCredentials) =>
 export const fetchGoogleAuthApi = async () =>
   await api.get(`/auth/google_auth`);
 
-export const fetchGoogleCallbackApi = async () =>
-  await api.get(`/auth/google/callback`);
+export const fetchGoogleCallbackApi = async (code: string) =>
+  api.get(`/auth/google/callback?code=${code}`);

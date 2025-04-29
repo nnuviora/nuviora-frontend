@@ -1,6 +1,6 @@
 import { api } from "@/api/authApi";
-import store, { RootState } from "@/lib/redux/store";
-import { refreshAccessToken, logOut } from "@/lib/redux/auth/operations";
+import store, { RootState } from "@lib/redux/store";
+import { refreshAccessToken, logOut } from "@lib/redux/auth/operations";
 import Router from "next/router";
 
 export const setupTokenInterceptor = (getState: () => RootState) => {
