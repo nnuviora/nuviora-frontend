@@ -91,6 +91,7 @@ export default function ResendTimer(): JSX.Element {
   const [timeLeft, setTimeLeft] = useState<number>(10);
   const dispatch = useAppDispatch();
   const { resendValidationCode } = useAuth();
+
   useEffect(() => {
     if (timeLeft > 0) {
       const timer: NodeJS.Timeout = setTimeout(

@@ -121,7 +121,6 @@ export function SignUp() {
         type: "success",
       });
       dispatch(closeModal("isSignUp"));
-      console.log("after useEffect", userId);
       dispatch(openModal("isValidateOTP"));
     }
     if (IsError) {

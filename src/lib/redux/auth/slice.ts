@@ -1,14 +1,14 @@
 import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import {
-  logInUser,
-  logOut,
+  // logInUser,
+  // logOut,
   // registerUser,
   // validateRegistrationEmail,
   // resendValidationCode,
   refreshAccessToken,
-  recoveryPassword,
-  changePassword,
-  verifyEmail,
+  // recoveryPassword,
+  // changePassword,
+  // verifyEmail,
   // fetchGoogleAuth,
   // fetchGoogleCallback,
 } from "@lib/redux/auth/operations";
@@ -17,7 +17,7 @@ import {
   IAuthState,
   // IGoogleCallback,
   // IGoogleResponse,
-  IRegistrationResponse,
+  // IRegistrationResponse,
 } from "../types";
 
 const handlePending = (state: IAuthState) => {
@@ -76,8 +76,28 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
     },
 
+    addVerify: (state) => {
+      state.isVerify = true;
+    },
+
+    removeVerify: (state) => {
+      state.isVerify = false;
+    },
+
+    addPasswordChange: (state) => {
+      state.isPasswordChange = true;
+    },
+
+    removePasswordChange: (state) => {
+      state.isPasswordChange = false;
+    },
+
     resendEmail: (state) => {
       state.isResend = true;
+    },
+
+    removeResendEmail: (state) => {
+      state.isResend = false;
     },
 
     clearError: (state) => {
@@ -95,7 +115,7 @@ const authSlice = createSlice({
     //   },
     // );
 
-    builder.addCase(logInUser.fulfilled, setAuthSuccess);
+    // builder.addCase(logInUser.fulfilled, setAuthSuccess);
 
     // builder.addCase(validateRegistrationEmail.fulfilled, setAuthSuccess);
 
@@ -105,65 +125,67 @@ const authSlice = createSlice({
     //   state.isResend = false;
     // });
 
-    builder.addCase(refreshAccessToken.fulfilled, setAuthSuccess);
-
-    builder.addCase(
-      recoveryPassword.fulfilled,
-      (state: IAuthState, action: PayloadAction<IRegistrationResponse>) => {
-        state.isLoading = false;
-        state.error = null;
-        state.id = action.payload.id;
-      },
-    );
-
-    builder.addCase(verifyEmail.fulfilled, (state: IAuthState) => {
-      state.isLoading = false;
-      state.error = null;
-      state.isVerify = true;
-    });
-
-    builder.addCase(changePassword.fulfilled, (state: IAuthState) => {
-      state.isLoading = false;
-      state.error = null;
-      state.isVerify = false;
-      state.id = "";
-      state.isPasswordChange = true;
-    });
-
-    // builder.addCase(
-    //   fetchGoogleAuth.fulfilled,
-    //   (state: IAuthState, action: PayloadAction<IGoogleResponse>) => {
-    //     state.isLoading = false;
-    //     state.error = null;
-    //     state.url = action.payload.url;
-    //   },
-    // );
-
-    // builder.addCase(
-    //   fetchGoogleCallback.fulfilled,
-    //   (state: IAuthState, action: PayloadAction<IGoogleCallback>) => {
-    //     state.isLoading = false;
-    //     state.error = null;
-    //     state.accessToken = action.payload.access_token;
-    //     state.isAuthenticated = true;
-    //   },
-    // );
-
     builder
-      .addCase(logOut.fulfilled, () => {
-        return initialState;
-      })
+      .addCase(refreshAccessToken.fulfilled, setAuthSuccess)
+
+      // builder.addCase(
+      //   recoveryPassword.fulfilled,
+      //   (state: IAuthState, action: PayloadAction<IRegistrationResponse>) => {
+      //     state.isLoading = false;
+      //     state.error = null;
+      //     state.id = action.payload.id;
+      //   },
+      // );
+
+      // builder.addCase(verifyEmail.fulfilled, (state: IAuthState) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.isVerify = true;
+      // });
+
+      // builder
+      //   .addCase(changePassword.fulfilled, (state: IAuthState) => {
+      //     state.isLoading = false;
+      //     state.error = null;
+      //     state.isVerify = false;
+      //     state.id = "";
+      //     state.isPasswordChange = true;
+      //   })
+
+      // builder.addCase(
+      //   fetchGoogleAuth.fulfilled,
+      //   (state: IAuthState, action: PayloadAction<IGoogleResponse>) => {
+      //     state.isLoading = false;
+      //     state.error = null;
+      //     state.url = action.payload.url;
+      //   },
+      // );
+
+      // builder.addCase(
+      //   fetchGoogleCallback.fulfilled,
+      //   (state: IAuthState, action: PayloadAction<IGoogleCallback>) => {
+      //     state.isLoading = false;
+      //     state.error = null;
+      //     state.accessToken = action.payload.access_token;
+      //     state.isAuthenticated = true;
+      //   },
+      // );
+
+      // builder
+      //   .addCase(logOut.fulfilled, () => {
+      //     return initialState;
+      //   })
 
       .addMatcher(
         isAnyOf(
           // registerUser.pending,
-          logInUser.pending,
+          // logInUser.pending,
           // validateRegistrationEmail.pending,
           // resendValidationCode.pending,
           refreshAccessToken.pending,
-          changePassword.pending,
-          verifyEmail.pending,
-          recoveryPassword.pending,
+          // changePassword.pending,
+          // verifyEmail.pending,
+          // recoveryPassword.pending,
           // fetchGoogleAuth.pending,
         ),
         handlePending,
@@ -171,14 +193,14 @@ const authSlice = createSlice({
       .addMatcher(
         isAnyOf(
           // registerUser.rejected,
-          logInUser.rejected,
-          logOut.rejected,
+          // logInUser.rejected,
+          // logOut.rejected,
           // validateRegistrationEmail.rejected,
           // resendValidationCode.rejected,
           refreshAccessToken.rejected,
-          changePassword.rejected,
-          verifyEmail.rejected,
-          recoveryPassword.rejected,
+          // changePassword.rejected,
+          // verifyEmail.rejected,
+          // recoveryPassword.rejected,
           // fetchGoogleAuth.rejected,
         ),
         handleRejected,
@@ -191,7 +213,12 @@ export const {
   clearId,
   addAuthenticated,
   removeAuthenticated,
+  addVerify,
+  removeVerify,
+  addPasswordChange,
+  removePasswordChange,
   resendEmail,
+  removeResendEmail,
   clearError,
 } = authSlice.actions;
 
