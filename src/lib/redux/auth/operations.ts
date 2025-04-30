@@ -1,24 +1,24 @@
 import {
-  registerUserApi,
+  // registerUserApi,
   loginUserApi,
   logoutApi,
   refreshAccessTokenApi,
-  resendValidationCodeApi,
-  validateRegistrationEmailApi,
+  // resendValidationCodeApi,
+  // validateRegistrationEmailApi,
   api,
   requestRecoveryPasswordApi,
   verifyEmailApi,
   changePasswordApi,
-  fetchGoogleAuthApi,
-  fetchGoogleCallbackApi,
+  // fetchGoogleAuthApi,
+  // fetchGoogleCallbackApi,
 } from "@/api/authApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import {
-  IGoogleCallback,
-  IGoogleResponse,
+  // IGoogleCallback,
+  // IGoogleResponse,
   ILoginCredentials,
-  IRegisterCredentials,
+  // IRegisterCredentials,
   IRegistrationResponse,
 } from "../types";
 import { IPasswordRecoveryCredentials } from "@/types";
@@ -39,17 +39,17 @@ const handleApiError = (err: unknown, defaultMessage: string) => {
   return messages[status] || defaultMessage;
 };
 
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (userData: IRegisterCredentials, { rejectWithValue }) => {
-    try {
-      const response = await registerUserApi(userData);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(handleApiError(err, "Помилка реєстрації"));
-    }
-  },
-);
+// export const registerUser = createAsyncThunk(
+//   "auth/register",
+//   async (userData: IRegisterCredentials, { rejectWithValue }) => {
+//     try {
+//       const response = await registerUserApi(userData);
+//       return response.data;
+//     } catch (err) {
+//       return rejectWithValue(handleApiError(err, "Помилка реєстрації"));
+//     }
+//   },
+// );
 
 export const logInUser = createAsyncThunk(
   "auth/login",
@@ -63,29 +63,29 @@ export const logInUser = createAsyncThunk(
   },
 );
 
-export const validateRegistrationEmail = createAsyncThunk(
-  "auth/validateEmail",
-  async (otpCode: string, { rejectWithValue }) => {
-    try {
-      const response = await validateRegistrationEmailApi(otpCode);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(handleApiError(err, "Validation failed"));
-    }
-  },
-);
+// export const validateRegistrationEmail = createAsyncThunk(
+//   "auth/validateEmail",
+//   async (otpCode: string, { rejectWithValue }) => {
+//     try {
+//       const response = await validateRegistrationEmailApi(otpCode);
+//       return response.data;
+//     } catch (err) {
+//       return rejectWithValue(handleApiError(err, "Validation failed"));
+//     }
+//   },
+// );
 
-export const resendValidationCode = createAsyncThunk(
-  "auth/resendCode",
-  async (id: string, { rejectWithValue }) => {
-    try {
-      const response = await resendValidationCodeApi(id);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(handleApiError(err, "Validation failed"));
-    }
-  },
-);
+// export const resendValidationCode = createAsyncThunk(
+//   "auth/resendCode",
+//   async (id: string, { rejectWithValue }) => {
+//     try {
+//       const response = await resendValidationCodeApi(id);
+//       return response.data;
+//     } catch (err) {
+//       return rejectWithValue(handleApiError(err, "Validation failed"));
+//     }
+//   },
+// );
 
 export const refreshAccessToken = createAsyncThunk(
   "auth/refresh",
@@ -153,28 +153,28 @@ export const changePassword = createAsyncThunk<
   }
 });
 
-export const fetchGoogleAuth = createAsyncThunk<
-  IGoogleResponse,
-  void,
-  { rejectValue: string }
->("auth/fetchGoogleAuth", async (_, { rejectWithValue }) => {
-  try {
-    const response = await fetchGoogleAuthApi();
-    return response.data;
-  } catch (err) {
-    return rejectWithValue(handleApiError(err, "Validation failed"));
-  }
-});
+// export const fetchGoogleAuth = createAsyncThunk<
+//   IGoogleResponse,
+//   void,
+//   { rejectValue: string }
+// >("auth/fetchGoogleAuth", async (_, { rejectWithValue }) => {
+//   try {
+//     const response = await fetchGoogleAuthApi();
+//     return response.data;
+//   } catch (err) {
+//     return rejectWithValue(handleApiError(err, "Validation failed"));
+//   }
+// });
 
-export const fetchGoogleCallback = createAsyncThunk<
-  IGoogleCallback,
-  string,
-  { rejectValue: string }
->("auth/fetchGoogleCallback", async (code: string, { rejectWithValue }) => {
-  try {
-    const response = await fetchGoogleCallbackApi(code);
-    return response.data;
-  } catch (err) {
-    return rejectWithValue(handleApiError(err, "Validation failed"));
-  }
-});
+// export const fetchGoogleCallback = createAsyncThunk<
+//   IGoogleCallback,
+//   string,
+//   { rejectValue: string }
+// >("auth/fetchGoogleCallback", async (code: string, { rejectWithValue }) => {
+//   try {
+//     const response = await fetchGoogleCallbackApi(code);
+//     return response.data;
+//   } catch (err) {
+//     return rejectWithValue(handleApiError(err, "Validation failed"));
+//   }
+// });

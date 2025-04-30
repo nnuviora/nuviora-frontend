@@ -2,21 +2,21 @@ import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import {
   logInUser,
   logOut,
-  registerUser,
-  validateRegistrationEmail,
-  resendValidationCode,
+  // registerUser,
+  // validateRegistrationEmail,
+  // resendValidationCode,
   refreshAccessToken,
   recoveryPassword,
   changePassword,
   verifyEmail,
-  fetchGoogleAuth,
-  fetchGoogleCallback,
+  // fetchGoogleAuth,
+  // fetchGoogleCallback,
 } from "@lib/redux/auth/operations";
 import {
   IAuthResponse,
   IAuthState,
-  IGoogleCallback,
-  IGoogleResponse,
+  // IGoogleCallback,
+  // IGoogleResponse,
   IRegistrationResponse,
 } from "../types";
 
@@ -60,8 +60,20 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    addId: (state, action) => {
+      state.id = action.payload;
+    },
+
     clearId: (state) => {
       state.id = "";
+    },
+
+    addAuthenticated: (state) => {
+      state.isAuthenticated = true;
+    },
+
+    removeAuthenticated: (state) => {
+      state.isAuthenticated = false;
     },
 
     resendEmail: (state) => {
@@ -74,24 +86,24 @@ const authSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(
-      registerUser.fulfilled,
-      (state: IAuthState, action: PayloadAction<IRegistrationResponse>) => {
-        state.isLoading = false;
-        state.error = null;
-        state.id = action.payload.id;
-      },
-    );
+    // builder.addCase(
+    //   registerUser.fulfilled,
+    //   (state: IAuthState, action: PayloadAction<IRegistrationResponse>) => {
+    //     state.isLoading = false;
+    //     state.error = null;
+    //     state.id = action.payload.id;
+    //   },
+    // );
 
     builder.addCase(logInUser.fulfilled, setAuthSuccess);
 
-    builder.addCase(validateRegistrationEmail.fulfilled, setAuthSuccess);
+    // builder.addCase(validateRegistrationEmail.fulfilled, setAuthSuccess);
 
-    builder.addCase(resendValidationCode.fulfilled, (state: IAuthState) => {
-      state.isLoading = false;
-      state.error = null;
-      state.isResend = false;
-    });
+    // builder.addCase(resendValidationCode.fulfilled, (state: IAuthState) => {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.isResend = false;
+    // });
 
     builder.addCase(refreshAccessToken.fulfilled, setAuthSuccess);
 
@@ -118,24 +130,24 @@ const authSlice = createSlice({
       state.isPasswordChange = true;
     });
 
-    builder.addCase(
-      fetchGoogleAuth.fulfilled,
-      (state: IAuthState, action: PayloadAction<IGoogleResponse>) => {
-        state.isLoading = false;
-        state.error = null;
-        state.url = action.payload.url;
-      },
-    );
+    // builder.addCase(
+    //   fetchGoogleAuth.fulfilled,
+    //   (state: IAuthState, action: PayloadAction<IGoogleResponse>) => {
+    //     state.isLoading = false;
+    //     state.error = null;
+    //     state.url = action.payload.url;
+    //   },
+    // );
 
-    builder.addCase(
-      fetchGoogleCallback.fulfilled,
-      (state: IAuthState, action: PayloadAction<IGoogleCallback>) => {
-        state.isLoading = false;
-        state.error = null;
-        state.accessToken = action.payload.access_token;
-        state.isAuthenticated = true;
-      },
-    );
+    // builder.addCase(
+    //   fetchGoogleCallback.fulfilled,
+    //   (state: IAuthState, action: PayloadAction<IGoogleCallback>) => {
+    //     state.isLoading = false;
+    //     state.error = null;
+    //     state.accessToken = action.payload.access_token;
+    //     state.isAuthenticated = true;
+    //   },
+    // );
 
     builder
       .addCase(logOut.fulfilled, () => {
@@ -144,36 +156,43 @@ const authSlice = createSlice({
 
       .addMatcher(
         isAnyOf(
-          registerUser.pending,
+          // registerUser.pending,
           logInUser.pending,
-          validateRegistrationEmail.pending,
-          resendValidationCode.pending,
+          // validateRegistrationEmail.pending,
+          // resendValidationCode.pending,
           refreshAccessToken.pending,
           changePassword.pending,
           verifyEmail.pending,
           recoveryPassword.pending,
-          fetchGoogleAuth.pending,
+          // fetchGoogleAuth.pending,
         ),
         handlePending,
       )
       .addMatcher(
         isAnyOf(
-          registerUser.rejected,
+          // registerUser.rejected,
           logInUser.rejected,
           logOut.rejected,
-          validateRegistrationEmail.rejected,
-          resendValidationCode.rejected,
+          // validateRegistrationEmail.rejected,
+          // resendValidationCode.rejected,
           refreshAccessToken.rejected,
           changePassword.rejected,
           verifyEmail.rejected,
           recoveryPassword.rejected,
-          fetchGoogleAuth.rejected,
+          // fetchGoogleAuth.rejected,
         ),
         handleRejected,
       );
   },
 });
 
-export const { clearId, resendEmail, clearError } = authSlice.actions;
+export const {
+  addId,
+  clearId,
+  addAuthenticated,
+  removeAuthenticated,
+  resendEmail,
+  clearError,
+} = authSlice.actions;
 
 export default authSlice.reducer;
