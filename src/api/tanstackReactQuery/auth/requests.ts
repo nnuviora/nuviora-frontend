@@ -24,7 +24,6 @@ export const logoutApi = async () => await api.get("/auth/logout");
 
 export const refreshAccessTokenApi = async () =>
   await api.post("/auth/refresh_access");
-//змінити посилання в інтерцепторі
 
 export const requestRecoveryPasswordApi = async (
   email: Pick<ILoginCredentials, "email">,

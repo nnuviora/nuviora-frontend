@@ -9,7 +9,6 @@ export const selectIsResend = (state: RootState) => state.auth.isResend;
 export const selectIsAuthenticated = (state: RootState) =>
   state.auth.isAuthenticated;
 
-export const selectToken = (state: RootState) => state.auth.accessToken;
 export const selectIdUser = (state: RootState) => state.auth.id;
 export const selectIsVerify = (state: RootState) => state.auth.isVerify;
 export const selectIsPasswordChange = (state: RootState) =>
