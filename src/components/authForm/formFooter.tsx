@@ -3,15 +3,16 @@
 import { Button } from "@components/ui";
 import { FcGoogle } from "react-icons/fc";
 
-import { useAppDispatch } from "@/lib/redux/hooks";
-import { fetchGoogleAuth } from "@/lib/redux/auth/operations";
+import { useMutation } from "@tanstack/react-query";
+import { fetchGoogleAuthApi } from "@/api/tanstackReactQuery/auth/requests";
 
 export default function FormFooter() {
-  const dispatch = useAppDispatch();
-
-  const handleClick = () => {
-    dispatch(fetchGoogleAuth());
-  };
+  const { mutate: getGoogleAuthUrl } = useMutation({
+    mutationFn: async () => fetchGoogleAuthApi(),
+    onSuccess: (res) => {
+      window.location.href = res.data.url;
+    },
+  });
 
   return (
     <>
@@ -20,7 +21,7 @@ export default function FormFooter() {
         <Button
           variant="outline"
           className="w-full border-[var(--stroke-normal)]"
-          onClick={handleClick}
+          onClick={() => getGoogleAuthUrl()}
         >
           <div className="flex w-full items-center justify-center gap-3">
             <FcGoogle size={18} />
