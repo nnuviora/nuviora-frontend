@@ -19,8 +19,9 @@ import { PasswordRecoveryPassword } from "@components/authForm/passwordRecovery/
 import { ValidateOTP } from "@components/authForm/validateForm/validateOTP";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { VerifyOTP } from "../authForm/passwordRecovery/verifyOTP";
-import { selectIsAuthenticated, selectURL } from "@/lib/redux/auth/selectors";
-import { useEffect } from "react";
+import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
+// import { selectIsAuthenticated, selectURL } from "@/lib/redux/auth/selectors";
+// import { useEffect } from "react";
 
 const Footer = () => {
   const dispatch = useAppDispatch();
@@ -33,14 +34,13 @@ const Footer = () => {
   );
   const isValidateOTP = useAppSelector(selectIsValidateOTP);
   const isVerifyOTP = useAppSelector(selectIsVerifyOTP);
-
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
-  const url = useAppSelector(selectURL);
+  // const url = useAppSelector(selectURL);
 
-  useEffect(() => {
-    if (url) window.location.href = url;
-  }, [url]);
+  // useEffect(() => {
+  //   if (url) window.location.href = url;
+  // }, [url]);
 
   return (
     <footer>

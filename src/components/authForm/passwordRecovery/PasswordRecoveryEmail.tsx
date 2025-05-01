@@ -16,16 +16,17 @@ import { useEffect } from "react";
 import { selectAuthError, selectIdUser } from "@/lib/redux/auth/selectors";
 import { notify } from "@/components/notifi/notifi";
 import { clearError } from "@/lib/redux/auth/slice";
-import { logOut } from "@/lib/redux/auth/operations";
+import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export const PasswordRecoveryEmail = () => {
   const isPasswordRecoveryEmail = useAppSelector(selectIsPasswordRecoveryEmail);
   const dispatch = useAppDispatch();
   const userId = useAppSelector(selectIdUser);
   const IsError = useAppSelector(selectAuthError);
+  const { logoutMutation } = useAuth();
 
   useEffect(() => {
-    if (userId !== "") {
+    if (userId) {
       notify({ message: "Код для верифікації надіслано", type: "success" });
       dispatch(closeModal("isPasswordRecoveryEmail"));
       dispatch(openModal("isVerifyOTP"));
@@ -41,7 +42,7 @@ export const PasswordRecoveryEmail = () => {
       open={isPasswordRecoveryEmail}
       onOpenChange={() => {
         dispatch(closeModal("isPasswordRecoveryEmail"));
-        dispatch(logOut());
+        logoutMutation.mutate();
       }}
     >
       <DialogContent

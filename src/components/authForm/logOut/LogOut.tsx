@@ -14,11 +14,14 @@ import {
 import { selectIsLogOut } from "@lib/redux/toggleModal/selectors";
 import { closeModal } from "@lib/redux/toggleModal/slice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { logOut } from "@/lib/redux/auth/operations";
+// import { logOut } from "@/lib/redux/auth/operations";
+import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export const LogOut = () => {
   const islogOut = useAppSelector(selectIsLogOut);
   const dispatch = useAppDispatch();
+
+  const { logoutMutation } = useAuth();
 
   return (
     <AlertDialog
@@ -39,8 +42,11 @@ export const LogOut = () => {
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
+            // onClick={() => {
+            //   dispatch(logOut());
+            // }}
             onClick={() => {
-              dispatch(logOut());
+              logoutMutation.mutate();
             }}
           >
             Continue
