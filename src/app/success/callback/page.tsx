@@ -1,32 +1,20 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
-import { fetchGoogleCallbackApi } from "@/api/tanstackReactQuery/auth/requests";
 import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 import { useAppSelector } from "@/lib/redux/hooks";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 const Page = () => {
-  const router = useRouter();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { googleCallbackMutation } = useAuth();
 
   const code =
     typeof window !== "undefined"
       ? new URLSearchParams(window.location.search).get("code")
       : null;
 
-  const mutation = useMutation({
-    mutationFn: async (code: string) => {
-      await fetchGoogleCallbackApi(code);
-    },
-    onSuccess: () => {
-      router.push("/");
-    },
-  });
-
-  if (code && !isAuthenticated && mutation.status === "idle") {
-    console.log("mutation :>> ");
-    mutation.mutate(code);
+  if (code && !isAuthenticated && googleCallbackMutation.status === "idle") {
+    googleCallbackMutation.mutate(code);
   }
 
   return (

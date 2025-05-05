@@ -8,9 +8,7 @@ const initialState: IAuthState = {
   error: null,
   isResend: false,
   isAuthenticated: false,
-  isVerify: false,
   id: "",
-  isPasswordChange: false,
   url: "",
 };
 
@@ -34,22 +32,6 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
     },
 
-    addVerify: (state) => {
-      state.isVerify = true;
-    },
-
-    removeVerify: (state) => {
-      state.isVerify = false;
-    },
-
-    addPasswordChange: (state) => {
-      state.isPasswordChange = true;
-    },
-
-    removePasswordChange: (state) => {
-      state.isPasswordChange = false;
-    },
-
     resendEmail: (state) => {
       state.isResend = true;
     },
@@ -69,11 +51,6 @@ export const {
   clearId,
   addAuthenticated,
   removeAuthenticated,
-  addVerify,
-  removeVerify,
-  addPasswordChange,
-  // TODO Перевірити  removePasswordChange,
-  removePasswordChange,
   resendEmail,
   removeResendEmail,
   clearError, // TODO Видалити

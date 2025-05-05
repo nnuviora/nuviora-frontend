@@ -10,8 +10,6 @@ import { SignInSchema } from "@components/authForm/validationSchema";
 import { BarLoader } from "react-spinners";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
-import { notify } from "@components/notifi/notifi";
-import { AxiosError } from "axios";
 
 export function SignInForm() {
   const dispatch = useAppDispatch();
@@ -35,18 +33,6 @@ export function SignInForm() {
     loginMutation.mutate({ email: data.email, password: data.password });
     reset();
   };
-
-  if (loginMutation.isSuccess) {
-    notify({ message: "Аутентифікація успішна!", type: "success" });
-    dispatch(closeModal("isSignIn"));
-  }
-
-  if (loginMutation.isError) {
-    const axiosError = loginMutation.error as AxiosError<{ detail?: string }>;
-    const error = axiosError.response?.data?.detail || "Щось пішло не так ... ";
-    notify({ message: error, type: "error" });
-    loginMutation.reset();
-  }
 
   return (
     <form
