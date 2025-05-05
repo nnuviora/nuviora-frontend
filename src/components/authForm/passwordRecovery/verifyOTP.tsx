@@ -38,11 +38,9 @@
 // };
 "use client";
 
-import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
+import { closeModal } from "@lib/redux/toggleModal/slice";
 import { selectIsVerifyOTP } from "@lib/redux/toggleModal/selectors";
-
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { selectAuthError, selectIsVerify } from "@/lib/redux/auth/selectors";
 import { VerifyOTPForm } from "./verifyOTPForm";
 import { OtpDialog } from "../OtpDialog";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
@@ -50,8 +48,6 @@ import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 export const VerifyOTP = () => {
   const dispatch = useAppDispatch();
   const isVerifyOTP = useAppSelector(selectIsVerifyOTP);
-  const isVerify = useAppSelector(selectIsVerify);
-  const error = useAppSelector(selectAuthError);
 
   const { logoutMutation } = useAuth();
 
@@ -59,20 +55,12 @@ export const VerifyOTP = () => {
     dispatch(closeModal("isVerifyOTP"));
     logoutMutation.mutate();
   };
-  const handleSuccess = () => {
-    dispatch(closeModal("isVerifyOTP"));
-    dispatch(openModal("isPasswordRecoveryPassword"));
-  };
 
   return (
     <OtpDialog
       formComponent={<VerifyOTPForm />}
       isOpen={isVerifyOTP}
       onClose={handleClose}
-      isSuccess={isVerify}
-      successMessage="Верифікація пройшла успішно"
-      onSuccess={handleSuccess}
-      error={error}
     />
   );
 };

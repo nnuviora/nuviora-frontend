@@ -84,15 +84,11 @@ import { Button, Input, InputErrorMassage } from "@components/ui";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IPasswordRecoveryEmail } from "@/types";
-import { useAppSelector } from "@/lib/redux/hooks";
 import { passwordRecoveryEmailSchema } from "../validationSchema";
-import { selectIsLoading } from "@/lib/redux/auth/selectors";
 import { BarLoader } from "react-spinners";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export const PasswordRecoveryFormEmail = () => {
-  const isLoading = useAppSelector(selectIsLoading);
-
   const {
     control,
     handleSubmit,
@@ -104,8 +100,8 @@ export const PasswordRecoveryFormEmail = () => {
     },
     resolver: yupResolver(passwordRecoveryEmailSchema),
   });
-
   const { requestRecoveryPasswordMutation } = useAuth();
+
   const onSubmit: SubmitHandler<IPasswordRecoveryEmail> = (data) => {
     requestRecoveryPasswordMutation.mutate({ email: data.email });
     reset();
@@ -140,8 +136,11 @@ export const PasswordRecoveryFormEmail = () => {
         )}
       </div>
 
-      <Button className="font-semibold" disabled={isLoading}>
-        {!isLoading ? (
+      <Button
+        className="font-semibold"
+        disabled={requestRecoveryPasswordMutation.isPending}
+      >
+        {!requestRecoveryPasswordMutation.isPending ? (
           "Відновити пароль"
         ) : (
           <div className="flex flex-col items-center justify-center gap-1">

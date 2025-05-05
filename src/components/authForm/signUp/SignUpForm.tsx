@@ -4,19 +4,13 @@ import { Button, Input, InputErrorMassage } from "@components/ui";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISingUpForm } from "@/types";
-
 import { SignUpSchema } from "@components/authForm/validationSchema";
 import { Checkbox } from "@components/ui/checkbox";
 import { BarLoader } from "react-spinners";
 import { useId } from "react";
-import { useAppDispatch } from "@/lib/redux/hooks";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
-import { notify } from "@components/notifi/notifi";
-import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
-import { AxiosError } from "axios";
 
 export function SingUpForm() {
-  const dispatch = useAppDispatch();
   const uniqueId = useId();
   const {
     control,
@@ -43,24 +37,6 @@ export function SingUpForm() {
 
     reset();
   };
-
-  if (registerMutation.isSuccess) {
-    notify({
-      message: "На ваш email відправлено код підтвердження",
-      type: "success",
-    });
-    dispatch(closeModal("isSignUp"));
-    dispatch(openModal("isValidateOTP"));
-  }
-
-  if (registerMutation.isError) {
-    const axiosError = registerMutation.error as AxiosError<{
-      detail?: string;
-    }>;
-    const error = axiosError.response?.data?.detail || "Щось пішло не так ... ";
-    notify({ message: error, type: "error" });
-    registerMutation.reset();
-  }
 
   return (
     <form

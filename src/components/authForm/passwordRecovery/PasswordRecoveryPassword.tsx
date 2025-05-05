@@ -76,17 +76,9 @@ import {
   DialogDescription,
 } from "@components/ui";
 import { selectIsPasswordRecoveryPassword } from "@lib/redux/toggleModal/selectors";
-import { closeModal, openModal } from "@lib/redux/toggleModal/slice";
+import { closeModal } from "@lib/redux/toggleModal/slice";
 import { PasswordRecoveryFormPassword } from "@components/authForm/passwordRecovery/PasswordRecoveryFormPassword";
-
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import {
-  selectAuthError,
-  selectIsPasswordChange,
-} from "@/lib/redux/auth/selectors";
-import { notify } from "@/components/notifi/notifi";
-import { clearError } from "@/lib/redux/auth/slice";
-import { useEffect } from "react";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export const PasswordRecoveryPassword = () => {
@@ -94,21 +86,7 @@ export const PasswordRecoveryPassword = () => {
     selectIsPasswordRecoveryPassword,
   );
   const dispatch = useAppDispatch();
-  const isPasswordChange = useAppSelector(selectIsPasswordChange);
-  const IsError = useAppSelector(selectAuthError);
   const { logoutMutation } = useAuth();
-
-  useEffect(() => {
-    if (isPasswordChange) {
-      notify({ message: "Пароль успішно змінено", type: "success" });
-      dispatch(closeModal("isPasswordRecoveryPassword"));
-      dispatch(openModal("isSignIn"));
-    }
-    if (IsError) {
-      notify({ message: IsError, type: "error" });
-      dispatch(clearError());
-    }
-  }, [IsError, isPasswordChange, dispatch]);
 
   return (
     <Dialog

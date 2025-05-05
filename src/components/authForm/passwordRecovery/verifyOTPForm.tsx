@@ -12,10 +12,7 @@
 "use client";
 
 import { OtpForm } from "../OtpForm";
-import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export function VerifyOTPForm() {
-  const { verifyEmailMutation } = useAuth();
-
-  return <OtpForm onSubmitOtp={(otp) => verifyEmailMutation.mutate(otp)} />;
+  return <OtpForm mutationName="verifyEmailMutation" />;
 }
