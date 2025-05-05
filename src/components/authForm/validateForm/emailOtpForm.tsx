@@ -14,18 +14,27 @@
 //     />
 //   );
 // }
+
+// ============================
+// "use client";
+
+// import { OtpForm } from "../OtpForm";
+// import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
+
+// export function EmailOTPForm() {
+//   const { validateMutation } = useAuth();
+
+//   return (
+//     <OtpForm
+//       onSubmitOtp={(otp) => validateMutation.mutate(otp)}
+//       buttonText=""
+//     />
+//   );
+// }
 "use client";
 
 import { OtpForm } from "../OtpForm";
-import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export function EmailOTPForm() {
-  const { validateMutation } = useAuth();
-
-  return (
-    <OtpForm
-      onSubmitOtp={(otp) => validateMutation.mutate(otp)}
-      buttonText=""
-    />
-  );
+  return <OtpForm mutationName="validateMutation" />;
 }

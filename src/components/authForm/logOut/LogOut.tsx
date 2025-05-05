@@ -14,7 +14,6 @@ import {
 import { selectIsLogOut } from "@lib/redux/toggleModal/selectors";
 import { closeModal } from "@lib/redux/toggleModal/slice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-// import { logOut } from "@/lib/redux/auth/operations";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export const LogOut = () => {
@@ -42,9 +41,6 @@ export const LogOut = () => {
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            // onClick={() => {
-            //   dispatch(logOut());
-            // }}
             onClick={() => {
               logoutMutation.mutate();
             }}

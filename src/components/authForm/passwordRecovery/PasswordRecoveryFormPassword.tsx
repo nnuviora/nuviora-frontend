@@ -126,14 +126,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { cn } from "@lib/utils";
 import { IPasswordRecovery } from "@/types";
 import { useAppSelector } from "@/lib/redux/hooks";
-import { selectIdUser, selectIsLoading } from "@/lib/redux/auth/selectors";
+import { selectIdUser } from "@/lib/redux/auth/selectors";
 import { passwordRecoverySchema } from "../validationSchema";
 import { BarLoader } from "react-spinners";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
 
 export const PasswordRecoveryFormPassword = () => {
   const userId = useAppSelector(selectIdUser);
-  const isLoading = useAppSelector(selectIsLoading);
 
   const {
     control,
@@ -219,8 +218,11 @@ export const PasswordRecoveryFormPassword = () => {
         )}
       </div>
 
-      <Button className="font-semibold" disabled={isLoading}>
-        {!isLoading ? (
+      <Button
+        className="font-semibold"
+        disabled={changePasswordMutation.isPending}
+      >
+        {!changePasswordMutation.isPending ? (
           "Відновити пароль"
         ) : (
           <div className="flex flex-col items-center justify-center gap-1">

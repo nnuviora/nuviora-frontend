@@ -22,8 +22,6 @@ export interface IAuthState {
   isResend: boolean;
   isAuthenticated: boolean;
   id: string;
-  isVerify: boolean;
-  isPasswordChange: boolean;
   url: string;
 }
 

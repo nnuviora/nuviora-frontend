@@ -20,6 +20,7 @@ import { formatUserName } from "@/lib/utils/formatUserName";
 const ProfilePageClient = ({}) => {
   const router = useRouter();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const { data: profile, isLoading, error } = useProfile(isAuthenticated);
 
   if (isLoading) return <div>Loading...</div>;
@@ -28,7 +29,6 @@ const ProfilePageClient = ({}) => {
 
   const user = profile.data;
   const { initials, fullName } = formatUserName(user);
-
   const handleBack = () => router.back();
 
   return (
