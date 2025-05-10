@@ -3,10 +3,13 @@
 import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { useAuth } from "@/api/tanstackReactQuery/auth/mutations";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Page = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const { googleCallbackMutation } = useAuth();
+  const router = useRouter();
 
   const code =
     typeof window !== "undefined"
@@ -17,6 +20,11 @@ const Page = () => {
     googleCallbackMutation.mutate(code);
   }
 
+  useEffect(() => {
+    if (googleCallbackMutation.isSuccess) {
+      router.replace("/");
+    }
+  }, [googleCallbackMutation, router]);
   return (
     <div className="flex h-screen items-center justify-center">
       <p>Виконуємо вхід через Google...</p>
