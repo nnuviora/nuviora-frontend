@@ -16,15 +16,21 @@ const Page = () => {
       ? new URLSearchParams(window.location.search).get("code")
       : null;
 
+  const error =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("error")
+      : null;
+
   if (code && !isAuthenticated && googleCallbackMutation.status === "idle") {
     googleCallbackMutation.mutate(code);
   }
 
   useEffect(() => {
-    if (googleCallbackMutation.isSuccess) {
+    if (googleCallbackMutation.isSuccess || error) {
       router.replace("/");
     }
-  }, [googleCallbackMutation, router]);
+  }, [googleCallbackMutation, router, error]);
+
   return (
     <div className="flex h-screen items-center justify-center">
       <p>Виконуємо вхід через Google...</p>
