@@ -105,7 +105,7 @@ export const PasswordRecoveryPassword = () => {
             Відновлення паролю
           </DialogTitle>
           <DialogDescription className="captions-text text-start text-[var(--text-black)]">
-            Введіть Ваш email, після чого ми відправимо на нього новий пароль
+            Введіть новий пароль
           </DialogDescription>
         </DialogHeader>
         <PasswordRecoveryFormPassword />

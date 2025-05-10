@@ -94,7 +94,7 @@ export const PasswordRecoveryEmail = () => {
       }}
     >
       <DialogContent
-        className="xl2:py-32 xl2:px-38 xl2:w-[636px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 py-15 md:w-[465px] md:overflow-hidden md:px-16 md:py-20"
+        className="xl2:py-32 xl2:px-38 xl2:w-[636px] flex h-full max-h-3/5 w-[335px] flex-col gap-5 overflow-y-auto px-4 py-15 md:w-[465px] md:px-16 md:py-20"
         aria-describedby={undefined}
       >
         <DialogHeader className="pt-10">
