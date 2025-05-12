@@ -32,7 +32,7 @@ const ProfilePageClient = ({}) => {
   const handleBack = () => router.back();
 
   return (
-    <section className="xl2:h-[calc(100vh-129px-24px)] flex h-[calc(100vh-116px-91px)] min-h-full w-full flex-col md:bg-[var(--bg-disabled)] md:p-6">
+    <section className="flex h-[calc(100vh-116px-91px)] min-h-full w-full flex-col md:bg-[var(--bg-disabled)] md:p-6 xl:h-[calc(100vh-129px-24px)]">
       <p className="subtitle1-text mb-4 hidden md:block">
         Профіль / Зміна паролю
       </p>
