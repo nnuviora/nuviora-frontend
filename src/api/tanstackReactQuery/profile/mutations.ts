@@ -3,10 +3,11 @@ import { editUserApi } from "./requests";
 import { notify } from "@/components/notifi/notifi";
 import getQueryClient from "../getQueryClient";
 import { IUser } from "@/lib/redux/types";
+import { useInvalidateProfile } from "@/api/tanstackReactQuery/profile/queries";
 
 export function useUser() {
   const queryClient = getQueryClient();
-
+  const invalidateProfile = useInvalidateProfile();
   const editUserMutation = useMutation({
     mutationFn: editUserApi,
 
@@ -32,20 +33,15 @@ export function useUser() {
     },
 
     onSuccess: () => {
-      // queryClient.setQueryData(["profile"], (old: IUser) => ({
-      //   ...old,
-      //   ...newData,
-      // }));
-
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
-
       notify({
         message: "Дані успішно оновлено!",
         type: "success",
       });
     },
 
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ["profile"] }),
+    onSettled: () => {
+      invalidateProfile();
+    },
   });
 
   return { editUserMutation };
