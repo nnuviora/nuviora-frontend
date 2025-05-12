@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchProfileApi } from "@/api/tanstackReactQuery/profile/requests";
 
 export const useProfile = (isAuthenticated: boolean) => {
@@ -7,4 +7,12 @@ export const useProfile = (isAuthenticated: boolean) => {
     queryFn: fetchProfileApi,
     enabled: isAuthenticated,
   });
+};
+
+export const useInvalidateProfile = () => {
+  const queryClient = useQueryClient();
+
+  return () => {
+    queryClient.invalidateQueries({ queryKey: ["profile"] });
+  };
 };
