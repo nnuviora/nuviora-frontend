@@ -1,8 +1,14 @@
+// export interface IProfileFormData {
+//   firstname: string;
+//   lastname: string;
+//   email: string;
+//   about?: string;
+// }
 export interface IProfileFormData {
-  firstname: string;
-  lastname: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  about?: string;
+  username?: string;
 }
 
 export interface IPasswordFormData {
