@@ -9,7 +9,7 @@ export const ProfileSchema: ObjectSchema<IProfileFormData> = object().shape({
   first_name: string().required("Обов'язкове поле"),
   last_name: string().required("Обов'язкове поле"),
   email: string().email("Некоректний email").required("Обов'язкове поле"),
-  username: string().max(500, "Максимальна довжина — 500 символів"),
+  about: string().max(500, "Максимальна довжина — 500 символів"),
 });
 
 export const PasswordSchema: ObjectSchema<IPasswordFormData> = object().shape({
