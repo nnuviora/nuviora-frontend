@@ -25,7 +25,6 @@ import { closeModal } from "@/lib/redux/toggleModal/slice";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 import { formatUserName } from "@/lib/utils/formatUserName";
 import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
@@ -34,8 +33,7 @@ export function Menu() {
   const isMenuOpen = useAppSelector(selectIsMenuOpen);
 
   const router = useRouter();
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  const { data: profile, isLoading, error } = useProfile();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
