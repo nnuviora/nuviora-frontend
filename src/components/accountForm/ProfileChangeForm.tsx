@@ -18,15 +18,13 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { selectIsEdit } from "@/lib/redux/user/selectors";
 import { readProfile } from "@/lib/redux/user/slice";
 import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
-import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
 import { useUser } from "@/api/tanstackReactQuery/profile/mutations";
 
 export default function ProfileChangeForm() {
   const id = useId();
   const isEdit = useAppSelector(selectIsEdit);
   const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const { data: user } = useProfile(isAuthenticated);
+  const { data: user } = useProfile();
   const { state } = useSidebar();
 
   const {
@@ -38,18 +36,17 @@ export default function ProfileChangeForm() {
       first_name: user?.data.first_name || "",
       last_name: user?.data.last_name || "",
       email: user?.data.email || "",
-      username: user?.data.username || "",
+      about: user?.data.about || "",
     },
     resolver: yupResolver(ProfileSchema),
   });
   const { editUserMutation } = useUser();
 
   const onSubmit: SubmitHandler<IProfileFormData> = (data) => {
-    console.log("data :>> ", data);
     editUserMutation.mutate({
       first_name: data.first_name,
       last_name: data.last_name,
-      username: data.username,
+      about: data.about,
     });
     dispatch(readProfile());
   };
@@ -79,7 +76,6 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    // value={user?.data.last_name ?? ""}
                     placeholder="Шевченко"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -123,7 +119,6 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    // value={user?.data.first_name ?? ""}
                     placeholder="Тарас"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
@@ -191,7 +186,7 @@ export default function ProfileChangeForm() {
       />
 
       <Controller
-        name="username"
+        name="about"
         control={control}
         render={({ field }) => (
           <div
@@ -213,7 +208,7 @@ export default function ProfileChangeForm() {
                 placeholder="Мені тринадцятий минало..."
               />
             ) : (
-              <p>{user?.data.username}</p>
+              <p>{user?.data.about}</p>
             )}
           </div>
         )}

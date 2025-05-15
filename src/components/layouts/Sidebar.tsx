@@ -28,10 +28,9 @@ import {
 import items from "../../../data/sidebar-items.json";
 import itemsFooter from "../../../data/sidebar-items-footer.json";
 import { cn } from "@/lib/utils";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { useAppDispatch } from "@/lib/redux/hooks";
 import { openModal } from "@/lib/redux/toggleModal/slice";
 import { usePathname } from "next/navigation";
-import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 import { formatUserName } from "@/lib/utils/formatUserName";
 import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
 
@@ -51,8 +50,7 @@ const AppSidebar = () => {
   const dispatch = useAppDispatch();
   const { state, isMobile } = useSidebar();
   const pathname = usePathname();
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  const { data: profile, isLoading, error } = useProfile();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

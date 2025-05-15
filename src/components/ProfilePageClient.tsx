@@ -11,17 +11,14 @@ import {
 import { ArrowLeft, PanelLeftOpen } from "lucide-react";
 import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
-import { useAppSelector } from "@/lib/redux/hooks";
 
 import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
-import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 import { formatUserName } from "@/lib/utils/formatUserName";
 
 const ProfilePageClient = ({}) => {
   const router = useRouter();
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
-  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  const { data: profile, isLoading, error } = useProfile();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

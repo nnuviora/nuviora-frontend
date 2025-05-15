@@ -1,7 +1,6 @@
 import { api } from "@/api/authApi";
 import store, { RootState } from "@lib/redux/store";
 
-import Router from "next/router";
 import {
   logoutApi,
   refreshAccessTokenApi,
@@ -41,7 +40,6 @@ export const setupTokenInterceptor = (getState: () => RootState) => {
           }
           localStorage.removeItem("accessToken");
           store.dispatch(removeAuthenticated());
-          Router.push("/login");
           return Promise.reject(err);
         }
       }
@@ -54,7 +52,6 @@ export const setupTokenInterceptor = (getState: () => RootState) => {
         }
         localStorage.removeItem("accessToken");
         store.dispatch(removeAuthenticated());
-        Router.push("/login");
         return Promise.reject(error);
       }
 

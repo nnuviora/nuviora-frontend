@@ -34,7 +34,7 @@ export function ProfileTabs() {
           {!isEdit && (
             <Button
               variant="ghost"
-              className="body-text flex items-center gap-1 text-[var(--text-success)]"
+              className="body-text flex max-h-[24px] items-center gap-1 py-0 text-[var(--text-success)]"
               onClick={handleEdit}
             >
               <Pencil color="#BDBCDB" /> Редагувати
@@ -45,7 +45,9 @@ export function ProfileTabs() {
       </TabsContent>
 
       <TabsContent value="password">
-        <h2 className="subtitle3-text mb-6">Зміна паролю</h2>
+        <div className="mb-6 flex items-center gap-8">
+          <h2 className="subtitle3-text">Зміна паролю</h2>
+        </div>
         <PasswordChangeForm />
       </TabsContent>
     </Tabs>

@@ -1,11 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchProfileApi } from "@/api/tanstackReactQuery/profile/requests";
 
-export const useProfile = (isAuthenticated: boolean) => {
+export const useProfile = () => {
   return useQuery({
     queryKey: ["profile"],
     queryFn: fetchProfileApi,
-    enabled: isAuthenticated,
   });
 };
 
