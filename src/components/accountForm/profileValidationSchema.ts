@@ -6,8 +6,8 @@ import {
 } from "@/types/profileTypes";
 
 export const ProfileSchema: ObjectSchema<IProfileFormData> = object().shape({
-  firstname: string().required("Обов'язкове поле"),
-  lastname: string().required("Обов'язкове поле"),
+  first_name: string().required("Обов'язкове поле"),
+  last_name: string().required("Обов'язкове поле"),
   email: string().email("Некоректний email").required("Обов'язкове поле"),
   about: string().max(500, "Максимальна довжина — 500 символів"),
 });

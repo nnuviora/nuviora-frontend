@@ -10,7 +10,9 @@ import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 import { useAppDispatch, useAppSelector } from "@lib/redux/hooks";
 import AvatarHeader from "@components/Header/avatarHeader";
 import Modal from "./modal";
-// import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
+import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
+import { useEffect } from "react";
+import { addAuthenticated } from "@/lib/redux/auth/slice";
 
 export function Header() {
   const deviceType = useDeviceType();
@@ -18,11 +20,13 @@ export function Header() {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const dispatch = useAppDispatch();
 
-  // const { data: user, isLoading, error } = useProfile(isAuthenticated);
+  const { isSuccess } = useProfile();
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error.message}</div>;
-  // console.log(user);
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(addAuthenticated());
+    }
+  }, [dispatch, isSuccess]);
 
   function handleUser() {
     if (isAuthenticated) {

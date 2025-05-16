@@ -11,17 +11,14 @@ import {
 import { ArrowLeft, PanelLeftOpen } from "lucide-react";
 import React from "react";
 import { Breadcrumbs } from "@/components/accountForm/Breadcrumbs";
-import { useAppSelector } from "@/lib/redux/hooks";
 
 import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
-import { selectIsAuthenticated } from "@lib/redux/auth/selectors";
 import { formatUserName } from "@/lib/utils/formatUserName";
 
 const ProfilePageClient = ({}) => {
   const router = useRouter();
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
-  const { data: profile, isLoading, error } = useProfile(isAuthenticated);
+  const { data: profile, isLoading, error } = useProfile();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -32,7 +29,7 @@ const ProfilePageClient = ({}) => {
   const handleBack = () => router.back();
 
   return (
-    <section className="xl2:h-[calc(100vh-129px-24px)] flex h-[calc(100vh-116px-91px)] min-h-full w-full flex-col md:bg-[var(--bg-disabled)] md:p-6">
+    <section className="flex h-[calc(100vh-116px-91px)] min-h-full w-full flex-col md:bg-[var(--bg-disabled)] md:p-6 xl:h-[calc(100vh-129px-24px)]">
       <p className="subtitle1-text mb-4 hidden md:block">
         Профіль / Зміна паролю
       </p>

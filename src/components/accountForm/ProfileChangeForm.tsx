@@ -18,14 +18,13 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { selectIsEdit } from "@/lib/redux/user/selectors";
 import { readProfile } from "@/lib/redux/user/slice";
 import { useProfile } from "@/api/tanstackReactQuery/profile/queries";
-import { selectIsAuthenticated } from "@/lib/redux/auth/selectors";
+import { useUser } from "@/api/tanstackReactQuery/profile/mutations";
 
 export default function ProfileChangeForm() {
   const id = useId();
   const isEdit = useAppSelector(selectIsEdit);
   const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const { data: user } = useProfile(isAuthenticated);
+  const { data: user } = useProfile();
   const { state } = useSidebar();
 
   const {
@@ -34,16 +33,21 @@ export default function ProfileChangeForm() {
     formState: { errors },
   } = useForm<IProfileFormData>({
     defaultValues: {
-      firstname: user?.data.first_name || "",
-      lastname: user?.data.last_name || "",
+      first_name: user?.data.first_name || "",
+      last_name: user?.data.last_name || "",
       email: user?.data.email || "",
-      about: "",
+      about: user?.data.about || "",
     },
     resolver: yupResolver(ProfileSchema),
   });
+  const { editUserMutation } = useUser();
 
   const onSubmit: SubmitHandler<IProfileFormData> = (data) => {
-    console.log(data);
+    editUserMutation.mutate({
+      first_name: data.first_name,
+      last_name: data.last_name,
+      about: data.about,
+    });
     dispatch(readProfile());
   };
 
@@ -54,7 +58,7 @@ export default function ProfileChangeForm() {
       noValidate
     >
       <Controller
-        name="lastname"
+        name="last_name"
         control={control}
         render={({ field }) => (
           <div
@@ -72,20 +76,19 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    value={user?.data.last_name ?? ""}
                     placeholder="Шевченко"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                      errors.lastname &&
+                      errors.last_name &&
                         "border-[var(--text-error)] bg-[var(--bg-error)]",
                       state === "expanded"
                         ? "md:w-[325px]"
                         : "xl2:w-[325px] md:w-full",
                     )}
                   />
-                  {errors.lastname && (
+                  {errors.last_name && (
                     <InputErrorMassage
-                      message={errors.lastname.message || ""}
+                      message={errors.last_name.message || ""}
                     />
                   )}
                 </>
@@ -98,7 +101,7 @@ export default function ProfileChangeForm() {
       />
 
       <Controller
-        name="firstname"
+        name="first_name"
         control={control}
         render={({ field }) => (
           <div
@@ -116,20 +119,19 @@ export default function ProfileChangeForm() {
                     id={`${id}+${field.name}`}
                     {...field}
                     type="text"
-                    value={user?.data.first_name ?? ""}
                     placeholder="Тарас"
                     className={cn(
                       "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                      errors.firstname &&
+                      errors.first_name &&
                         "border-[var(--text-error)] bg-[var(--bg-error)]",
                       state === "expanded"
                         ? "md:w-[325px]"
                         : "xl2:w-[325px] md:w-full",
                     )}
                   />
-                  {errors.firstname && (
+                  {errors.first_name && (
                     <InputErrorMassage
-                      message={errors.firstname.message || ""}
+                      message={errors.first_name.message || ""}
                     />
                   )}
                 </>
@@ -206,7 +208,7 @@ export default function ProfileChangeForm() {
                 placeholder="Мені тринадцятий минало..."
               />
             ) : (
-              <p>Про себе</p>
+              <p>{user?.data.about}</p>
             )}
           </div>
         )}
