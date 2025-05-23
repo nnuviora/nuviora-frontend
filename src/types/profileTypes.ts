@@ -6,9 +6,9 @@ export interface IProfileFormData {
 }
 
 export interface IPasswordFormData {
-  oldPassword: string;
-  newPassword: string;
-  newPasswordRepeat: string;
+  current_password: string;
+  new_password: string;
+  confirm_new_password: string;
 }
 
 export interface IAddressFormData {
