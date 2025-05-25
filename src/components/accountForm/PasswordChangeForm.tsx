@@ -13,6 +13,7 @@ import { IPasswordFormData } from "@/types";
 import { useId } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PasswordSchema } from "./profileValidationSchema";
+import { useUser } from "@/api/tanstackReactQuery/profile/mutations";
 
 export default function PasswordChangeForm() {
   const id = useId();
@@ -20,18 +21,26 @@ export default function PasswordChangeForm() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<IPasswordFormData>({
     defaultValues: {
-      oldPassword: "",
-      newPassword: "",
-      newPasswordRepeat: "",
+      current_password: "",
+      new_password: "",
+      confirm_new_password: "",
     },
     resolver: yupResolver(PasswordSchema),
   });
 
+  const { changePassword } = useUser();
+
   const onSubmit: SubmitHandler<IPasswordFormData> = (data) => {
-    console.log(data);
+    changePassword.mutate({
+      current_password: data.current_password,
+      new_password: data.new_password,
+      confirm_new_password: data.confirm_new_password,
+    });
+    reset();
   };
 
   return (
@@ -41,7 +50,7 @@ export default function PasswordChangeForm() {
       noValidate
     >
       <Controller
-        name="oldPassword"
+        name="current_password"
         control={control}
         render={({ field }) => (
           <div
@@ -61,17 +70,19 @@ export default function PasswordChangeForm() {
               <Input
                 id={`${id}+${field.name}`}
                 {...field}
-                type="text"
+                type="password"
                 showToggle={true}
                 placeholder="Старий пароль"
                 className={cn(
                   "h-10 w-full border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  errors.oldPassword &&
+                  errors.current_password &&
                     "border-[var(--text-error)] bg-[var(--bg-error)]",
                 )}
               />
-              {errors.oldPassword && (
-                <InputErrorMassage message={errors.oldPassword.message || ""} />
+              {errors.current_password && (
+                <InputErrorMassage
+                  message={errors.current_password.message || ""}
+                />
               )}
             </div>
           </div>
@@ -79,7 +90,7 @@ export default function PasswordChangeForm() {
       />
 
       <Controller
-        name="newPassword"
+        name="new_password"
         control={control}
         render={({ field }) => (
           <div
@@ -99,17 +110,19 @@ export default function PasswordChangeForm() {
               <Input
                 id={`${id}+${field.name}`}
                 {...field}
-                type="text"
+                type="password"
                 showToggle={true}
                 placeholder="Новий пароль"
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  errors.newPassword &&
+                  errors.new_password &&
                     "border-[var(--text-error)] bg-[var(--bg-error)]",
                 )}
               />
-              {errors.newPassword && (
-                <InputErrorMassage message={errors.newPassword.message || ""} />
+              {errors.new_password && (
+                <InputErrorMassage
+                  message={errors.new_password.message || ""}
+                />
               )}
             </div>
           </div>
@@ -117,7 +130,7 @@ export default function PasswordChangeForm() {
       />
 
       <Controller
-        name="newPasswordRepeat"
+        name="confirm_new_password"
         control={control}
         render={({ field }) => (
           <div
@@ -137,18 +150,18 @@ export default function PasswordChangeForm() {
               <Input
                 id={`${id}+${field.name}`}
                 {...field}
-                type="text"
+                type="password"
                 showToggle={true}
                 placeholder="Повторіть новий пароль"
                 className={cn(
                   "h-10 border border-solid border-[var(--stroke-field)] px-3 py-2.5 placeholder:text-[14px] placeholder:text-[var(--text-grey)]",
-                  errors.newPasswordRepeat &&
+                  errors.confirm_new_password &&
                     "border-[var(--text-error)] bg-[var(--bg-error)]",
                 )}
               />
-              {errors.newPasswordRepeat && (
+              {errors.confirm_new_password && (
                 <InputErrorMassage
-                  message={errors.newPasswordRepeat.message || ""}
+                  message={errors.confirm_new_password.message || ""}
                 />
               )}
             </div>
