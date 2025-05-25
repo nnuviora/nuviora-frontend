@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { editUserApi } from "./requests";
+import { editPasswordApi, editUserApi } from "./requests";
 import { notify } from "@/components/notifi/notifi";
 import getQueryClient from "../getQueryClient";
 import { IUser } from "@/lib/redux/types";
 import { useInvalidateProfile } from "@/api/tanstackReactQuery/profile/queries";
+import { handleAxiosError } from "@/lib/utils/handleError";
 
 export function useUser() {
   const queryClient = getQueryClient();
@@ -44,5 +45,17 @@ export function useUser() {
     },
   });
 
-  return { editUserMutation };
+  const changePassword = useMutation({
+    mutationFn: editPasswordApi,
+
+    onSuccess: () => {
+      notify({
+        message: "Пароль успішно змінено!",
+        type: "success",
+      });
+    },
+
+    onError: handleAxiosError,
+  });
+  return { editUserMutation, changePassword };
 }
