@@ -11,8 +11,12 @@ import {
   selectIsPasswordRecoveryPassword,
   selectIsSignIn,
   selectIsSignUp,
+  selectIsValidateOTP,
+  selectIsVerifyOTP,
 } from "@lib/redux/toggleModal/selectors";
 import { Menu } from "../sidebar-components/Menu";
+import { ValidateOTP } from "../authForm/validateForm/validateOTP";
+import { VerifyOTP } from "../authForm/passwordRecovery/verifyOTP";
 
 export default function Modal() {
   const isSignIn = useAppSelector(selectIsSignIn);
@@ -23,6 +27,8 @@ export default function Modal() {
     selectIsPasswordRecoveryPassword,
   );
   const isMenuOpen = useAppSelector(selectIsMenuOpen);
+  const isValidateOTP = useAppSelector(selectIsValidateOTP);
+  const isVerifyOTP = useAppSelector(selectIsVerifyOTP);
 
   return (
     <>
@@ -32,6 +38,8 @@ export default function Modal() {
       {isPasswordRecoveryEmail && <PasswordRecoveryEmail />}
       {isPasswordRecoveryPassword && <PasswordRecoveryPassword />}
       {isMenuOpen && <Menu />}
+      {isValidateOTP && <ValidateOTP />}
+      {isVerifyOTP && <VerifyOTP />}
     </>
   );
 }
