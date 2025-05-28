@@ -6,10 +6,14 @@ import {
 } from "@/types/profileTypes";
 
 export const ProfileSchema: ObjectSchema<IProfileFormData> = object().shape({
-  first_name: string().required("Обов'язкове поле"),
-  last_name: string().required("Обов'язкове поле"),
+  first_name: string()
+    .required("Обов'язкове поле")
+    .max(12, "Максимальна довжина — 12 символів"),
+  last_name: string()
+    .required("Обов'язкове поле")
+    .max(12, "Максимальна довжина — 12 символів"),
   email: string().email("Некоректний email").required("Обов'язкове поле"),
-  about: string().max(500, "Максимальна довжина — 500 символів"),
+  about: string().max(100, "Максимальна довжина — 100 символів"),
 });
 
 export const PasswordSchema: ObjectSchema<IPasswordFormData> = object().shape({
