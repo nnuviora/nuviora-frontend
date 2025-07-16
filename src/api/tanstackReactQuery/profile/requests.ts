@@ -15,7 +15,7 @@ export const editPasswordApi = async (userData: IPasswordFormData) => {
   return await api.put("/profile/change_password", userData);
 };
 
-export const updateUserAvatarApi = async (userData: any) => {
+export const updateUserAvatarApi = async (userData: string) => {
   console.log("userData :>> ", userData);
   return await api.put("/profile/upload-avatar", userData);
 };
