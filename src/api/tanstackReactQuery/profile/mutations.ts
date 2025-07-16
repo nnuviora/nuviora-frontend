@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { editPasswordApi, editUserApi } from "./requests";
+import { editPasswordApi, editUserApi, updateUserAvatarApi } from "./requests";
 import { notify } from "@/components/notifi/notifi";
 import getQueryClient from "../getQueryClient";
 import { IUser } from "@/lib/redux/types";
@@ -57,5 +57,19 @@ export function useUser() {
 
     onError: handleAxiosError,
   });
-  return { editUserMutation, changePassword };
+
+  const updateUserAvatar = useMutation({
+    mutationFn: updateUserAvatarApi,
+
+    onSuccess: () => {
+      notify({
+        message: "Аватар успішно оновлено",
+        type: "success",
+      });
+    },
+
+    onError: handleAxiosError,
+  });
+
+  return { editUserMutation, changePassword, updateUserAvatar };
 }
