@@ -5,6 +5,7 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
 import { cn } from "@/lib/utils";
 import { Camera } from "lucide-react";
+// import { useUser } from "@/api/tanstackReactQuery/profile/mutations";
 
 interface AvatarProps
   extends React.ComponentProps<typeof AvatarPrimitive.Root> {
@@ -13,6 +14,7 @@ interface AvatarProps
 
 function Avatar({ isEdit = true, className, ...props }: AvatarProps) {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  // const { updateUserAvatar } = useUser();
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -24,6 +26,7 @@ function Avatar({ isEdit = true, className, ...props }: AvatarProps) {
     const file = event.target.files?.[0];
     if (file) {
       console.log("Avatar :>> ", file);
+      // updateUserAvatar.mutate(file);
     }
   };
 
@@ -42,7 +45,7 @@ function Avatar({ isEdit = true, className, ...props }: AvatarProps) {
           <button
             type="button"
             onClick={handleButtonClick}
-            className="absolute right-0 bottom-0 flex size-10.5 items-center justify-center rounded-full border border-gray-400 bg-white"
+            className="absolute right-0 bottom-0 flex size-10.5 cursor-pointer items-center justify-center rounded-full border border-gray-400 bg-white"
             aria-label="Upload new avatar"
           >
             <Camera size={24} color="#818181" />
